@@ -29,6 +29,7 @@ require("./routes/api-routes.js")(app);
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/howdyNeighbourDB",
   {
+    useUnifiedTopology: true,
     useNewUrlParser: true
   }
 );

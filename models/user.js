@@ -23,6 +23,23 @@ const UserSchema = new Schema({
     trim: true,
     required: "please enter a unique password"
   },
+  streetNum: {
+    type: String,
+    required: "please enter your street number"
+  },
+  streetName: {
+    type: String,
+    required: "please enter your street name"
+  },
+  suburb: {
+    type: String,
+    required: "please enter your suburb"
+  },
+  state: {
+    type: String,
+    required: "please enter your state"
+  },
+
   userCreated: {
     type: Date,
     default: Date.now
