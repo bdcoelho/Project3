@@ -18,8 +18,8 @@ $(document).ready(() => {
       password: passwordInput.val().trim(),
       firstName: firstNameInput.val().trim(),
       lastName: lastNameInput.val().trim(),
-      stNum: stNumInput.val().trim(),
-      stName: stNameInput.val().trim(),
+      streetNum: stNumInput.val().trim(),
+      streetName: stNameInput.val().trim(),
       suburb: suburbInput.val().trim(),
       state: stateInput.val().trim(),
     };

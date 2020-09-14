@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const { Asset } = require("../models");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -19,22 +20,25 @@ module.exports = function(app) {
   // otherwise send back an error
 
   app.post("/api/signup", async (req, res) => {
+    console.log(req.body);
     const User = new db.User({
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      streetNum: req.body.stNum,
-      streetName: req.body.stName,
+      streetNum: req.body.streetNum,
+      streetName: req.body.streetName,
       suburb: req.body.suburb,
       state: req.body.state,
+      geometry: req.body.geometry
+  
     });
+  
     try {
       const dbUser = await db.User.create(User);
-      console.log(dbUser);
       res.json(dbUser);
     } catch (err) {
-      res.json(err);
+      res.json(err.message);
     }
   });
 
@@ -42,6 +46,38 @@ module.exports = function(app) {
   app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
+  });
+
+  app.post("/api/addAsset", async (req, res) => {
+    try {
+      const newAsset = await db.Asset.create(req.body);
+      res.send(newAsset);
+    } catch (err) {
+      res.json(err);
+    }
+  });
+
+  app.put("/api/modifyAsset/:id", async (req, res) => {
+    console.log(req.params.id);
+    res.send(req.params.id);
+  });
+
+  app.delete("/api/deleteAsset/:id", async (req, res) => {
+
+    try {
+      const deleteAsset = await db.Asset.findByIdAndRemove(req.params.id);
+      res.send(deleteAsset);
+    } catch (err) {
+      res.json(err);
+    }
+  
+
+
+  });
+
+  app.get("/api/myAssets/:userId", async (req, res) => {
+    console.log(req.params.userId);
+    res.send(req.params.userId);
   });
 
   // Route for getting some data about our user to be used client side
