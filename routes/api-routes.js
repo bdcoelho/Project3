@@ -23,12 +23,19 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.firstName,
-      lastName: req.body.lastName
+      lastName: req.body.lastName,
+      streetNum:req.body.stNum,
+      streetName:req.body.stName,
+      suburb:req.body.suburb,
+      state:req.body.state
+      
     });
     try {
       const dbUser = await db.User.create(User);
+      console.log("created db user")
+      console.log(dbUser)
       res.json(dbUser);
-    } catch (err) {
+     } catch (err) {
       res.json(err);
     }
   });

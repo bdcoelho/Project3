@@ -39,6 +39,12 @@ const UserSchema = new Schema({
     type: String,
     required: "please enter your state"
   },
+  country: {
+    type: String,
+    required: "please enter your country",
+    default: "Australia"
+  },
+
 
   userCreated: {
     type: Date,
