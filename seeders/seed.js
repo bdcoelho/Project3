@@ -45,7 +45,6 @@ const assetSeed = [
 ];
 
 
-
 const userSeed = [
 
   
@@ -55,7 +54,11 @@ const userSeed = [
     "password" : "$2a$10$vEbWVSaP.QIUJIEZosYFdu4YAq5XmGiFn7npaRu0L1xqAXCbWFpbi",
     "firstName" : "Benson",
     "lastName" : "Coelho",
-    "userCreated" : "2020-09-09T04:08:10.175Z"
+    "streetNum": 8,
+    "streetName": "James St",
+    "suburb": "Glenhuntly",
+    "state": "VIC"
+    
 },
 
 {
@@ -64,7 +67,11 @@ const userSeed = [
   "password" : "$2a$10$WxcaqblPmKynHDeHTMnclOXbl8DgJ5qDerrZm7VskmPSfihPWVRI2",
   "firstName" : "Benson",
   "lastName" : "Coelho",
-  "userCreated" : "2020-09-09T04:29:10.085Z"
+  "streetNum": 10,
+  "streetName": "James St",
+  "suburb": "Glenhuntly",
+  "state": "VIC"
+  
 }
 
 ];
@@ -72,9 +79,10 @@ const userSeed = [
 
 
 db.User.deleteMany({})
-  .then(() => db.User.collection.insertMany(userSeed))
+  .then(() => db.User.insertMany(userSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+
+    console.log(data.length + " records inserted!");
     process.exit(0);
   })
   .catch(err => {
@@ -85,9 +93,9 @@ db.User.deleteMany({})
 
 
 db.Asset.deleteMany({})
-  .then(() => db.Asset.collection.insertMany(assetSeed))
+  .then(() => db.Asset.insertMany(assetSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.length + " records inserted!");
     process.exit(0);
   })
   .catch(err => {
