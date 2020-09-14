@@ -10,7 +10,7 @@ module.exports = function(app) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id
+      id: req.user.id,
     });
   });
 
@@ -24,18 +24,16 @@ module.exports = function(app) {
       password: req.body.password,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      streetNum:req.body.stNum,
-      streetName:req.body.stName,
-      suburb:req.body.suburb,
-      state:req.body.state
-      
+      streetNum: req.body.stNum,
+      streetName: req.body.stName,
+      suburb: req.body.suburb,
+      state: req.body.state,
     });
     try {
       const dbUser = await db.User.create(User);
-      console.log("created db user")
-      console.log(dbUser)
+      console.log(dbUser);
       res.json(dbUser);
-     } catch (err) {
+    } catch (err) {
       res.json(err);
     }
   });
@@ -56,7 +54,7 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id
+        id: req.user.id,
       });
     }
   });
