@@ -13,32 +13,32 @@ const assetSeed = [
     name:"Hammer",
     category:"Tools",
     description:"A Hammer",
-    hourlyPrice:"10",
-    dailyPrice:"1",
+    hourlyPrice:10,
+    dailyPrice:1,
     user_id: "5f58552ad578bb54a0ca401d"
   },
   {
     name: "Rammer",
     category: "Tools",
     description: "A Rammer",
-    hourlyPrice: "10",
-    dailyPrice: "1",
+    hourlyPrice: 10,
+    dailyPrice: 1,
     user_id: "5f58552ad578bb54a0ca401d"
   },
   {
     name:"Watchimacallit",
     category:"Tools",
     description:"A Watchimacallit",
-    hourlyPrice:"10",
-    dailyPrice:"1",
+    hourlyPrice:10,
+    dailyPrice:1,
     user_id:"5f585a1686ba1e1d0c08ce43"
   },
   {
     name:"Spear",
     category:"Tools",
     description:"A Spear",
-    hourlyPrice:"10",
-    dailyPrice:"1",
+    hourlyPrice:10,
+    dailyPrice:1,
     user_id:"5f585a1686ba1e1d0c08ce43"
   }
 

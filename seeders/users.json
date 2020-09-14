@@ -1,0 +1,31 @@
+[
+
+  
+  {
+    "_id" : "5f58552ad578bb54a0ca401d",
+    "email" : "ben_d_coelho@hotmail.com",
+    "password" : "$2a$10$vEbWVSaP.QIUJIEZosYFdu4YAq5XmGiFn7npaRu0L1xqAXCbWFpbi",
+    "firstName" : "Benson",
+    "lastName" : "Coelho",
+    "streetNum": 8,
+    "streetName": "James St",
+    "suburb": "Glenhuntly",
+    "state": "VIC"
+    
+},
+
+{
+  "_id" : "5f585a1686ba1e1d0c08ce43",
+  "email" : "ben_d_coelho0@hotmail.com",
+  "password" : "$2a$10$WxcaqblPmKynHDeHTMnclOXbl8DgJ5qDerrZm7VskmPSfihPWVRI2",
+  "firstName" : "Benson",
+  "lastName" : "Coelho",
+  "streetNum": 10,
+  "streetName": "James St",
+  "suburb": "Glenhuntly",
+  "state": "VIC"
+  
+}
+
+]
+
