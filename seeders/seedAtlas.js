@@ -57,8 +57,8 @@ const userSeed = [
     "streetNum": 8,
     "streetName": "James St",
     "suburb": "Glenhuntly",
-    "state": "VIC",
-    "geometry": {"coordinates": [145,37]}
+    "state": "VIC"
+    
 },
 
 {
@@ -70,9 +70,8 @@ const userSeed = [
   "streetNum": 10,
   "streetName": "James St",
   "suburb": "Glenhuntly",
-  "state": "VIC",
-  "geometry": {"coordinates": [145.1,37.1]}
-
+  "state": "VIC"
+  
 }
 
 ];
