@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <Router>
-    <Route component={App} />
+<App/>
   </Router>, 
   document.getElementById('root')
 );

@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 import Nav from "./components/nav";
 import axios from "axios";
 
-export default function App() {
+function App() {
 
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({
@@ -36,7 +36,6 @@ export default function App() {
 
     return (
       <>
-
               <UserContext.Provider value={userData}>
                 <Nav />
                 <Route 
@@ -90,3 +89,4 @@ export default function App() {
       </>
     )
   }
+  export default App;

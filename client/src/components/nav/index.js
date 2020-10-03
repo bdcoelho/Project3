@@ -22,7 +22,7 @@ function NavHeader() {
         </Nav.Link>
       </Navbar.Collapse>
     </Navbar>
-  );
+  )
 }
 
 export default NavHeader;
