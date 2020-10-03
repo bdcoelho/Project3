@@ -3,6 +3,19 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+
+const GeoSchema = new Schema({
+    type: {
+      type: String,
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number],
+      index: "2dsphere"
+    }
+  });
+
+
 const UserSchema = new Schema({
     firstName: {
         type: String,
@@ -52,11 +65,12 @@ const UserSchema = new Schema({
       },
 
       
-      
+
     userCreated: {
         type: Date,
         default: Date.now
-    }
+    },
+    geometry: GeoSchema
 });
 
 UserSchema.methods.validPassword = function(password) {

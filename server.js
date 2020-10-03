@@ -24,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/dashboardDB", { 
+  process.env.MONGODB_URI || "mongodb://localhost/howdyNeighbourDB", { 
   useNewUrlParser: true,
 });
 
