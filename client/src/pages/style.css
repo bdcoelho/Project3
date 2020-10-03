@@ -1,12 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
-.loginForm {
+.signup-form {
+
+margin-top: 50px;
+
+
+}
+
+.login-form {
     position: absolute;
     top: 20vh;
     left: 50vw;
     transform: translateX(-40%);
     width: 300px;
 }
+
 
 .loginH1 {
     color: rgb(16, 114, 243);

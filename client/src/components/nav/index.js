@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-
 import UserContext from "../../utils/UserContext";
 import "./style.css";
-
 import { Navbar, Nav } from "react-bootstrap";
 
 function NavHeader() {

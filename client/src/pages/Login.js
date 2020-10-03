@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 
 
 import "./style.css";
@@ -40,7 +40,8 @@ function Signup(props) {
 
 
   return (
-    <Form noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <Container>
+    <Form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -64,16 +65,17 @@ function Signup(props) {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="dark" type="submit">
         Submit
       </Button>
 
-      <p>
+      <p style={{marginTop:"20px"}}>
             Or sign up <a href="/signup">here</a>
           </p>
 
           
     </Form>
+    </Container>
   );
 }
 
