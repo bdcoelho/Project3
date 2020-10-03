@@ -13,11 +13,18 @@ module.exports = app => {
 
       // Signup routing
       app.post("/api/signup", (req, res) => {
+        console.log(req.body);
         db.User.create({
           email: req.body.email,
           password: req.body.password,
           firstName: req.body.firstName,
-          lastName: req.body.lastName
+          lastName: req.body.lastName,
+          streetNum: req.body.streetNum,
+          streetName: req.body.streetName,
+          suburb: req.body.suburb,
+          state: req.body.state,
+          postCode: req.body.postCode
+          
         })
           .then(() => {
             res.redirect(307, "/api/login");

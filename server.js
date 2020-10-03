@@ -29,8 +29,7 @@ mongoose.connect(
 });
 
 require("./routes/api-routes.js")(app);
-require("./routes/widget-routes.js")(app);
-require("./routes/weather-route.js")(app);
+
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);

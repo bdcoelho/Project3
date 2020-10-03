@@ -23,6 +23,36 @@ const UserSchema = new Schema({
         trim: true,
         required: "please enter a unique password",
     },
+
+
+    streetNum: {
+        type: String,
+        required: "Please enter your street number"
+      },
+      streetName: {
+        type: String,
+        required: "Please enter your street name"
+      },
+      suburb: {
+        type: String,
+        required: "Please enter your suburb"
+      },
+      state: {
+        type: String,
+        required: "Please enter your state"
+      },
+      postCode: {
+        type: Number,
+        required: "Please enter your postcode"
+      },
+      country: {
+        type: String,
+        required: "Please enter your country",
+        default: "Australia"
+      },
+
+      
+      
     userCreated: {
         type: Date,
         default: Date.now

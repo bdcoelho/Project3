@@ -16,7 +16,7 @@ function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data2 = {
+    const data = {
       email,
       password,
       firstName,
@@ -27,16 +27,16 @@ function Signup() {
       state,
       postCode,
     };
-    console.log(data2);
-
-    const data = {
-      email,
-      password,
-      firstName,
-      lastName,
-    };
-
     console.log(data);
+
+    // const data = {
+    //   email,
+    //   password,
+    //   firstName,
+    //   lastName,
+    // };
+
+    // console.log(data);
 
     axios
       .post("/api/signup", data)
