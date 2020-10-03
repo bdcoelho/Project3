@@ -12,6 +12,12 @@ function Signup() {
   const [suburb, setSuburb] = useState("");
   const [state, setState] = useState("");
   const [postCode, setPostcode] = useState("");
+  const [testAddress, setTestAddress] = useState("");
+
+
+
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,21 +32,14 @@ function Signup() {
       suburb,
       state,
       postCode,
+      testAddress
+
     };
     console.log(data);
 
-    // const data = {
-    //   email,
-    //   password,
-    //   firstName,
-    //   lastName,
-    // };
-
-    // console.log(data);
-
     axios
       .post("/api/signup", data)
-      .then((res) => {
+      .then(() => {
         console.log("User Created");
         window.location = "/Home";
       })
@@ -48,6 +47,16 @@ function Signup() {
         console.error(err);
       });
   };
+
+
+  const handleAddressSearch = (event) => {
+    event.preventDefault();
+console.log(event.target.value)
+    setTestAddress(event.target.value);
+  };
+
+
+
 
   const handleUserChange = (event) => {
     setEmail(event.target.value);
@@ -85,9 +94,34 @@ function Signup() {
     setPostcode(event.target.value);
   };
 
+
+  const handleTestAddressChange = (event) => {
+    setTestAddress(event.target.value);
+  };
+
+
+  
+
+
   return (
     <Container>
       <Form className="signup-form" autoComplete="off" onSubmit={handleSubmit}>
+
+      <Form.Group controlId="formBasicTestAddress">
+          <Form.Label>Test Address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Address"
+            value={testAddress}
+            onChange={handleTestAddressChange}
+          />
+                  <Button variant="primary" value={testAddress} onClick={handleAddressSearch}>
+          Submit
+        </Button>
+        </Form.Group>
+
+        
+
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
