@@ -7,7 +7,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [testAddress, setTestAddress] = useState("");
+  const [address, setAddress] = useState("");
   const [addressList, setAddressList] = useState([1, 2, 3]);
 
   const handleSubmit = (event) => {
@@ -18,7 +18,7 @@ function Signup() {
       password,
       firstName,
       lastName,
-      testAddress,
+      address,
     };
     console.log(data);
 
@@ -63,13 +63,13 @@ function Signup() {
     setLastName(event.target.value);
   };
 
-  const handleTestAddressChange = (event) => {
-    setTestAddress(event.target.value);
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
   const handleLiClick = (event) => {
     console.log(event.target.innerText);
-    setTestAddress(event.target.innerText);
+    setAddress(event.target.innerText);
   };
 
   const addressTest = addressList.map((address) => {
@@ -126,21 +126,21 @@ function Signup() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicTestAddress">
+        <Form.Group controlId="formBasicAddress">
           <Form.Label>Address</Form.Label>
           <Row>
             <Col>
               <Form.Control
                 type="text"
                 placeholder="Search for your address"
-                value={testAddress}
-                onChange={handleTestAddressChange}
+                value={address}
+                onChange={handleAddressChange}
               />
             </Col>
             <Col>
               <Button
                 variant="primary"
-                value={testAddress}
+                value={address}
                 onClick={handleAddressSearch}
               >
                 Search

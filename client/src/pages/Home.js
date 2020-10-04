@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import UserContext from "../utils/UserContext";
 import Autocomplete from '../components/Autocomplete';
 
-function NavHeader() {
+function Home() {
     const { firstName, lastName } = useContext(UserContext);
   
     return (
@@ -14,5 +14,5 @@ function NavHeader() {
     );
   }
   
-  export default NavHeader;
+  export default Home;
   

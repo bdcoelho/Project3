@@ -53,7 +53,7 @@ module.exports = (app) => {
       (signUpObject.firstName = req.body.firstName),
       (signUpObject.lastName = req.body.lastName),
       axios
-        .get(buildGeoCodeURL(req.body.testAddress, "GeoCode"))
+        .get(buildGeoCodeURL(req.body.address, "GeoCode"))
         .then((response) => {
           let resArray = response.data.results[0]
           let coordsArray = [];
