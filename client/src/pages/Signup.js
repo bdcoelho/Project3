@@ -14,11 +14,6 @@ function Signup() {
   const [postCode, setPostcode] = useState("");
   const [testAddress, setTestAddress] = useState("");
 
-
-
-
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -32,8 +27,7 @@ function Signup() {
       suburb,
       state,
       postCode,
-      testAddress
-
+      testAddress,
     };
     console.log(data);
 
@@ -48,15 +42,19 @@ function Signup() {
       });
   };
 
-
   const handleAddressSearch = (event) => {
     event.preventDefault();
-console.log(event.target.value)
-    setTestAddress(event.target.value);
+    const address = { value: event.target.value };
+    axios
+      .post("/api/addressSearch", address)
+      .then((res) => {
+        console.log(res);
+        console.log("Return from server api");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-
-
 
   const handleUserChange = (event) => {
     setEmail(event.target.value);
@@ -94,20 +92,14 @@ console.log(event.target.value)
     setPostcode(event.target.value);
   };
 
-
   const handleTestAddressChange = (event) => {
     setTestAddress(event.target.value);
   };
 
-
-  
-
-
   return (
     <Container>
       <Form className="signup-form" autoComplete="off" onSubmit={handleSubmit}>
-
-      <Form.Group controlId="formBasicTestAddress">
+        <Form.Group controlId="formBasicTestAddress">
           <Form.Label>Test Address</Form.Label>
           <Form.Control
             type="text"
@@ -115,12 +107,14 @@ console.log(event.target.value)
             value={testAddress}
             onChange={handleTestAddressChange}
           />
-                  <Button variant="primary" value={testAddress} onClick={handleAddressSearch}>
-          Submit
-        </Button>
+          <Button
+            variant="primary"
+            value={testAddress}
+            onClick={handleAddressSearch}
+          >
+            Submit
+          </Button>
         </Form.Group>
-
-        
 
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
