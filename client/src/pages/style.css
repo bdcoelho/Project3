@@ -36,3 +36,11 @@ margin-top: 50px;
 .typical-link:hover{
     color: red;
 }
+
+.address-list{
+    list-style-type:none;
+}
+
+.address-list-item:hover{
+    background-color: lightslategray;
+}
