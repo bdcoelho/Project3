@@ -22,6 +22,10 @@ const AssetSchema = new Schema({
     type: Number,
     trim: true
   },
+  dailyPrice: {
+    type: String,
+    trim: true
+  },
   user_id: {
     type: String,
     trim: true
