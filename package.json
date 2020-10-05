@@ -27,8 +27,11 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdcoelho/Project3"
+  },
   "author": "Benson Coelho",
-  "license": "MIT",
   "eslintConfig": {
     "extends": "react-app"
   },
