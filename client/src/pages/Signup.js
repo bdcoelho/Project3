@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [streetNum, setStreetnum] = useState("");
-  const [streetName, setStreetname] = useState("");
-  const [suburb, setSuburb] = useState("");
-  const [state, setState] = useState("");
-  const [postCode, setPostcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressList, setAddressList] = useState([1, 2, 3]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,28 +18,29 @@ function Signup() {
       password,
       firstName,
       lastName,
-      streetNum,
-      streetName,
-      suburb,
-      state,
-      postCode,
+      address,
     };
     console.log(data);
 
-    // const data = {
-    //   email,
-    //   password,
-    //   firstName,
-    //   lastName,
-    // };
-
-    // console.log(data);
-
     axios
       .post("/api/signup", data)
-      .then((res) => {
+      .then(() => {
         console.log("User Created");
         window.location = "/Home";
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleAddressSearch = (event) => {
+    event.preventDefault();
+    const address = { value: event.target.value };
+    axios
+      .post("/api/addressSearch", address)
+      .then((res) => {
+        console.log(res.data.predictions);
+        setAddressList(res.data.predictions);
       })
       .catch((err) => {
         console.error(err);
@@ -65,26 +63,23 @@ function Signup() {
     setLastName(event.target.value);
   };
 
-  const handleStreetnumChange = (event) => {
-    setStreetnum(event.target.value);
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
-  const handleStreetnameChange = (event) => {
-    setStreetname(event.target.value);
+  const handleLiClick = (event) => {
+    console.log(event.target.innerText);
+    setAddress(event.target.innerText);
   };
 
-  const handleSuburbChange = (event) => {
-    setSuburb(event.target.value);
-  };
-
-  const handleStateChange = (event) => {
-    setState(event.target.value);
-  };
-
-  const handlePostcodeChange = (event) => {
-    setPostcode(event.target.value);
-  };
-
+  const addressTest = addressList.map((address) => {
+    return (
+      <li className="address-list-item" onClick={handleLiClick}>
+        {address.description}
+      </li>
+    );
+  });
+  console.log(addressTest);
   return (
     <Container>
       <Form className="signup-form" autoComplete="off" onSubmit={handleSubmit}>
@@ -131,67 +126,30 @@ function Signup() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicStreetnumChange">
-          <Form.Label>Street No.</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Street No."
-            value={streetNum}
-            onChange={handleStreetnumChange}
-          />
+        <Form.Group controlId="formBasicAddress">
+          <Form.Label>Address</Form.Label>
+          <Row>
+            <Col>
+              <Form.Control
+                type="text"
+                placeholder="Search for your address"
+                value={address}
+                onChange={handleAddressChange}
+              />
+            </Col>
+            <Col>
+              <Button
+                variant="primary"
+                value={address}
+                onClick={handleAddressSearch}
+              >
+                Search
+              </Button>
+            </Col>
+          </Row>
+          <ul className="address-list">Select your Address {addressTest}</ul>
         </Form.Group>
 
-        <Form.Group controlId="formBasicStreetnameChange">
-          <Form.Label>Street Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Street Name"
-            value={streetName}
-            onChange={handleStreetnameChange}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicSuburbChange">
-          <Form.Label>Suburb</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Suburb"
-            value={suburb}
-            onChange={handleSuburbChange}
-          />
-        </Form.Group>
-
-        <Form.Group controlId="formBasicStateChange">
-          <Form.Label>State</Form.Label>
-          <Form.Control
-            as="select"
-            placeholder="State"
-            value={state}
-            onChange={handleStateChange}
-          >
-            <option value="" selected disabled>
-              Select State
-            </option>
-            <option>ACT</option>
-            <option>NSW</option>
-            <option>NT</option>
-            <option>QLD</option>
-            <option>SA</option>
-            <option>TAS</option>
-            <option>VIC</option>
-            <option>WA</option>
-          </Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPostcodeChange">
-          <Form.Label>Postcode</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Postcode"
-            value={postCode}
-            onChange={handlePostcodeChange}
-          />
-        </Form.Group>
 
         <Form.Group controlId="formBasicCountryChange">
           <Form.Label>Country</Form.Label>
