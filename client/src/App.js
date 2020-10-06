@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Signup from "./pages/Signup";
-import Nav from "./components/Nav";
+import Nav from "./components/TopNav";
 import axios from "axios";
 
 function App() {
