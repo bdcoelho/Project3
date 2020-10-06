@@ -78,4 +78,33 @@ module.exports = (app) => {
       });
     }
   });
+
+  // Find all assets of a user
+  app.get("/api/myAssets/:userId", (req, res) => {
+  db.Asset.find({user_id:req.params.userId})
+    .then((response) => res.json(response))
+   .catch((err) => res.status(422).json(err));
+
+
+});
+
+    // Add an asset
+    app.post("/api/addAsset", (req, res) => {
+      console.log(req.body);
+      db.Asset.create(req.body)
+       .then((response) => res.json(response))
+       .catch((err) => res.status(422).json(err));
+      });
+
+
+// Delete an asset
+      app.post("/api/deleteAsset/:id", (req, res) => {
+        console.log(req.params.id);
+        db.Asset.findByIdAndDelete({ _id: req.params.id })
+        .then((response) => res.json(response))
+        .catch((err) => res.status(422).json(err));
+      });
 };
+
+
+
