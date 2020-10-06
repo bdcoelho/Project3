@@ -44,3 +44,14 @@ margin-top: 50px;
 .address-list-item:hover{
     background-color: lightslategray;
 }
+
+
+.page-content-wrapper{
+    float: right;
+}
+
+.wrapper{
+display: flex;
+position: relative;
+
+}
