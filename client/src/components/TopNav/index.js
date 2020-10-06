@@ -10,7 +10,7 @@ function NavHeader() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Navbar.Brand href="/" className="mr-auto">
+        <Navbar.Brand href="/Home" className="mr-auto">
           {firstName
             ? `Welcome, ${firstName + " " + lastName}!`
             : "Howdy Neighbour!"}
