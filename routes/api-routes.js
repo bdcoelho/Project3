@@ -104,6 +104,21 @@ module.exports = (app) => {
         .then((response) => res.json(response))
         .catch((err) => res.status(422).json(err));
       });
+
+
+// Find Users Near
+app.get("/api/findUserNear/:id", (req, res) => {
+  console.log(req.params.id);
+  db.User.find({user_id:req.params.userId})
+    .then((response) => res.json(response))
+   .catch((err) => res.status(422).json(err));
+});
+
+
+
+
+
+
 };
 
 
