@@ -42,6 +42,7 @@ function App() {
   return (
     <UserContext.Provider value={userData}>
       {console.log("The user is "+ userData.email )}
+      {console.log(loggedIn)}
 
       <Router>
         
@@ -52,7 +53,7 @@ function App() {
           </Route>
 
           <Route exact path="/Login">
-            {userData.email ? <Redirect to="/Home"></Redirect> : null}
+            {userData.email!==null ? <Redirect to="/Home"></Redirect> : console.log("login failed")}
             <Login setLoggedIn={setLoggedIn} />
           </Route>
 
