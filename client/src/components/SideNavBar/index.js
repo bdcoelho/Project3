@@ -3,6 +3,7 @@ import UserContext from "../../utils/UserContext";
 import "./style.css";
 import { Sidenav, Nav, Icon, Dropdown } from "rsuite";
 import 'rsuite/dist/styles/rsuite-default.css';
+import {Link} from "react-router-dom";
 // import 'rsuite/dist/styles/rsuite-dark.css';
 
 
@@ -22,7 +23,7 @@ import 'rsuite/dist/styles/rsuite-default.css';
               title="My Tools"
               icon={<Icon icon="wrench" />}
             >
-              <Dropdown.Item eventKey="3-1" href="/view">View/Edit</Dropdown.Item>
+              <Dropdown.Item componentClass={Link} to="/View" eventKey="3-1">View/Edit</Dropdown.Item>
               <Dropdown.Item eventKey="3-2">Add New</Dropdown.Item>
 
             </Dropdown>

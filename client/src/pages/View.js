@@ -1,25 +1,52 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
-import { Col, Row, Container } from "react-bootstrap";
+import { Col, Row, Container, Button, CardDeck } from "react-bootstrap";
+import AssetCard from "../components/Card";
+import axios from "axios";
 
-function Home() {
-  const { firstName, lastName } = useContext(UserContext);
+function View() {
+  const [userAssets, setUserAssets] = useState([]);
+  const { id, email, firstName, lastName } = useContext(UserContext);
+
+  const retrieveAssets = () => {
+    axios
+      .get("/api/myAssets/" + id)
+      .then((res) => {
+        setUserAssets(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(retrieveAssets, []);
 
   return (
-    <div className="wrapper">
-      <div className="sidebar-wrapper">
+    <Row>
+      <Col md={3}>
         <SideNavBar />
-      </div>
-      <div className="page-content-wrapper">
-        <Container fluid="lg">
-          <Row>
-            <Col>View Page</Col>
-          </Row>
-        </Container>
-      </div>
-    </div>
+      </Col>
+      <Col md={9}>
+        <Row>
+          <CardDeck>
+            {userAssets.map((asset) => (
+              // console.log(asset)
+              <Col md={4} key={asset._id}>
+                <AssetCard
+                  name={asset.name}
+                  image={asset.image}
+                  category={asset.category}
+                  description={asset.description}
+                  hourly={asset.hourlyPrice}
+                  daily={asset.dailyPrice}
+                />
+              </Col>
+            ))}
+          </CardDeck>
+        </Row>
+      </Col>
+    </Row>
+
   );
 }
 
-export default Home;
+export default View;

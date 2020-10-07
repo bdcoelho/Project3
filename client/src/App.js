@@ -19,10 +19,10 @@ import {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({
-    id: "",
-    email: "",
-    firstName: "",
-    lastName: "",
+    id: null,
+    email: null,
+    firstName: null,
+    lastName: null
   });
 
   useEffect(() => {
@@ -41,31 +41,34 @@ function App() {
 
   return (
     <UserContext.Provider value={userData}>
-      <Nav />
+      {console.log("The user is "+ userData.email )}
+
       <Router>
+        
+      <Nav />
         <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
 
           <Route exact path="/Login">
-            {loggedIn ? <Redirect to="/Home"></Redirect> : null}
+            {userData.email ? <Redirect to="/Home"></Redirect> : null}
             <Login setLoggedIn={setLoggedIn} />
           </Route>
 
           <Route exact path="/Signup" component={Signup} />
 
           <Route exact path="/Home" component={Home}>
-            {loggedIn ? null : <Redirect to="/login"></Redirect>}
+          {userData.email===null ? <Login setLoggedIn={setLoggedIn} /> : <Home/>}
           </Route>
 
           <Route exact path="/logout" component={Logout}>
             <Logout setLoggedIn={setLoggedIn} />
-            {loggedIn ? null : <Redirect to="/" />}
+            {userData.email!==null ? null : <Redirect to="/" />}
           </Route>
 
           <Route exact path="/view" component={View}>
-            {loggedIn ? null : <Redirect to="/login"></Redirect>}
+          {userData.email===null ? <Login setLoggedIn={setLoggedIn} /> : <View/>}
           </Route>
 
           <Route exact path="*" component={Invalid}></Route>
