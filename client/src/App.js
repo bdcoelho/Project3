@@ -64,7 +64,9 @@ function App() {
             {loggedIn ? null : <Redirect to="/" />}
           </Route>
 
-          <Route exact path="/view" component={View}></Route>
+          <Route exact path="/view" component={View}>
+            {loggedIn ? null : <Redirect to="/login"></Redirect>}
+          </Route>
 
           <Route exact path="*" component={Invalid}></Route>
         </Switch>
