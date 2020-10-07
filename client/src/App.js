@@ -53,23 +53,23 @@ function App() {
           </Route>
 
           <Route exact path="/Login">
-            {userData.email!==null ? <Redirect to="/Home"></Redirect> : console.log("login failed")}
+            {loggedIn===true ? <Redirect to="/Home"></Redirect> : console.log("login failed")}
             <Login setLoggedIn={setLoggedIn} />
           </Route>
 
           <Route exact path="/Signup" component={Signup} />
 
           <Route exact path="/Home" component={Home}>
-          {userData.email===null ? <Login setLoggedIn={setLoggedIn} /> : <Home/>}
+          {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <Home/>}
           </Route>
 
           <Route exact path="/logout" component={Logout}>
             <Logout setLoggedIn={setLoggedIn} />
-            {userData.email!==null ? null : <Redirect to="/" />}
+            {loggedIn===true ? null : <Redirect to="/" />}
           </Route>
 
           <Route exact path="/view" component={View}>
-          {userData.email===null ? <Login setLoggedIn={setLoggedIn} /> : <View/>}
+          {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <View/>}
           </Route>
 
           <Route exact path="*" component={Invalid}></Route>
