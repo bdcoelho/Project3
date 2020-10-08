@@ -66,6 +66,7 @@ function App() {
           </Route>
 
           <Route exact path="/logout" component={Logout}>
+            {console.log("app.js logout hit")}
             <Logout setLoggedIn={setLoggedIn} />
             {loggedIn===true ? null : <Redirect to="/" />}
           </Route>
