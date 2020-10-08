@@ -24,6 +24,7 @@ function View() {
   const [item, setItem] = useState([]);
   const [distance, setDistance] = useState([]);
   const [categoryArray, setCategoryArray] = useState([]);
+  const [itemArray, setItemArray] = useState([]);
 
   const retrieveCategories = () => {
     axios
@@ -52,9 +53,61 @@ function View() {
   // useEffect(findAssets, []);
   const handleCategoryChange = (event) => {
     event.persist();
-    console.log(event);
-    console.log("category changed");
+    console.log(event.nativeEvent.target.value);
+    setCategory(event.nativeEvent.target.value)
   };
+
+
+
+  const handleItemChange = (event) => {
+    event.persist();
+    console.log(event.nativeEvent.target.value);
+    setItem(event.nativeEvent.target.value)
+  };
+
+
+
+
+  
+
+
+
+
+
+
+  const retrieveItems = () => {
+    if (category===""){
+      return
+    }
+    axios
+      .get("/api/findItems/"+category)
+      .then((items) => {
+        console.log(items.data);
+        setItemArray(items.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(retrieveItems, [category]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Row>
@@ -69,18 +122,40 @@ function View() {
             onSubmit={findAssets}
           >
             <Form.Group controlId="formSearch">
-              <Form.Label>Custom select Small</Form.Label>
+              <Form.Label>Categories</Form.Label>
               <Form.Control
                 as="select"
                 size="md"
                 onChange={handleCategoryChange}
+                defaultValue={'DEFAULT'}
               >
+                <option disabled value="DEFAULT">Select Category</option>
                 {categoryArray.map((element, index) => (
-                  <option key={index} value={element}>
+                  <option key={"cat"+index} value={element}>
                     {element}
                   </option>
                 ))}
               </Form.Control>
+
+              <Form.Label>Items</Form.Label>
+              <Form.Control
+                as="select"
+                size="md"
+                onChange={handleItemChange}
+                defaultValue={'DEFAULT'}
+              >
+                <option disabled value="DEFAULT">Select Item</option>
+                {itemArray.map((element, index) => 
+                // console.log(element)
+                (
+                  <option key={"item"+index} value={element.item}>
+                    {element.item}
+                  </option>
+                )
+                )}
+              </Form.Control>
+
+
             </Form.Group>
 
             <Button variant="primary" type="submit">

@@ -32,7 +32,16 @@ module.exports = (app) => {
 
 //Find items and categories
   app.get("/api/findCategories/", controller.findCategories);
+
+
+  //Find items and categories
+app.get("/api/findItems/:category", controller.findItems);
+
+
+
+
 };
+
 
 
 

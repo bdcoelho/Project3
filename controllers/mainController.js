@@ -122,6 +122,15 @@ module.exports = {
   },
 
 
+findItems: function (req,res) {
+console.log(req.params);
+    db.Item.find(req.params,{item:1, _id: 0})
+      .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
+  }
+
+
+  
 
 
 
