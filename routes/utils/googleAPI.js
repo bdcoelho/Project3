@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const appSecret = process.env.GOOGLE_MAPS_API_KEY;
 
-
 module.exports = {
     buildGeoCodeURL: function(searchTerm, type) {
         let queryURL = "";

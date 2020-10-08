@@ -3,6 +3,7 @@ const passport = require("../Auth/passport");
 const axios = require("axios");
 const googleAPI = require("./utils/googleAPI");
 const { parseGeoJSON } = require("./utils/googleAPI");
+const controller = require("../controllers/controller");
 let addressObject = {};
 let signUpObject = {};
 
@@ -15,17 +16,7 @@ module.exports = (app) => {
     });
   });
 
-  app.post("/api/addressSearch", (req, res) => {
-    axios
-      .get(googleAPI.buildGeoCodeURL(req.body.value, "Place"))
-      .then((response) => {
-        addressObject = response.data;
-        res.send(addressObject);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
+  app.post("/api/addressSearch", controller.addressSearch);
 
   // Signup routing
   app.post("/api/signup", (req, res) => {
@@ -60,70 +51,23 @@ module.exports = (app) => {
   });
 
   // Logging out routing
-  app.get("/api/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-  });
+  app.get("/api/logout", controller.logout);
 
   // getting user data if they are logged in
-  app.get("/api/user_data", (req, res) => {
-    if (!req.user) {
-      res.json({});
-    } else {
-      res.json({
-        email: req.user.email,
-        id: req.user._id,
-        firstName: req.user.firstName,
-        lastName: req.user.lastName,
-      });
-    }
-  });
+  app.get("/api/user_data", controller.getUserData);
 
   // Find all assets of a user
-  app.get("/api/myAssets/:userId", (req, res) => {
-    console.log(req.params.userId);
-    db.Asset.find({ user_id: req.params.userId })
-
-      .then((response) => res.json(response))
-      .catch((err) => res.status(422).json(err));
-  });
+  app.get("/api/myAssets/:userId", controller.userAsset);
 
   // Add an asset
-  app.post("/api/addAsset", (req, res) => {
-    console.log(req.body);
-    db.Asset.create(req.body)
-      .then((response) => res.json(response))
-      .catch((err) => res.status(422).json(err));
-  });
+  app.post("/api/addAsset", controller.addAsset);
 
   // Delete an asset
-  app.post("/api/deleteAsset/:id", (req, res) => {
-    console.log(req.params.id);
-    db.Asset.findByIdAndDelete({ _id: req.params.id })
-      .then((response) => res.json(response))
-      .catch((err) => res.status(422).json(err));
-  });
+  app.post("/api/deleteAsset/:id", controller.deleteAsset);
+
 
   // Find Users Near
-  app.get("/api/findUserNear/", (req, res) => {
-
-    
-    
-    
-    db.User.aggregate([
-      {
-        $geoNear: {
-           near: { type: "Point", coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)] },
-           distanceField: "dist.calculated",
-           maxDistance: 1000,
-          //  query: { category: "Parks" },
-           spherical: true
-        }
-      }
-   ])
-    
-    .then((response)=>res.send({length:response.length}));
-  });
+  app.get("/api/findUserNear/", controller.findNear);
 
 
 };
