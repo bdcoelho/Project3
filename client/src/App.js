@@ -27,6 +27,7 @@ function App() {
 
   useEffect(() => {
     axios.get("/api/user_data").then((result) => {
+      console.log(result);
       if (result.data.email) {
         setLoggedIn(true);
         console.log(result.data.id);
