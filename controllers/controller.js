@@ -55,11 +55,6 @@ module.exports = {
     }
   },
 
-  logout: function (req, res) {
-    req.logout();
-    res.redirect("/");
-  },
-
   addressSearch: function (req, res) {
     axios
       .get(googleAPI.buildGeoCodeURL(req.body.value, "Place"))
