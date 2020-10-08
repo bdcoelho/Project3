@@ -1,0 +1,19 @@
+[
+  { "Item": "Drill", "Category": "Power Tools" },
+  { "Item": "Powersaw", "Category": "Power Tools" },
+  { "Item": "Pressure Washer", "Category": "Power Tools" },
+  { "Item": "Air Compressor", "Category": "Power Tools" },
+  { "Item": "Sander", "Category": "Power Tools" },
+  { "Item": "Circle Saw", "Category": "Power Tools" },
+  { "Item": "Portable Generator", "Category": "Power Tools" },
+  { "Item": "Work Light", "Category": "Power Tools" },
+  { "Item": "Lawn Mower", "Category": "Garden Tools" },
+  { "Item": "Line Trimmer", "Category": "Garden Tools" },
+  { "Item": "Leaf Blower", "Category": "Garden Tools" },
+  { "Item": "Hedge Trimmer", "Category": "Garden Tools" },
+  { "Item": "Chain Saw", "Category": "Garden Tools" },
+  { "Item": "Drill Bits", "Category": "Tool Accessories" },
+  { "Item": "Socket Adapter", "Category": "Tool Accessories" },
+  { "Item": "Drill Bit Sharpener", "Category": "Tool Accessories" },
+  { "Item": "Mixing Paddle", "Category": "Tool Accessories" }
+]
