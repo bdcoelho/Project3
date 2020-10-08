@@ -4,7 +4,7 @@ function Logout(props) {
 
     const data={}
 
-    Axios.get("./api/logout", data)
+    Axios.get("/api/logout", data)
     .then(() => {
         props.setLoggedIn(false);
     })
