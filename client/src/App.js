@@ -19,16 +19,17 @@ import {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState({
-    id: null,
-    email: null,
-    firstName: null,
-    lastName: null
+    id: "",
+    email: "",
+    firstName: "",
+    lastName: ""
   });
 
   useEffect(() => {
     axios.get("/api/user_data").then((result) => {
       if (result.data.email) {
         setLoggedIn(true);
+        console.log(result.data.id);
         setUserData({
           id: result.data.id,
           email: result.data.email,

@@ -81,7 +81,9 @@ module.exports = (app) => {
 
   // Find all assets of a user
   app.get("/api/myAssets/:userId", (req, res) => {
+    console.log(req.params.userId)
   db.Asset.find({user_id:req.params.userId})
+
     .then((response) => res.json(response))
    .catch((err) => res.status(422).json(err));
 
