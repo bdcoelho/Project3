@@ -29,10 +29,10 @@ module.exports = (app) => {
 
   // Signup routing
   app.post("/api/signup", (req, res) => {
-    signUpObject.email = req.body.email,
-      signUpObject.password = req.body.password,
-      signUpObject.firstName = req.body.firstName,
-      signUpObject.lastName = req.body.lastName,
+    (signUpObject.email = req.body.email),
+      (signUpObject.password = req.body.password),
+      (signUpObject.firstName = req.body.firstName),
+      (signUpObject.lastName = req.body.lastName),
       axios
         .get(googleAPI.buildGeoCodeURL(req.body.address, "GeoCode"))
         .then((response) => {
@@ -81,47 +81,49 @@ module.exports = (app) => {
 
   // Find all assets of a user
   app.get("/api/myAssets/:userId", (req, res) => {
-    console.log(req.params.userId)
-  db.Asset.find({user_id:req.params.userId})
+    console.log(req.params.userId);
+    db.Asset.find({ user_id: req.params.userId })
 
-    .then((response) => res.json(response))
-   .catch((err) => res.status(422).json(err));
+      .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
+  });
 
+  // Add an asset
+  app.post("/api/addAsset", (req, res) => {
+    console.log(req.body);
+    db.Asset.create(req.body)
+      .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
+  });
 
-});
+  // Delete an asset
+  app.post("/api/deleteAsset/:id", (req, res) => {
+    console.log(req.params.id);
+    db.Asset.findByIdAndDelete({ _id: req.params.id })
+      .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
+  });
 
-    // Add an asset
-    app.post("/api/addAsset", (req, res) => {
-      console.log(req.body);
-      db.Asset.create(req.body)
-       .then((response) => res.json(response))
-       .catch((err) => res.status(422).json(err));
-      });
+  // Find Users Near
+  app.get("/api/findUserNear/", (req, res) => {
 
-
-// Delete an asset
-      app.post("/api/deleteAsset/:id", (req, res) => {
-        console.log(req.params.id);
-        db.Asset.findByIdAndDelete({ _id: req.params.id })
-        .then((response) => res.json(response))
-        .catch((err) => res.status(422).json(err));
-      });
-
-
-// Find Users Near
-app.get("/api/findUserNear/:id", (req, res) => {
-  console.log(req.params.id);
-  db.User.find({user_id:req.params.userId})
-    .then((response) => res.json(response))
-   .catch((err) => res.status(422).json(err));
-});
-
-
-
-
+    
+    
+    
+    db.User.aggregate([
+      {
+        $geoNear: {
+           near: { type: "Point", coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)] },
+           distanceField: "dist.calculated",
+           maxDistance: 1000,
+          //  query: { category: "Parks" },
+           spherical: true
+        }
+      }
+   ])
+    
+    .then((response)=>res.send({length:response.length}));
+  });
 
 
 };
-
-
-
