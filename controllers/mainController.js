@@ -116,7 +116,7 @@ module.exports = {
   findCategories: function (req,res) {
     // db.Item.find()
 
-    db.Item.distinct('Category')
+    db.Item.distinct('category')
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
   },
