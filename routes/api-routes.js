@@ -4,17 +4,12 @@ const axios = require("axios");
 const googleAPI = require("./utils/googleAPI");
 const { parseGeoJSON } = require("./utils/googleAPI");
 const controller = require("../controllers/controller");
-let addressObject = {};
+
 let signUpObject = {};
 
 module.exports = (app) => {
   // Login routing
-  app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    res.json({
-      email: req.user.email,
-      id: req.user.id,
-    });
-  });
+  app.post("/api/login", passport.authenticate("local"), controller.login);
 
   app.post("/api/addressSearch", controller.addressSearch);
 
@@ -51,7 +46,10 @@ module.exports = (app) => {
   });
 
   // Logging out routing
-  app.get("/api/logout", controller.logout);
+  app.get("/api/logout", (req,res)=>{
+  req.logout();
+  res.redirect("/");
+  });
 
   // getting user data if they are logged in
   app.get("/api/user_data", controller.getUserData);
@@ -65,9 +63,6 @@ module.exports = (app) => {
   // Delete an asset
   app.post("/api/deleteAsset/:id", controller.deleteAsset);
 
-
   // Find Users Near
   app.get("/api/findUserNear/", controller.findNear);
-
-
 };

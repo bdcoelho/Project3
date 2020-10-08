@@ -1,6 +1,7 @@
 const db = require("../models");
 const googleAPI = require("../routes/utils/googleAPI");
 const axios = require("axios");
+let addressObject = {};
 
 module.exports = {
   findNear: function (req, res) {
@@ -43,15 +44,15 @@ module.exports = {
 
   getUserData: function (req, res) {
     if (!req.user) {
-        res.json({});
-      } else {
-        res.json({
-          email: req.user.email,
-          id: req.user._id,
-          firstName: req.user.firstName,
-          lastName: req.user.lastName,
-        });
-      }
+      res.json({});
+    } else {
+      res.json({
+        email: req.user.email,
+        id: req.user._id,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+      });
+    }
   },
 
   logout: function (req, res) {
@@ -59,48 +60,23 @@ module.exports = {
     res.redirect("/");
   },
 
-
-
-
   addressSearch: function (req, res) {
     axios
-    .get(googleAPI.buildGeoCodeURL(req.body.value, "Place"))
-    .then((response) => {
-      addressObject = response.data;
-      res.send(addressObject);
-    })
-    .catch((err) => {
-      console.error(err);
+      .get(googleAPI.buildGeoCodeURL(req.body.value, "Place"))
+      .then((response) => {
+        addressObject = response.data;
+        res.send(addressObject);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
+
+  login: function (req, res) {
+    res.json({
+      email: req.user.email,
+      id: req.user.id,
     });
-    
-  }
+  },
 
-
-
-  //   findById: function(req, res) {
-  //     db.Book
-  //       .findById(req.params.id)
-  //       .then(dbModel => res.json(dbModel))
-  //       .catch(err => res.status(422).json(err));
-  //   },
-  //   create: function(req, res) {
-  //     console.log(req.body);
-  //     db.Book
-  //       .create(req.body)
-  //       .then(dbModel => res.json(dbModel))
-  //       .catch(err => res.status(422).json(err));
-  //   },
-  //   update: function(req, res) {
-  //     db.Book
-  //       .findOneAndUpdate({ _id: req.params.id }, req.body)
-  //       .then(dbModel => res.json(dbModel))
-  //       .catch(err => res.status(422).json(err));
-  //   },
-  //   remove: function(req, res) {
-  //     db.Book
-  //       .findById({ _id: req.params.id })
-  //       .then(dbModel => dbModel.remove())
-  //       .then(dbModel => res.json(dbModel))
-  //       .catch(err => res.status(422).json(err));
-  //   }
 };
