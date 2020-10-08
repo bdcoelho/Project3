@@ -73,7 +73,7 @@ function View() {
               <Form.Control
                 as="select"
                 size="md"
-                onChange={handleCategoryChange.bind(this)}
+                onChange={handleCategoryChange}
               >
                 {categoryArray.map((element, index) => (
                   <option key={index} value={element}>
