@@ -8,6 +8,9 @@ import Signup from "./pages/Signup";
 import Nav from "./components/TopNav";
 import View from "./pages/View";
 import axios from "axios";
+import Find from "./pages/Find";
+
+
 import {
   BrowserRouter as Router,
   Route,
@@ -66,13 +69,16 @@ function App() {
           </Route>
 
           <Route exact path="/logout" component={Logout}>
-            {console.log("app.js logout hit")}
             <Logout setLoggedIn={setLoggedIn} />
             {loggedIn===true ? null : <Redirect to="/" />}
           </Route>
 
           <Route exact path="/view" component={View}>
           {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <View/>}
+          </Route>
+
+          <Route exact path="/Find" component={Find}>
+          {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <Find/>}
           </Route>
 
           <Route exact path="*" component={Invalid}></Route>

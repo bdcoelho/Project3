@@ -29,4 +29,12 @@ module.exports = (app) => {
 
   // Find Users Near
   app.get("/api/findUserNear/", controller.findNear);
+
+//Find items and categories
+  app.get("/api/findCategories/", controller.findCategories);
 };
+
+
+
+
+
