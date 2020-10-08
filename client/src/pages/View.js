@@ -8,7 +8,10 @@ import axios from "axios";
 function View() {
   const [userAssets, setUserAssets] = useState([]);
   const { id, email, firstName, lastName } = useContext(UserContext);
-
+  console.log(id);
+  console.log(email);
+  console.log(firstName);
+console.log(lastName);
   const retrieveAssets = () => {
     axios
       .get("/api/myAssets/" + id)

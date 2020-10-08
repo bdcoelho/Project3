@@ -5,6 +5,8 @@ import { Col, Row, Container } from "react-bootstrap";
 
 function Home() {
   const { firstName, lastName } = useContext(UserContext);
+console.log(firstName);
+console.log(lastName);
 
   return (
     <div className="wrapper">
