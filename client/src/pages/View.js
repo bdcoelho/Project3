@@ -13,6 +13,8 @@ function View() {
     axios
       .get("/api/myAssets/" + id)
       .then((res) => {
+        console.log("/api/myAssets/" + id);
+        console.log(res.data);
         setUserAssets(res.data);
       })
       .catch((err) => console.log(err));
