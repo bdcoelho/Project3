@@ -17,7 +17,7 @@ function NavHeader() {
             ? `Welcome, ${firstName + " " + lastName}!`
             : "Howdy Neighbour!"}
         </Nav.Link>
-        <Nav.Link className="nav-link" href="/logout">
+        <Nav.Link className="nav-link" as={Link} to ="/Logout">
           Logout
         </Nav.Link>
       </Navbar.Collapse>
