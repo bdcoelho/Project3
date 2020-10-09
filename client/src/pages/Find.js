@@ -18,7 +18,7 @@ let query = "?lng=144.9544441&lat=-37.8198382";
 
 function View() {
   const [userAssets, setUserAssets] = useState([]);
-  const { id, email, firstName, lastName } = useContext(UserContext);
+  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
 
   const [category, setCategory] = useState("");
   const [item, setItem] = useState([]);
@@ -43,7 +43,9 @@ function View() {
     const data = {
       category,
       item,
-      distance
+      distance,
+      lng,
+      lat      
     };
     console.log(data);
 

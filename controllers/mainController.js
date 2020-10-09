@@ -132,23 +132,44 @@ module.exports = {
 
   findItemsNear: function (req, res) {
     console.log(req.body);
-    res.json(req.body);
-    //   db.User.aggregate([
-    //     {
-    //       $geoNear: {
-    //         near: {
-    //           type: "Point",
-    //           coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
-    //         },
-    //         distanceField: "dist.calculated",
-    //         maxDistance: 1000,
-    //         //  query: { category: "Parks" },
-    //         spherical: true,
-    //       },
-    //     },
-    //   ])
+    // res.json(req.body);
+    db.User.aggregate([
+      {
+        $geoNear: {
+          near: {
+            type: "Point",
+            coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+          },
+          distanceField: "dist.calculated",
+          minDistance: 1,
+          maxDistance: req.body.distance * 1000,
+          //  query: { category: "Parks" },
+          spherical: true,
+        },
+      },
+    ])
+      .then(
+        (users) => {
+          console.log(users);
 
-    //     .then((response) => res.send({ length: response.length }))
-    //     .catch((err) => res.status(422).json(err));
+          let userIds = users.map((user) => user._id);
+
+          console.log(userIds);
+
+          db.Asset.find({
+            user_id: { $in: userIds },
+            name: req.body.item,
+          })
+            .then((items) => {
+              console.log(items);
+
+              res.json(items);
+            })
+            .catch((err) => res.status(422).json(err));
+        }
+
+        // res.send(response)
+      )
+      .catch((err) => res.status(422).json(err));
   },
 };
