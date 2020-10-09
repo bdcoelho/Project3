@@ -4,7 +4,9 @@ const UserContext = createContext({
   id: "",
   email: "",
   firstName: "",
-  lastName: ""
+  lastName: "",
+  lng: "",
+  lat: ""
 });
 
 export default UserContext;

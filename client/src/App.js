@@ -33,12 +33,14 @@ function App() {
       console.log(result);
       if (result.data.email) {
         setLoggedIn(true);
-        console.log(result.data.id);
+        console.log(result.data);
         setUserData({
           id: result.data.id,
           email: result.data.email,
           firstName: result.data.firstName,
           lastName: result.data.lastName,
+          lng: result.data.lng,
+          lat: result.data.lat
         });
       }
     });
@@ -47,6 +49,8 @@ function App() {
   return (
     <UserContext.Provider value={userData}>
       {console.log("The user is "+ userData.email )}
+      {console.log("The user lat is "+ userData.lat )}
+      
       {console.log(loggedIn)}
 
       <Router>

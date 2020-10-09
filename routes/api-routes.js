@@ -28,7 +28,7 @@ module.exports = (app) => {
   app.post("/api/deleteAsset/:id", controller.deleteAsset);
 
   // Find Users Near
-  app.get("/api/findUserNear/", controller.findNear);
+  app.post("/api/findItemsNear/", controller.findItemsNear);
 
 //Find items and categories
   app.get("/api/findCategories/", controller.findCategories);

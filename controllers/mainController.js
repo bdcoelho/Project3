@@ -1,9 +1,9 @@
 const db = require("../models");
 const axios = require("axios");
 const googleAPI = require("./googleAPIController");
+const querystring = require("querystring");
 let addressObject = {};
 let signUpObject = {};
-
 
 module.exports = {
   findNear: function (req, res) {
@@ -48,11 +48,14 @@ module.exports = {
     if (!req.user) {
       res.json({});
     } else {
+      console.log(req.user);
       res.json({
         email: req.user.email,
         id: req.user._id,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
+        lng: req.user.geometry.coordinates[0],
+        lat: req.user.geometry.coordinates[1],
       });
     }
   },
@@ -82,56 +85,70 @@ module.exports = {
   },
 
   signup: function (req, res) {
-
-    signUpObject.email = req.body.email,
-    signUpObject.password = req.body.password,
-    signUpObject.firstName = req.body.firstName,
-    signUpObject.lastName = req.body.lastName,
-    axios
-      .get(googleAPI.buildGeoCodeURL(req.body.address, "GeoCode"))
-      .then((response) => {
-        let resArray = response.data.results[0];
-        let coordsArray = [];
-        addressArray = resArray.address_components;
-        addressArray.forEach(googleAPI.parseGeoJSON, signUpObject);
-        coordsArray.push(
-          resArray.geometry.location.lng,
-          resArray.geometry.location.lat
-        );
-        console.log(coordsArray);
-        signUpObject.geometry = { type: "point", coordinates: coordsArray };
-        db.User.create(signUpObject)
-          .then(() => {
-            res.redirect(307, "/api/login");
-          })
-          .catch((err) => {
-            res.status(401).json(err);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    (signUpObject.email = req.body.email),
+      (signUpObject.password = req.body.password),
+      (signUpObject.firstName = req.body.firstName),
+      (signUpObject.lastName = req.body.lastName),
+      axios
+        .get(googleAPI.buildGeoCodeURL(req.body.address, "GeoCode"))
+        .then((response) => {
+          let resArray = response.data.results[0];
+          let coordsArray = [];
+          addressArray = resArray.address_components;
+          addressArray.forEach(googleAPI.parseGeoJSON, signUpObject);
+          coordsArray.push(
+            resArray.geometry.location.lng,
+            resArray.geometry.location.lat
+          );
+          console.log(coordsArray);
+          signUpObject.geometry = { type: "point", coordinates: coordsArray };
+          db.User.create(signUpObject)
+            .then(() => {
+              res.redirect(307, "/api/login");
+            })
+            .catch((err) => {
+              res.status(401).json(err);
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
   },
 
-  findCategories: function (req,res) {
+  findCategories: function (req, res) {
     // db.Item.find()
 
-    db.Item.distinct('category')
+    db.Item.distinct("category")
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
   },
 
-
-findItems: function (req,res) {
-console.log(req.params);
-    db.Item.find(req.params,{item:1, _id: 0})
+  findItems: function (req, res) {
+    console.log(req.params);
+    db.Item.find(req.params, { item: 1, _id: 0 })
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
-  }
+  },
 
+  findItemsNear: function (req, res) {
+    console.log(req.body);
+    res.json(req.body);
+    //   db.User.aggregate([
+    //     {
+    //       $geoNear: {
+    //         near: {
+    //           type: "Point",
+    //           coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+    //         },
+    //         distanceField: "dist.calculated",
+    //         maxDistance: 1000,
+    //         //  query: { category: "Parks" },
+    //         spherical: true,
+    //       },
+    //     },
+    //   ])
 
-  
-
-
-
+    //     .then((response) => res.send({ length: response.length }))
+    //     .catch((err) => res.status(422).json(err));
+  },
 };

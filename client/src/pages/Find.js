@@ -38,10 +38,17 @@ function View() {
 
   useEffect(retrieveCategories, []);
 
-  const findAssets = (event) => {
+  const handleFormSubmit = (event) => {
     event.preventDefault();
+    const data = {
+      category,
+      item,
+      distance
+    };
+    console.log(data);
+
     axios
-      .get("/api/findUserNear/" + query)
+      .post("/api/findItemsNear/", data)
       .then((res) => {
         console.log("executed axios");
         console.log(res);
@@ -50,37 +57,24 @@ function View() {
       .catch((err) => console.log(err));
   };
 
-  // useEffect(findAssets, []);
   const handleCategoryChange = (event) => {
     event.persist();
-    console.log(event.nativeEvent.target.value);
-    setCategory(event.nativeEvent.target.value)
+    console.log(event.target.value);
+    setCategory(event.target.value);
   };
-
-
 
   const handleItemChange = (event) => {
     event.persist();
-    console.log(event.nativeEvent.target.value);
-    setItem(event.nativeEvent.target.value)
+    console.log(event.target.value);
+    setItem(event.target.value);
   };
 
-
-
-
-  
-
-
-
-
-
-
   const retrieveItems = () => {
-    if (category===""){
-      return
+    if (category === "") {
+      return;
     }
     axios
-      .get("/api/findItems/"+category)
+      .get("/api/findItems/" + category)
       .then((items) => {
         console.log(items.data);
         setItemArray(items.data);
@@ -90,24 +84,10 @@ function View() {
 
   useEffect(retrieveItems, [category]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const handleDistanceChange = (event) => {
+    console.log(event.target.value);
+    setDistance(event.target.value);
+  };
 
   return (
     <Row>
@@ -119,43 +99,54 @@ function View() {
           <Form
             className="search-formj"
             autoComplete="off"
-            onSubmit={findAssets}
+            onSubmit={handleFormSubmit}
           >
-            <Form.Group controlId="formSearch">
+            <Form.Group controlId="formCategory">
               <Form.Label>Categories</Form.Label>
               <Form.Control
                 as="select"
                 size="md"
                 onChange={handleCategoryChange}
-                defaultValue={'DEFAULT'}
+                defaultValue={"DEFAULT"}
               >
-                <option disabled value="DEFAULT">Select Category</option>
+                <option disabled value="DEFAULT">
+                  Select Category
+                </option>
                 {categoryArray.map((element, index) => (
-                  <option key={"cat"+index} value={element}>
+                  <option key={"cat" + index} value={element}>
                     {element}
                   </option>
                 ))}
               </Form.Control>
+            </Form.Group>
 
+            <Form.Group controlId="formItem">
               <Form.Label>Items</Form.Label>
               <Form.Control
                 as="select"
                 size="md"
                 onChange={handleItemChange}
-                defaultValue={'DEFAULT'}
+                defaultValue={"DEFAULT"}
               >
-                <option disabled value="DEFAULT">Select Item</option>
-                {itemArray.map((element, index) => 
-                // console.log(element)
-                (
-                  <option key={"item"+index} value={element.item}>
+                <option disabled value="DEFAULT">
+                  Select Item
+                </option>
+                {itemArray.map((element, index) => (
+                  // console.log(element)
+                  <option key={"item" + index} value={element.item}>
                     {element.item}
                   </option>
-                )
-                )}
+                ))}
               </Form.Control>
-
-
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Distance</Form.Label>
+              <Form.Control
+                as="input"
+                size="md"
+                onChange={handleDistanceChange}
+                type="number"
+              ></Form.Control>
             </Form.Group>
 
             <Button variant="primary" type="submit">
