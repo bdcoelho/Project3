@@ -175,9 +175,23 @@ module.exports = {
 
         // console.log(users)
         users.map((user) => {
-          let userAsset = user.userAssets;
-          let filterAsset = userAsset.filter(queryFilter);
-          responseArray.push(filterAsset[0]);
+          let userAssets = user.userAssets;
+          let filterAssets = userAssets.filter(queryFilter);
+          filterAssets.forEach((filterAsset) => {          
+
+            filterAsset.userId = user._id;
+            filterAsset.dist = user.dist.calculated;
+            filterAsset.streetNum = user.streetNum;
+            filterAsset.streetName = user.streetName;
+            filterAsset.suburb = user.suburb;
+            filterAsset.state = user.state;
+            filterAsset.postCode = user.postCode;
+            responseArray.push(filterAsset);
+
+          });      
+
+          console.log(responseArray);
+
         });
         res.json(responseArray);
       })
