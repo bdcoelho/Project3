@@ -100,6 +100,8 @@ function Find() {
             autoComplete="off"
             onSubmit={handleFormSubmit}
           >
+            <Form.Row>
+              <Col>
             <Form.Group controlId="formCategory">
               <Form.Label>Categories</Form.Label>
               <Form.Control
@@ -118,7 +120,8 @@ function Find() {
                 ))}
               </Form.Control>
             </Form.Group>
-
+            </Col>
+            <Col>
             <Form.Group controlId="formItem">
               <Form.Label>Items</Form.Label>
               <Form.Control
@@ -138,6 +141,8 @@ function Find() {
                 ))}
               </Form.Control>
             </Form.Group>
+            </Col>
+            <Col>
             <Form.Group>
               <Form.Label>Distance</Form.Label>
               <Form.Control
@@ -147,10 +152,13 @@ function Find() {
                 type="number"
               ></Form.Control>
             </Form.Group>
-
+            </Col>
+            <Col style={{alignContent:"center"}}>
             <Button variant="primary" type="submit">
               Submit
             </Button>
+            </Col>
+            </Form.Row>
           </Form>
         </Row>
       </Col>
