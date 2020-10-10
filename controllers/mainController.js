@@ -131,9 +131,11 @@ module.exports = {
   },
 
   findItemsNear: function (req, res) {
+    let responseArray = [];
     console.log(req.body);
     // res.json(req.body);
     db.User.aggregate([
+      // Stage 1
       {
         $geoNear: {
           near: {
@@ -147,13 +149,40 @@ module.exports = {
           spherical: true,
         },
       },
+
+      // Stage 2
+      {
+        $lookup: {
+          from: "assets",
+          localField: "assets",
+          foreignField: "_id",
+          as: "userAssets",
+        },
+      },
+      // Stage 3
+
+      { $match: { "userAssets.name": req.body.item } },
+
+      // HOW TO QUERY ARRAY. instock is an array, warehouse is a property inside the array, A is the Value.
+      // db.inventory.find( { "instock.warehouse": "A" } )
     ])
-    .then((users)=>{
-      return db.Asset.populate(users, {
-        path: 'assets'
+      .then((users) => {
+        const queryFilter = (asset) => {
+          if (asset.name === req.body.item) {
+            return asset;
+          }
+        };
+
+        // console.log(users)
+        users.map((user) => {
+          let userAsset = user.userAssets;
+          let filterAsset = userAsset.filter(queryFilter);
+          responseArray.push(filterAsset[0]);
+        });
+        res.json(responseArray);
       })
-    })
-    .then((users) => users.map((user)=>{console.log(user.assets)}))
+
+      .then(console.log("hello"))
       .catch((err) => res.status(422).json(err));
   },
 };
