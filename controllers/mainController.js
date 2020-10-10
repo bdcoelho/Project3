@@ -179,7 +179,6 @@ module.exports = {
           let filterAssets = userAssets.filter(queryFilter);
           filterAssets.forEach((filterAsset) => {          
 
-            filterAsset.userId = user._id;
             filterAsset.dist = user.dist.calculated;
             filterAsset.streetNum = user.streetNum;
             filterAsset.streetName = user.streetName;

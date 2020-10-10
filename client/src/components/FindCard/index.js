@@ -3,7 +3,7 @@ import UserContext from "../../utils/UserContext";
 import "./style.css";
 import { Card, Button} from "react-bootstrap";
 
-function AssetCard(props) {
+function ViewCard(props) {
   const { firstName, lastName } = useContext(UserContext);
 console.log(props)
   return (
@@ -23,4 +23,4 @@ console.log(props)
   )
 }
 
-export default AssetCard;
+export default ViewCard;

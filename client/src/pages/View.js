@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
 import { Col, Row, Container, Button, CardDeck } from "react-bootstrap";
-import AssetCard from "../components/Card";
+import ViewCard from "../components/ViewCard";
 import axios from "axios";
 
 function View() {
@@ -36,7 +36,7 @@ console.log(lastName);
             {userAssets.map((asset) => (
               // console.log(asset)
               <Col md={4} key={asset._id}>
-                <AssetCard
+                <ViewCard
                   name={asset.name}
                   image={asset.image}
                   category={asset.category}
