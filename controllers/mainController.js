@@ -148,28 +148,12 @@ module.exports = {
         },
       },
     ])
-      .then(
-        (users) => {
-          console.log(users);
-
-          let userIds = users.map((user) => user._id);
-
-          console.log(userIds);
-
-          db.Asset.find({
-            user_id: { $in: userIds },
-            name: req.body.item,
-          })
-            .then((items) => {
-              console.log(items);
-
-              res.json(items);
-            })
-            .catch((err) => res.status(422).json(err));
-        }
-
-        // res.send(response)
-      )
+    .then((users)=>{
+      return db.Asset.populate(users, {
+        path: 'assets'
+      })
+    })
+    .then((users) => users.map((user)=>{console.log(user.assets)}))
       .catch((err) => res.status(422).json(err));
   },
 };

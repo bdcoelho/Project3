@@ -63,7 +63,12 @@ const UserSchema = new Schema({
         required: "Please enter your country",
         default: "Australia"
       },
-
+      assets: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Asset"
+        }
+      ],
       
 
     userCreated: {
