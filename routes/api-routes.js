@@ -25,7 +25,7 @@ module.exports = (app) => {
   app.post("/api/addAsset", controller.addAsset);
 
   // Delete an asset
-  app.post("/api/deleteAsset/:id", controller.deleteAsset);
+  app.post("/api/deleteAsset", controller.deleteAsset);
 
   // Find Users Near
   app.post("/api/findItemsNear/", controller.findItemsNear);

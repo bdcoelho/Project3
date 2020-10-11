@@ -27,9 +27,25 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
-    db.Asset.findByIdAndDelete({ _id: req.params.id })
-      .then((response) => res.json(response))
-      .catch((err) => res.status(422).json(err));
+    console.log(req.body);
+    console.log("about to delete");
+    // db.Asset.findById(req.body.assetId)
+    //   .then((asset) => {
+    //     let userId = asset.user_id;
+    //     console.log(userId);
+        db.User.find({ _id: userId })
+          .then((user) => {
+            console.log(user);
+          })
+          .catch((err) => console.log(err));
+      //   res.json(asset);
+      // })
+
+      // db.User.findById(req.body.userId).then((user) => {
+      //   console.log(user);
+      // })
+
+      // .catch((err) => res.status(422).json(err));
   },
 
   addAsset: function (req, res) {
@@ -177,8 +193,7 @@ module.exports = {
         users.map((user) => {
           let userAssets = user.userAssets;
           let filterAssets = userAssets.filter(queryFilter);
-          filterAssets.forEach((filterAsset) => {          
-
+          filterAssets.forEach((filterAsset) => {
             filterAsset.dist = user.dist.calculated;
             filterAsset.streetNum = user.streetNum;
             filterAsset.streetName = user.streetName;
@@ -186,11 +201,9 @@ module.exports = {
             filterAsset.state = user.state;
             filterAsset.postCode = user.postCode;
             responseArray.push(filterAsset);
-
-          });      
+          });
 
           console.log(responseArray);
-
         });
         res.json(responseArray);
       })

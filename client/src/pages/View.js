@@ -23,7 +23,7 @@ console.log(lastName);
       .catch((err) => console.log(err));
   };
 
-  useEffect(retrieveAssets, []);
+  useEffect(retrieveAssets, [id]);
 
   return (
     <Row>
@@ -43,6 +43,7 @@ console.log(lastName);
                   description={asset.description}
                   hourly={asset.hourlyPrice}
                   daily={asset.dailyPrice}
+                  id={asset._id}
                 />
               </Col>
             ))}
