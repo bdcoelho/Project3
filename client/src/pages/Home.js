@@ -14,7 +14,7 @@ console.log(lastName);
         <SideNavBar />
       </Col>
       <Col md={9}>
- 
+ Home Page
       </Col>
     </Row>
 

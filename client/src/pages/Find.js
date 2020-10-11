@@ -143,7 +143,7 @@ function Find() {
             </Col>
             <Col>
             <Form.Group>
-              <Form.Label>Distance</Form.Label>
+              <Form.Label>Distance (km)</Form.Label>
               <Form.Control
                 as="input"
                 size="md"
