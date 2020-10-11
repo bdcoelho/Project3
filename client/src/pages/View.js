@@ -27,7 +27,7 @@ console.log(lastName);
 
   return (
     <Row>
-      <Col md={3}>
+      <Col md={2} className="pr-0">
         <SideNavBar />
       </Col>
       <Col md={9}>

@@ -10,11 +10,11 @@ import {
   Dropdown,
   Form,
 } from "react-bootstrap";
-// import AssetCard from "../components/Card";
+import FindCard from "../components/FindCard";
 import axios from "axios";
 
 function Find() {
-  const [userAssets, setUserAssets] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
 
   const [category, setCategory] = useState("");
@@ -49,9 +49,8 @@ function Find() {
     axios
       .post("/api/findItemsNear/", data)
       .then((res) => {
-        console.log("executed axios");
         console.log(res);
-        setUserAssets(res.data);
+        setSearchResult(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -90,13 +89,13 @@ function Find() {
 
   return (
     <Row>
-      <Col md={3}>
+      <Col md={2} className="pr-0">
         <SideNavBar />
       </Col>
       <Col md={9}>
-        <Row>
+        <Row className="mt-3">
           <Form
-            className="search-formj"
+            className="search-form"
             autoComplete="off"
             onSubmit={handleFormSubmit}
           >
@@ -153,13 +152,48 @@ function Find() {
               ></Form.Control>
             </Form.Group>
             </Col>
-            <Col style={{alignContent:"center"}}>
-            <Button variant="primary" type="submit">
+            <Col  className="d-flex align-items-end pb-3">
+            <Button variant="primary" type="submit" className="findButton">
               Submit
             </Button>
             </Col>
             </Form.Row>
           </Form>
+        </Row>
+        <Row>
+
+
+
+
+
+          
+          <div className="find-card">
+            
+            {searchResult.map((item) => (
+
+                <FindCard key = {item.id}
+name={item.name}
+hourlyPrice={item.hourlyPrice}
+dailyPrice={item.dailyPrice}
+description={item.description}
+dist={item.dist/1000}
+image={item.image}
+postCode={item.postCode}
+suburb={item.suburb}
+asset_id={item._id}
+
+
+
+                />
+           ))}
+          </div>
+
+
+
+
+
+
+
         </Row>
       </Col>
     </Row>

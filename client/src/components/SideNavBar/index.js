@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 // import 'rsuite/dist/styles/rsuite-dark.css';
 
 const SideNavBar = () => (
-  <div style={{ width: 250 }}>
     <Sidenav defaultOpenKeys={["3", "4"]} activeKey="1" className="side-nav">
       <Sidenav.Body>
         <Nav>
@@ -44,7 +43,6 @@ const SideNavBar = () => (
         </Nav>
       </Sidenav.Body>
     </Sidenav>
-  </div>
 );
 
 export default SideNavBar;

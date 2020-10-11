@@ -1,86 +1,106 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 .signup-form {
-
-margin-top: 50px;
-
-
+  margin-top: 50px;
 }
 
 .login-form {
-    position: absolute;
-    top: 20vh;
-    left: 50vw;
-    transform: translateX(-40%);
-    width: 300px;
+  position: absolute;
+  top: 20vh;
+  left: 50vw;
+  transform: translateX(-40%);
+  width: 300px;
 }
 
-
 .loginH1 {
-    color: rgb(16, 114, 243);
-    font-family: 'Roboto', sans-serif;
+  color: rgb(16, 114, 243);
+  font-family: "Roboto", sans-serif;
 }
 
 #outlined-basic,
-#outlined-password-input { 
-    margin: auto;
+#outlined-password-input {
+  margin: auto;
 }
 
-.typical-link{
-    color: blue;
+.typical-link {
+  color: blue;
 }
 
-.typical-link:visited{
-    color: purple;
+.typical-link:visited {
+  color: purple;
 }
-.typical-link:hover{
-    color: red;
-}
-
-.address-list{
-    list-style-type:none;
+.typical-link:hover {
+  color: red;
 }
 
-.address-list-item:hover{
-    background-color: lightslategray;
+.address-list {
+  list-style-type: none;
 }
 
-
-.page-content-wrapper{
-    float: right;
+.address-list-item:hover {
+  background-color: lightslategray;
 }
 
-.wrapper{
-display: flex;
-position: relative;
-
+.page-content-wrapper {
+  float: right;
 }
 
-
-
+.wrapper {
+  display: flex;
+  position: relative;
+}
 
 body {
-    color: #222222;
-    background-color: rgb(43, 76, 93);
-    font-size: 1em;
-    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  color: #222222;
+  background-color: rgb(43, 76, 93);
+  font-size: 1em;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.team-heading{
-background-color: rgb(7, 40, 56);
-color: white;
-font-weight: bolder;
+.team-heading {
+  background-color: rgb(7, 40, 56);
+  color: white;
+  font-weight: bolder;
 }
 
-.text-center{
-    font-size: 60px;
+.text-center {
+  font-size: 60px;
 }
 
-.card-header{
-    background-color: rgb(84, 133, 196);
+.card-header {
+  background-color: rgb(84, 133, 196);
 }
 
-.asset-card{
-    width: 250px;
-    margin: 10px;
+.asset-card {
+  width: 250px;
+  margin: 10px;
 }
+
+/* .findButton {
+margin-bottom: 16px !important ;
+
+} */
+
+/* .test {
+    margin-top: 25% !important;
+align-items: center !important;    
+    }
+     */
+
+.search-form {
+margin: 0 auto;
+width:80%;
+}
+
+.find-card {
+
+  width:100%;
+  max-height: 20vh;
+  margin: 20px 0px 0px 20px;
+  }
+  
+
+  .find-img{
+    height: 250px;
+    object-fit: scale-down;
+  }
