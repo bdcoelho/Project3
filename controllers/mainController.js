@@ -33,6 +33,8 @@ module.exports = {
     //   .then((asset) => {
     //     let userId = asset.user_id;
     //     console.log(userId);
+    let userId  =req.body.userId;
+    console.log(userId);
         db.User.find({ _id: userId })
           .then((user) => {
             console.log(user);
