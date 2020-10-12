@@ -104,3 +104,8 @@ width:80%;
     height: 250px;
     object-fit: scale-down;
   }
+
+  .modal{ 
+    display:block; 
+  
+  }
