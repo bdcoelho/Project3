@@ -27,27 +27,23 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
-    console.log(req.body);
     console.log("about to delete");
-    // db.Asset.findById(req.body.assetId)
-    //   .then((asset) => {
-    //     let userId = asset.user_id;
-    //     console.log(userId);
-    let userId  =req.body.userId;
-    console.log(userId);
-        db.User.find({ _id: userId })
+    db.Asset.findByIdAndDelete(req.body.assetId)
+      .then((asset) => {
+        console.log(asset);
+        db.User.findByIdAndUpdate(asset.user_id,{ $pull: { assets: req.body.assetId} },{new:true})
           .then((user) => {
-            console.log(user);
+res.json(user)
+
           })
-          .catch((err) => console.log(err));
-      //   res.json(asset);
-      // })
+          .catch((err) => {
+            console.log(err)
+            res.status(422).json(err)});
+      })
 
-      // db.User.findById(req.body.userId).then((user) => {
-      //   console.log(user);
-      // })
-
-      // .catch((err) => res.status(422).json(err));
+      .catch((err) => {
+        console.log(err)
+        res.status(422).json(err)});
   },
 
   addAsset: function (req, res) {

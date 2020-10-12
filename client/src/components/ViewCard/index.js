@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import UserContext from "../../utils/UserContext";
 import "./style.css";
 import { Card, Button } from "react-bootstrap";
@@ -6,6 +6,7 @@ import axios from "axios";
 
 function FindCard(props) {
   const { id, email, firstName, lastName } = useContext(UserContext);
+  const [userAssets, setUserAssets] = useState([]);
 
   const handleRemove = (event) => {
     event.preventDefault();
@@ -15,9 +16,11 @@ function FindCard(props) {
       .post("/api/deleteAsset", { assetId: assetId, userId: id })
       .then((res) => {
         console.log(res);
+        setUserAssets(res.assets);
       })
       .catch((err) => console.log(err));
   };
+
   console.log(props);
   return (
     <Card style={{ width: "18rem" }} className="box asset-card">
