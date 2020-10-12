@@ -4,11 +4,9 @@ import "./style.css";
 import { Card, Button } from "react-bootstrap";
 import axios from "axios";
 
-import MyVerticallyCenteredModal from "../Edit";
 
 function FindCard(props) {
   const { id, email, firstName, lastName } = useContext(UserContext);
-  const [modalShow, setModalShow] = React.useState(false);
 
 
   
@@ -38,7 +36,7 @@ function FindCard(props) {
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <div className="card-buttons">
-          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
+          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => props.showModal(true)}>Edit</Button>
           <Button
             id={"del"+props.id}
             type="button"
@@ -51,10 +49,7 @@ function FindCard(props) {
       </Card.Body>
     </Card>
 
-        <MyVerticallyCenteredModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
+
 </div>
   );
 }

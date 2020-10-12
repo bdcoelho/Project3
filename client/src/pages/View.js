@@ -4,8 +4,11 @@ import SideNavBar from "../components/SideNavBar";
 import { Col, Row, Container, Button, CardDeck } from "react-bootstrap";
 import ViewCard from "../components/ViewCard";
 import axios from "axios";
+import MyVerticallyCenteredModal from "../components/Edit";
 
 function View() {
+  const [modalShow, setModalShow] = useState(false);
+
   const [userAssets, setUserAssets] = useState([]);
   const { id, email, firstName, lastName } = useContext(UserContext);
   console.log(id);
@@ -24,8 +27,9 @@ console.log(lastName);
   };
 
   useEffect(retrieveAssets, [id]);
-  // setTimeout(()=>{setUserAssets([])},1000)
+
   return (
+    <div>
     <Row>
       <Col md={2} className="pr-0">
         <SideNavBar />
@@ -45,6 +49,7 @@ console.log(lastName);
                   daily={asset.dailyPrice}
                   id={asset._id}
                   update={retrieveAssets}
+                  showModal={setModalShow}
                 />
               </Col>
             ))}
@@ -52,6 +57,13 @@ console.log(lastName);
         </Row>
       </Col>
     </Row>
+
+
+<MyVerticallyCenteredModal
+show={modalShow}
+onHide={() => setModalShow(false)}
+/>
+</div>
 
   );
 }
