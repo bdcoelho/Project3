@@ -4,10 +4,14 @@ import "./style.css";
 import { Card, Button } from "react-bootstrap";
 import axios from "axios";
 
+import MyVerticallyCenteredModal from "../Edit";
+
 function FindCard(props) {
   const { id, email, firstName, lastName } = useContext(UserContext);
-  const [userAssets, setUserAssets] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
 
+
+  
   const handleRemove = (event) => {
     event.preventDefault();
     let assetId = event.nativeEvent.target.id;
@@ -16,22 +20,27 @@ function FindCard(props) {
       .post("/api/deleteAsset", { assetId: assetId, userId: id })
       .then((res) => {
         console.log(res);
-        setUserAssets(res.assets);
+        props.update();
+
       })
       .catch((err) => console.log(err));
   };
 
+
+
+
   console.log(props);
   return (
+    <div>
     <Card style={{ width: "18rem" }} className="box asset-card">
       <Card.Img variant="top" src={props.image} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <div className="card-buttons">
-          <Button variant="info">Edit</Button>
+          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
           <Button
-            id={props.id}
+            id={"del"+props.id}
             type="button"
             variant="dark"
             onClick={handleRemove}
@@ -41,6 +50,12 @@ function FindCard(props) {
         </div>
       </Card.Body>
     </Card>
+
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+</div>
   );
 }
 

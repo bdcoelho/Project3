@@ -24,7 +24,7 @@ console.log(lastName);
   };
 
   useEffect(retrieveAssets, [id]);
-
+  // setTimeout(()=>{setUserAssets([])},1000)
   return (
     <Row>
       <Col md={2} className="pr-0">
@@ -44,6 +44,7 @@ console.log(lastName);
                   hourly={asset.hourlyPrice}
                   daily={asset.dailyPrice}
                   id={asset._id}
+                  update={retrieveAssets}
                 />
               </Col>
             ))}
