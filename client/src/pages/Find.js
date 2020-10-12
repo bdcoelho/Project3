@@ -171,7 +171,7 @@ function Find() {
             
             {searchResult.map((item) => (
 
-                <FindCard key = {item.id}
+                <FindCard key = {item._id}
 name={item.name}
 hourlyPrice={item.hourlyPrice}
 dailyPrice={item.dailyPrice}

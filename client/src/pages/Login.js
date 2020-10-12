@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Modal } from "react-bootstrap";
 
 
 import "./style.css";
@@ -41,6 +41,11 @@ function Signup(props) {
 
   return (
     <Container>
+       <Modal show={true}>
+        <Modal.Header>
+          <Modal.Title>Test Title</Modal.Title>
+        </Modal.Header>
+      </Modal>
     <Form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>

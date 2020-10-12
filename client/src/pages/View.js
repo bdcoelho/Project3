@@ -14,7 +14,7 @@ function View() {
   console.log(id);
   console.log(email);
   console.log(firstName);
-console.log(lastName);
+  console.log(lastName);
   const retrieveAssets = () => {
     axios
       .get("/api/myAssets/" + id)
@@ -28,43 +28,46 @@ console.log(lastName);
 
   useEffect(retrieveAssets, [id]);
 
+  const showModal = ()=>{
+
+setModalShow(true);
+
+  }
   return (
     <div>
-    <Row>
-      <Col md={2} className="pr-0">
-        <SideNavBar />
-      </Col>
-      <Col md={9}>
-        <Row>
-          <CardDeck>
-            {userAssets.map((asset) => (
-              // console.log(asset)
-              <Col md={4} key={asset._id}>
-                <ViewCard
-                  name={asset.name}
-                  image={asset.image}
-                  category={asset.category}
-                  description={asset.description}
-                  hourly={asset.hourlyPrice}
-                  daily={asset.dailyPrice}
-                  id={asset._id}
-                  update={retrieveAssets}
-                  showModal={setModalShow}
-                />
-              </Col>
-            ))}
-          </CardDeck>
-        </Row>
-      </Col>
-    </Row>
+      <Row>
+        <Col md={2} className="pr-0">
+          <SideNavBar />
+        </Col>
+        <Col md={9}>
+          <Row>
+            <CardDeck>
+              {userAssets.map((asset) => (
+                // console.log(asset)
+                <Col md={4} key={asset._id}>
+                  <ViewCard
+                    name={asset.name}
+                    image={asset.image}
+                    category={asset.category}
+                    description={asset.description}
+                    hourly={asset.hourlyPrice}
+                    daily={asset.dailyPrice}
+                    id={asset._id}
+                    update={retrieveAssets}
+                    showModal={showModal}
+                  />
+                </Col>
+              ))}
+            </CardDeck>
+          </Row>
+        </Col>
+      </Row>
 
-
-<MyVerticallyCenteredModal
-show={modalShow}
-onHide={() => setModalShow(false)}
-/>
-</div>
-
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+    </div>
   );
 }
 
