@@ -4,10 +4,8 @@ import SideNavBar from "../components/SideNavBar";
 import { Col, Row, Container, Button, CardDeck } from "react-bootstrap";
 import ViewCard from "../components/ViewCard";
 import axios from "axios";
-import MyVerticallyCenteredModal from "../components/Edit";
 
 function View() {
-  const [modalShow, setModalShow] = useState(false);
 
   const [userAssets, setUserAssets] = useState([]);
   const { id, email, firstName, lastName } = useContext(UserContext);
@@ -38,9 +36,11 @@ console.log(lastName);
         <Row>
           <CardDeck>
             {userAssets.map((asset) => (
-              // console.log(asset)
+
+
               <Col md={4} key={asset._id}>
                 <ViewCard
+                
                   name={asset.name}
                   image={asset.image}
                   category={asset.category}
@@ -49,7 +49,7 @@ console.log(lastName);
                   daily={asset.dailyPrice}
                   id={asset._id}
                   update={retrieveAssets}
-                  showModal={setModalShow}
+
                 />
               </Col>
             ))}
@@ -59,10 +59,7 @@ console.log(lastName);
     </Row>
 
 
-<MyVerticallyCenteredModal
-show={modalShow}
-onHide={() => setModalShow(false)}
-/>
+
 </div>
 
   );

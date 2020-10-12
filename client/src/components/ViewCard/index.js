@@ -3,10 +3,12 @@ import UserContext from "../../utils/UserContext";
 import "./style.css";
 import { Card, Button } from "react-bootstrap";
 import axios from "axios";
+import EditModal from "../EditModal";
 
 
 function FindCard(props) {
   const { id, email, firstName, lastName } = useContext(UserContext);
+  const [modalShow, setModalShow] = useState(false);
 
 
   
@@ -36,7 +38,7 @@ function FindCard(props) {
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <div className="card-buttons">
-          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => props.showModal(true)}>Edit</Button>
+          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
           <Button
             id={"del"+props.id}
             type="button"
@@ -48,6 +50,22 @@ function FindCard(props) {
         </div>
       </Card.Body>
     </Card>
+
+
+
+    <EditModal
+
+show={modalShow}
+onHide={() => setModalShow(false)}
+name={props.name}
+image={props.image}
+category={props.category}
+description={props.description}
+hourly={props.hourly}
+daily={props.daily}
+id={props._id}
+/>
+
 
 
 </div>
