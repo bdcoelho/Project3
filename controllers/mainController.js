@@ -69,15 +69,31 @@ module.exports = {
       name: req.body.name,
       description: req.body.description,
       hourlyPrice: req.body.hourlyPrice,
-      dailyPrice: req.body.dailyPrice
+      dailyPrice: req.body.dailyPrice,
     })
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
   },
 
   addAsset: function (req, res) {
+    console.log(req.body);
     db.Asset.create(req.body)
-      .then((response) => res.json(response))
+      .then((asset) => {
+        console.log("asset id is " + asset._id);
+        console.log("user id is " + asset.user_id);
+        db.User.findByIdAndUpdate(
+          asset.user_id,
+          { $push: { assets: asset._id } },
+          { new: true }
+        )
+          .then((user) => {
+            res.json(user);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(422).json(err);
+          });
+      })
       .catch((err) => res.status(422).json(err));
   },
 
@@ -103,8 +119,7 @@ module.exports = {
     }
   },
 
-
-  upload:   function (req, res) {
+  upload: function (req, res) {
     upload(req, res, function (err) {
       console.log("upload function");
       if (err instanceof multer.MulterError) {
@@ -115,10 +130,6 @@ module.exports = {
       return res.status(200).send(req.file);
     });
   },
-
-
-
-
 
   addressSearch: function (req, res) {
     axios
@@ -222,7 +233,6 @@ module.exports = {
       // Stage 3
 
       { $match: { "userAssets.name": req.body.item } },
-
     ])
       .then((users) => {
         const queryFilter = (asset) => {

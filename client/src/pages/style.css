@@ -76,36 +76,32 @@ body {
   margin: 10px;
 }
 
-/* .findButton {
-margin-bottom: 16px !important ;
-
-} */
-
-/* .test {
-    margin-top: 25% !important;
-align-items: center !important;    
-    }
-     */
-
 .search-form {
-margin: 0 auto;
-width:80%;
+  margin: 0 auto;
+  width: 80%;
 }
 
 .find-card {
-
-  width:100%;
+  width: 100%;
   max-height: 20vh;
   margin: 20px 0px 0px 20px;
-  }
-  
+}
 
-  .find-img{
-    height: 250px;
-    object-fit: scale-down;
-  }
+.find-img {
+  height: 250px;
+  object-fit: scale-down;
+}
 
-  .modal{ 
-    display:block; 
-  
-  }
+.modal {
+  display: block;
+}
+
+.add-text-area {
+  padding: 3px;
+  border: none;
+  min-height: 200px;
+}
+
+.btn.btn{
+margin-top: 20px;
+}
