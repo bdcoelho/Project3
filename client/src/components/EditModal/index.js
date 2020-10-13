@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
+import UserContext from "../../utils/UserContext";
+import axios from "axios";
 
 import {
   Modal,
@@ -12,14 +14,53 @@ import {
 } from "react-bootstrap";
 
 function EditModal(props) {
+  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
+  const [name, setName] = useState(props.name);
+  const [description, setDescription] = useState(props.description);
+  const [hourlyPrice, setHourlyPrice] = useState(props.hourly);
+  const [dailyPrice, setDailyPrice] = useState(props.daily);
+  console.log(props.assetid);
+
   const handleFormSubmit = (event) => {
+
     event.preventDefault();
+    const data = {
+      id:props.assetid,
+      name,
+      description,
+      hourlyPrice,
+      dailyPrice,
+    };
+    console.log(data);
+
+    axios
+      .post("/api/modifyAsset/", data)
+      .then((res) => {
+        console.log(res);
+        props.onHide();
+        props.onComplete();
+        // setSearchResult(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleNameChange = (event) => {};
-  const handleDescriptionChange = (event) => {};
-  const handleHourlyPriceChange = (event) => {};
-  const handleDailyPriceChange = (event) => {};
+
+
+
+
+
+  const handleNameChange = (event) => {
+    setName(event.target.value)
+  };
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
+  };
+  const handleHourlyPriceChange = (event) => {
+    setHourlyPrice(event.target.value)
+  };
+  const handleDailyPriceChange = (event) => {
+    setDailyPrice(event.target.value)
+  };
 
   return (
     <Modal
@@ -40,9 +81,8 @@ function EditModal(props) {
           <Container>
             <Row>
               <Col md={4}>
-                <img className="edit-img" src={props.image} alt={props.name} />
+                <img className="edit-img" src={props.image} alt={name} />
                 <Form.Group controlId="formPrice">
-                  {console.log(props.hourly)}
                   <Form.Label>Price</Form.Label>
                   <Form.Row>
                     <Col>
@@ -58,7 +98,7 @@ function EditModal(props) {
                           type="number"
                           size="md"
                           onChange={handleHourlyPriceChange}
-                          value={props.hourly}
+                          value={hourlyPrice}
                         ></Form.Control>
                       </InputGroup>
                     </Col>
@@ -75,7 +115,7 @@ function EditModal(props) {
                           type="number"
                           size="md"
                           onChange={handleDailyPriceChange}
-                          value={props.daily}
+                          value={dailyPrice}
                         ></Form.Control>
                       </InputGroup>
                     </Col>
@@ -84,7 +124,7 @@ function EditModal(props) {
               </Col>
 
               <Col md={8}>
-                <Row>
+                <Form.Row>
                   <Col md={12}>
                     <Form.Group controlId="formName">
                       <Form.Label>Name</Form.Label>
@@ -92,22 +132,23 @@ function EditModal(props) {
                         as="input"
                         size="md"
                         onChange={handleNameChange}
-                        value={props.name}
+                        value={name}
                       ></Form.Control>
                     </Form.Group>
                   </Col>
-                </Row>
+                </Form.Row>
                 <Row>
                   <Col md={12}>
                     <Form.Group controlId="formDescription">
                       <Form.Label>Description</Form.Label>
                       <Form.Control
-                        as="textArea"
+                        as="textarea"
                         size="md"
                         onChange={handleDescriptionChange}
                         style={{ minHeight: "200px" }}
+                        defaultValue={description}
                       >
-                        {props.description}
+                        
                       </Form.Control>
                     </Form.Group>
                   </Col>
@@ -122,10 +163,10 @@ function EditModal(props) {
           </p> */}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit" onClick="">
+          <Button variant="dark" type="submit">
             Update
           </Button>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button variant="danger" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Form>
     </Modal>

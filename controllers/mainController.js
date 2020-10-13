@@ -31,19 +31,36 @@ module.exports = {
     db.Asset.findByIdAndDelete(req.body.assetId)
       .then((asset) => {
         console.log(asset);
-        db.User.findByIdAndUpdate(asset.user_id,{ $pull: { assets: req.body.assetId} },{new:true})
+        db.User.findByIdAndUpdate(
+          asset.user_id,
+          { $pull: { assets: req.body.assetId } },
+          { new: true }
+        )
           .then((user) => {
-res.json(user)
-
+            res.json(user);
           })
           .catch((err) => {
-            console.log(err)
-            res.status(422).json(err)});
+            console.log(err);
+            res.status(422).json(err);
+          });
       })
 
       .catch((err) => {
-        console.log(err)
-        res.status(422).json(err)});
+        console.log(err);
+        res.status(422).json(err);
+      });
+  },
+
+  modifyAsset: function (req, res) {
+    console.log(req.body);
+    db.Asset.findByIdAndUpdate(req.body.id, {
+      name: req.body.name,
+      description: req.body.description,
+      hourlyPrice: req.body.hourlyPrice,
+      dailyPrice: req.body.dailyPrice
+    })
+      .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
   },
 
   addAsset: function (req, res) {

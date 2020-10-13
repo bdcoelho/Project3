@@ -7,6 +7,7 @@ module.exports = (app) => {
   // Login routing
   app.post("/api/login", passport.authenticate("local"), controller.login);
 
+// Address search
   app.post("/api/addressSearch", controller.addressSearch);
 
   // Signup routing
@@ -23,6 +24,9 @@ module.exports = (app) => {
 
   // Add an asset
   app.post("/api/addAsset", controller.addAsset);
+
+    // modify an asset
+    app.post("/api/modifyAsset", controller.modifyAsset);
 
   // Delete an asset
   app.post("/api/deleteAsset", controller.deleteAsset);
