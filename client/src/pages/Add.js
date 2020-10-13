@@ -3,6 +3,7 @@ import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
 import axios from "axios";
 import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
+import View from "./View";
 
 function Add() {
   const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
@@ -14,6 +15,8 @@ function Add() {
   const [description, setDescription] = useState("");
   const [categoryArray, setCategoryArray] = useState([]);
   const [itemArray, setItemArray] = useState([]);
+  const [complete, setComplete] = useState(false);
+  
 
   const retrieveCategories = () => {
     axios
@@ -87,6 +90,7 @@ function Add() {
       .post("/api/addAsset", data)
       .then((res) => {
         console.log(res);
+        setComplete(true)
 
       })
       .catch((err) => console.log(err));
@@ -98,6 +102,7 @@ function Add() {
 
   };
   return (
+    complete?<View/>:
     <Row>
       <Col md={2} className="pr-0">
         <SideNavBar />
