@@ -9,6 +9,7 @@ import Nav from "./components/TopNav";
 import View from "./pages/View";
 import axios from "axios";
 import Find from "./pages/Find";
+import Add from "./pages/Add";
 
 
 import {
@@ -84,6 +85,11 @@ function App() {
           <Route exact path="/Find" component={Find}>
           {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <Find/>}
           </Route>
+
+          <Route exact path="/Add" component={Add}>
+          {loggedIn===false ? <Login setLoggedIn={setLoggedIn} /> : <Add/>}
+          </Route>
+
 
           <Route exact path="*" component={Invalid}></Route>
         </Switch>

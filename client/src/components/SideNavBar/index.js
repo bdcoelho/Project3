@@ -14,19 +14,19 @@ const SideNavBar = () => (
             Home
           </Nav.Item>
 
-          <Dropdown eventKey="3" title="My Tools" icon={<Icon icon="wrench" />}>
-            <Dropdown.Item componentClass={Link} to="/View" eventKey="3-1">
+          <Dropdown eventKey="1" title="My Tools" icon={<Icon icon="wrench" />}>
+            <Dropdown.Item componentClass={Link} to="/View" eventKey="1-1">
               View/Edit
             </Dropdown.Item>
-            <Dropdown.Item eventKey="3-2">Add New</Dropdown.Item>
+            <Dropdown.Item componentClass={Link} to="/Add" eventKey="1-2">Add New</Dropdown.Item>
           </Dropdown>
 
           <Dropdown
-            eventKey="4"
+            eventKey="2"
             title="Find Tools"
             icon={<Icon icon="search" />}
           >
-            <Dropdown.Item componentClass={Link} to="/Find" eventKey="4-1">
+            <Dropdown.Item componentClass={Link} to="/Find" eventKey="2-1">
               Find
             </Dropdown.Item>
           </Dropdown>
