@@ -1,13 +1,11 @@
 const passport = require("../Auth/passport");
 const controller = require("../controllers/mainController");
 
-
-
 module.exports = (app) => {
   // Login routing
   app.post("/api/login", passport.authenticate("local"), controller.login);
 
-// Address search
+  // Address search
   app.post("/api/addressSearch", controller.addressSearch);
 
   // Signup routing
@@ -25,8 +23,8 @@ module.exports = (app) => {
   // Add an asset
   app.post("/api/addAsset", controller.addAsset);
 
-    // modify an asset
-    app.post("/api/modifyAsset", controller.modifyAsset);
+  // modify an asset
+  app.post("/api/modifyAsset", controller.modifyAsset);
 
   // Delete an asset
   app.post("/api/deleteAsset", controller.deleteAsset);
@@ -34,22 +32,12 @@ module.exports = (app) => {
   // Find Users Near
   app.post("/api/findItemsNear/", controller.findItemsNear);
 
-//Find items and categories
+  //Find items and categories
   app.get("/api/findCategories/", controller.findCategories);
 
-
   //Find items and categories
-app.get("/api/findItems/:category", controller.findItems);
+  app.get("/api/findItems/:category", controller.findItems);
 
-// app.post("/api/upload", controller.upload);
-
-
-
-
+  //Upload files
+  app.post("/upload", controller.upload);
 };
-
-
-
-
-
-

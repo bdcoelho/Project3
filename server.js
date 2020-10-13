@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const passport = require("./Auth/passport");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const multer = require("multer");
+
 const cors = require("cors");
 
 const app = express();
@@ -14,28 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
 
-const upload = multer({ storage: storage }).single("file");
 
-app.post("/upload", function (req, res) {
-  upload(req, res, function (err) {
-    console.log("upload function");
-    if (err instanceof multer.MulterError) {
-      return res.status(500).json(err);
-    } else if (err) {
-      return res.status(500).json(err);
-    }
-    return res.status(200).send(req.file);
-  });
-});
 
 if (process.env.NODE_ENV === "production") {
   // Exprses will serve up production assets

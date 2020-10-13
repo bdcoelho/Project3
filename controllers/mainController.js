@@ -4,6 +4,18 @@ const googleAPI = require("./googleAPIController");
 const querystring = require("querystring");
 let addressObject = {};
 let signUpObject = {};
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage }).single("file");
 
 module.exports = {
   findNear: function (req, res) {
@@ -90,6 +102,23 @@ module.exports = {
       });
     }
   },
+
+
+  upload:   function (req, res) {
+    upload(req, res, function (err) {
+      console.log("upload function");
+      if (err instanceof multer.MulterError) {
+        return res.status(500).json(err);
+      } else if (err) {
+        return res.status(500).json(err);
+      }
+      return res.status(200).send(req.file);
+    });
+  },
+
+
+
+
 
   addressSearch: function (req, res) {
     axios
@@ -194,8 +223,6 @@ module.exports = {
 
       { $match: { "userAssets.name": req.body.item } },
 
-      // HOW TO QUERY ARRAY. instock is an array, warehouse is a property inside the array, A is the Value.
-      // db.inventory.find( { "instock.warehouse": "A" } )
     ])
       .then((users) => {
         const queryFilter = (asset) => {
