@@ -19,6 +19,8 @@ function EditModal(props) {
   const [description, setDescription] = useState(props.description);
   const [hourlyPrice, setHourlyPrice] = useState(props.hourly);
   const [dailyPrice, setDailyPrice] = useState(props.daily);
+  const [imageFile, setImageFile] = useState(null);
+  
   console.log(props.assetid);
 
   const handleFormSubmit = (event) => {
@@ -38,7 +40,7 @@ function EditModal(props) {
       .then((res) => {
         console.log(res);
         props.onHide();
-        props.onComplete();
+        props.complete();
         // setSearchResult(res.data);
       })
       .catch((err) => console.log(err));
@@ -46,8 +48,21 @@ function EditModal(props) {
 
 
 
+  
+  const fileSelectedHandler = (event) => {
+    console.log(event.target.files[0]);
+    setImageFile(event.target.files[0]);
+    const data = new FormData();
+    data.append('file', imageFile);
 
+    axios.post("/upload", data, { // receive two parameter endpoint url ,form data 
+  })
+  .then(res => { // then print response status
+    console.log(res.statusText)
+  })
 
+    // axios.post("")
+  };
 
   const handleNameChange = (event) => {
     setName(event.target.value)
@@ -82,6 +97,18 @@ function EditModal(props) {
             <Row>
               <Col md={4}>
                 <img className="edit-img" src={props.image} alt={name} />
+<Form.Group controlId="formImage">
+<Form.Control
+
+as="input"
+type="file"
+onChange={fileSelectedHandler}
+>
+  
+</Form.Control>
+
+</Form.Group>
+                
                 <Form.Group controlId="formPrice">
                   <Form.Label>Price</Form.Label>
                   <Form.Row>

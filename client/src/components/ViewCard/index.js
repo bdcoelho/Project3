@@ -57,7 +57,7 @@ function FindCard(props) {
 
 show={modalShow}
 onHide={() => setModalShow(false)}
-onComplete={props.update}
+complete={props.update}
 name={props.name}
 image={props.image}
 category={props.category}
