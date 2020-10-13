@@ -38,9 +38,9 @@ function FindCard(props) {
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.description}</Card.Text>
         <div className="card-buttons">
-          <Button id={"edit"+props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
+          <Button id={props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
           <Button
-            id={"del"+props.id}
+            id={props.id}
             type="button"
             variant="dark"
             onClick={handleRemove}

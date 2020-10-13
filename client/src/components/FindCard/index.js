@@ -49,7 +49,7 @@ function FindCard(props) {
           <Row className="buttonDiv ">
             <Button
               className="saveAsset btn btn-primary"
-              id={"btn" + props.asset_id}
+              id={props.asset_id}
             >
               Save Asset
             </Button>
