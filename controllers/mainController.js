@@ -1,21 +1,8 @@
 const db = require("../models");
 const axios = require("axios");
 const googleAPI = require("./googleAPIController");
-const querystring = require("querystring");
 let addressObject = {};
 let signUpObject = {};
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage }).single("file");
 
 module.exports = {
   findNear: function (req, res) {
@@ -64,14 +51,18 @@ module.exports = {
   },
 
   modifyAsset: function (req, res) {
-    console.log(req.body);
-    db.Asset.findByIdAndUpdate(req.body.id, {
-      name: req.body.name,
-      description: req.body.description,
-      hourlyPrice: req.body.hourlyPrice,
-      dailyPrice: req.body.dailyPrice,
-    })
-      .then((response) => res.json(response))
+    formJSON = JSON.parse(req.body.formData);
+    const updateObj = {
+      name: formJSON.name,
+      description: formJSON.description,
+      hourlyPrice: formJSON.hourlyPrice,
+      dailyPrice: formJSON.dailyPrice,
+      image: req.file.filename,
+    };
+    db.Asset.findByIdAndUpdate(formJSON.id, updateObj)
+      .then((response) => {
+        res.json(response);
+      })
       .catch((err) => res.status(422).json(err));
   },
 

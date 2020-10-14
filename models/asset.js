@@ -29,6 +29,10 @@ const AssetSchema = new Schema({
   user_id: {
     type: String,
     trim: true
+  },
+  image:{
+    type: String,
+    trim: true
   }
 });
 
