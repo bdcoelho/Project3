@@ -33,7 +33,7 @@ module.exports = (app) => {
   app.get("/api/myAssets/:userId", controller.userAsset);
 
   // Add an asset
-  app.post("/api/addAsset", controller.addAsset);
+  app.post("/api/addAsset", upload.single("file"), controller.addAsset);
 
   // modify an asset
   app.post("/api/modifyAsset", upload.single("file"), controller.modifyAsset);

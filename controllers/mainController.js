@@ -67,8 +67,25 @@ module.exports = {
   },
 
   addAsset: function (req, res) {
-    console.log(req.body);
-    db.Asset.create(req.body)
+
+
+
+
+
+
+          formJSON = JSON.parse(req.body.formData);
+      const updateObj = {
+        user_id: formJSON.user_id,
+        category: formJSON.category,
+        name: formJSON.name,
+        description: formJSON.description,
+        hourlyPrice: formJSON.hourlyPrice,
+        dailyPrice: formJSON.dailyPrice,
+        image: req.file.filename,
+      };
+
+      console.log(updateObj);
+      db.Asset.create(updateObj)
       .then((asset) => {
         console.log("asset id is " + asset._id);
         console.log("user id is " + asset.user_id);

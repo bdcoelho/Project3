@@ -40,19 +40,7 @@ function EditModal(props) {
 
     data.append("formData", JSON.stringify(formDataObj));
     data.append("file", imageFile);
-console.log(imageFile);
-    // axios.post("https://httpbin.org/anything", data).then((res) => {
-    //   console.log(res);
-    // }).catch((err) => console.log(err));
-    // console.log(data);
-    // axios
-    //   .post("/upload", data, {
-    //     // receive two parameter endpoint url ,form data
-    //   })
-    //   .then((res) => {
-    //     // then print response status
-    //     console.log(res.statusText);
-    //   });
+    console.log(imageFile);
 
     axios
       .post("/api/modifyAsset/", data)
