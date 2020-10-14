@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-
+require("./routes/api-routes.js")(app);
 
 if (process.env.NODE_ENV === "production") {
   // Exprses will serve up production assets
@@ -46,7 +46,7 @@ mongoose.connect(
   }
 );
 
-require("./routes/api-routes.js")(app);
+
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
