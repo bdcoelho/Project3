@@ -62,5 +62,5 @@ function FindCard(props) {
     </Card>
   );
 }
-
+ 
 export default FindCard;
