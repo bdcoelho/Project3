@@ -20,7 +20,6 @@ function Signup() {
       lastName,
       address,
     };
-    console.log(data);
 
     axios
       .post("/api/signup", data)
@@ -39,7 +38,6 @@ function Signup() {
     axios
       .post("/api/addressSearch", address)
       .then((res) => {
-        console.log(res.data.predictions);
         setAddressList(res.data.predictions);
       })
       .catch((err) => {
@@ -68,7 +66,6 @@ function Signup() {
   };
 
   const handleLiClick = (event) => {
-    console.log(event.target.innerText);
     setAddress(event.target.innerText);
   };
 
@@ -79,7 +76,6 @@ function Signup() {
       </li>
     );
   });
-  console.log(addressTest);
   return (
     <Container>
       <Form className="signup-form" autoComplete="off" onSubmit={handleSubmit}>

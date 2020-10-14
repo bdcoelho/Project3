@@ -11,7 +11,6 @@ for (let index = 0; index < assets.length; index++) {
   let asset = assets[index];
   let user_id = asset.user_id;
     let asset_id = asset._id;
-    // console.log(asset_id)
   for (let i = 0; i < users.length; i++) {
 
     if (users[i]._id === user_id) {

@@ -23,7 +23,6 @@ function Add() {
     axios
       .get("/api/findCategories/")
       .then((categories) => {
-        console.log(categories.data);
         setCategoryArray(categories.data);
       })
       .catch((err) => console.log(err));
@@ -33,30 +32,25 @@ function Add() {
 
   const handleCategoryChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setCategory(event.target.value);
   };
 
   const handleItemChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setName(event.target.value);
   };
   const handleDescriptionChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setDescription(event.target.value);
   };
 
   const handleDailyPriceChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setDailyPrice(event.target.value);
   };
 
   const handleHourlyPriceChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setHourlyPrice(event.target.value);
   };
 
@@ -67,7 +61,6 @@ function Add() {
     axios
       .get("/api/findItems/" + category)
       .then((items) => {
-        console.log(items.data);
         setItemArray(items.data);
       })
       .catch((err) => console.log(err));
@@ -86,25 +79,20 @@ function Add() {
       dailyPrice,
       description,
     };
-    console.log(formDataObj);
 
     const data = new FormData();
 
     data.append("formData", JSON.stringify(formDataObj));
     data.append("file", imageFile);
-    console.log(imageFile);
-
     axios
       .post("/api/addAsset", data)
       .then((res) => {
-        console.log(res);
         setComplete(true);
       })
       .catch((err) => console.log(err));
   };
 
   const fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
     setImageURL(URL.createObjectURL(event.target.files[0]));
     setImageFile(event.target.files[0]);
   };
@@ -170,7 +158,6 @@ function Add() {
                           Select Item
                         </option>
                         {itemArray.map((element, index) => (
-                          // console.log(element)
                           <option key={"item" + index} value={element.item}>
                             {element.item}
                           </option>

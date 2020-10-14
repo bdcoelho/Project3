@@ -26,10 +26,8 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
-    console.log("about to delete");
     db.Asset.findByIdAndDelete(req.body.assetId)
       .then((asset) => {
-        console.log(asset);
         db.User.findByIdAndUpdate(
           asset.user_id,
           { $pull: { assets: req.body.assetId } },
@@ -84,11 +82,8 @@ module.exports = {
         image: req.file.filename,
       };
 
-      console.log(updateObj);
       db.Asset.create(updateObj)
       .then((asset) => {
-        console.log("asset id is " + asset._id);
-        console.log("user id is " + asset.user_id);
         db.User.findByIdAndUpdate(
           asset.user_id,
           { $push: { assets: asset._id } },
@@ -115,7 +110,6 @@ module.exports = {
     if (!req.user) {
       res.json({});
     } else {
-      console.log(req.user);
       res.json({
         email: req.user.email,
         id: req.user._id,
@@ -129,7 +123,6 @@ module.exports = {
 
   upload: function (req, res) {
     upload(req, res, function (err) {
-      console.log("upload function");
       if (err instanceof multer.MulterError) {
         return res.status(500).json(err);
       } else if (err) {
@@ -179,7 +172,6 @@ module.exports = {
             resArray.geometry.location.lng,
             resArray.geometry.location.lat
           );
-          console.log(coordsArray);
           signUpObject.geometry = { type: "point", coordinates: coordsArray };
           db.User.create(signUpObject)
             .then(() => {
@@ -203,7 +195,6 @@ module.exports = {
   },
 
   findItems: function (req, res) {
-    console.log(req.params);
     db.Item.find(req.params, { item: 1, _id: 0 })
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
@@ -211,8 +202,6 @@ module.exports = {
 
   findItemsNear: function (req, res) {
     let responseArray = [];
-    console.log(req.body);
-    // res.json(req.body);
     db.User.aggregate([
       // Stage 1
       {
@@ -249,7 +238,6 @@ module.exports = {
           }
         };
 
-        // console.log(users)
         users.map((user) => {
           let userAssets = user.userAssets;
           let filterAssets = userAssets.filter(queryFilter);
@@ -262,13 +250,9 @@ module.exports = {
             filterAsset.postCode = user.postCode;
             responseArray.push(filterAsset);
           });
-
-          console.log(responseArray);
-        });
+       });
         res.json(responseArray);
       })
-
-      .then(console.log("hello"))
       .catch((err) => res.status(422).json(err));
   },
 };

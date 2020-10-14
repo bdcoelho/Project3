@@ -31,10 +31,8 @@ function App() {
 
   useEffect(() => {
     axios.get("/api/user_data").then((result) => {
-      console.log(result);
       if (result.data.email) {
         setLoggedIn(true);
-        console.log(result.data);
         setUserData({
           id: result.data.id,
           email: result.data.email,

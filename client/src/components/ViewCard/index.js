@@ -15,13 +15,10 @@ function FindCard(props) {
   const handleRemove = (event) => {
     event.preventDefault();
     let assetId = event.nativeEvent.target.id;
-    console.log("The button was clicked.");
     axios
       .post("/api/deleteAsset", { assetId: assetId, userId: id })
       .then((res) => {
-        console.log(res);
         props.update();
-
       })
       .catch((err) => console.log(err));
   };
@@ -29,7 +26,6 @@ function FindCard(props) {
 
 
 
-  console.log(props);
   return (
     <div>
     <Card style={{ width: "18rem" }} className="box asset-card">

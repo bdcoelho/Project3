@@ -22,8 +22,6 @@ function EditModal(props) {
   const [imageFile, setImageFile] = useState();
   const [imageURL, setImageURL] = useState(props.image);
 
-  console.log(props.assetid);
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
     const formDataObj = {
@@ -33,19 +31,16 @@ function EditModal(props) {
       hourlyPrice,
       dailyPrice,
     };
-    console.log(formDataObj);
 
     const data = new FormData();
     // data.append("file", imageFile);
 
     data.append("formData", JSON.stringify(formDataObj));
     data.append("file", imageFile);
-    console.log(imageFile);
 
     axios
       .post("/api/modifyAsset/", data)
       .then((res) => {
-        console.log(res);
         props.onHide();
         props.complete();
         // setSearchResult(res.data);
@@ -54,7 +49,6 @@ function EditModal(props) {
   };
 
   const fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
 
     setImageURL(URL.createObjectURL(event.target.files[0]));
     setImageFile(event.target.files[0]);
@@ -73,9 +67,6 @@ function EditModal(props) {
     setDailyPrice(event.target.value);
   };
 
-  useEffect(() => {
-    console.log(imageURL);
-  }, [imageURL]);
 
   return (
     <Modal

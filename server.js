@@ -14,10 +14,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-
-
-
-
 app.use(
   session({
     secret: "keyboard cat",
@@ -46,7 +42,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);

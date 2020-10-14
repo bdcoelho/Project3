@@ -27,7 +27,6 @@ function Find() {
     axios
       .get("/api/findCategories/")
       .then((categories) => {
-        console.log(categories.data);
         setCategoryArray(categories.data);
       })
       .catch((err) => console.log(err));
@@ -57,13 +56,11 @@ function Find() {
 
   const handleCategoryChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setCategory(event.target.value);
   };
 
   const handleItemChange = (event) => {
     event.persist();
-    console.log(event.target.value);
     setItem(event.target.value);
   };
 
@@ -74,7 +71,6 @@ function Find() {
     axios
       .get("/api/findItems/" + category)
       .then((items) => {
-        console.log(items.data);
         setItemArray(items.data);
       })
       .catch((err) => console.log(err));
@@ -83,7 +79,6 @@ function Find() {
   useEffect(retrieveItems, [category]);
 
   const handleDistanceChange = (event) => {
-    console.log(event.target.value);
     setDistance(event.target.value);
   };
 
@@ -143,7 +138,6 @@ const getCategories = () => {
                       Select Item
                     </option>
                     {itemArray.map((element, index) => (
-                      // console.log(element)
                       <option key={"item" + index} value={element.item}>
                         {element.item}
                       </option>
