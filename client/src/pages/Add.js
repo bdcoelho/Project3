@@ -132,7 +132,7 @@ function Add() {
                     className="file-input"
                   ></Form.File>
                 </Form.Group>
-              </Col>
+              </Col> 
 
               <Col>
                 <Form.Row>
