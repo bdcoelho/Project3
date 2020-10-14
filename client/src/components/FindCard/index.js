@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import BookingModal from "../BookingModal";
+
+
 
 function FindCard(props) {
-  return (
-    // name={item.name}
-    // hourlyPrice={item.hourlyPrice}
-    // dailyPrice={item.dailyPrice}
-    // description={item.description}
-    // dist={item.dist/1000}
-    // image={item.image}
-    // postCode={item.postCode}
-    // suburb={item.suburb}
+  const [modalShow, setModalShow] = useState(false);
 
+
+  return (
+<div>
     <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
       <Card.Body>
         <li
@@ -53,13 +51,25 @@ function FindCard(props) {
             >
               Save Asset
             </Button>
-            <a href="xxxxx" target="_blank" rel="noopener noreferrer">
-              <Button className="viewAsset btn btn-success">View Asset</Button>
-            </a>
+              <Button className="viewAsset btn btn-success" onClick={() => setModalShow(true)}>View Asset</Button>
+
           </Row>
         </li>
       </Card.Body>
     </Card>
+
+
+<BookingModal
+
+show={modalShow}
+onHide={() => setModalShow(false)}
+
+/>
+
+</div>
+
+
+
   );
 }
 
