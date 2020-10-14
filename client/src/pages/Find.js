@@ -87,6 +87,19 @@ function Find() {
     setDistance(event.target.value);
   };
 
+const getCategories = () => {
+  if (categoryArray.length>0){
+  return categoryArray.map((element, index) => (
+    <option key={"cat" + index} value={element}>
+      {element}
+    </option>
+  ))
+  }
+  
+}
+
+
+
   return (
     <Row>
       <Col md={2} className="pr-0">
@@ -112,11 +125,7 @@ function Find() {
                     <option disabled value="DEFAULT">
                       Select Category
                     </option>
-                    {categoryArray.map((element, index) => (
-                      <option key={"cat" + index} value={element}>
-                        {element}
-                      </option>
-                    ))}
+                    {getCategories()}
                   </Form.Control>
                 </Form.Group>
               </Col>
@@ -167,7 +176,7 @@ function Find() {
           <div className="find-card">
             {searchResult.map((item) => (
               <FindCard
-                key={item.id}
+                key={item._id}
                 name={item.name}
                 hourlyPrice={item.hourlyPrice}
                 dailyPrice={item.dailyPrice}

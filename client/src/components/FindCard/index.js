@@ -31,7 +31,7 @@ function FindCard(props) {
               </Row>
               <Row>
                 <h6 className="assetSuburb text-muted">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <i className="fas fa-map-marker-alt"></i>
                   {" " +
                     props.dist.toFixed(1) +
                     " km | " +
