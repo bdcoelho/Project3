@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
 import axios from "axios";
@@ -19,21 +19,40 @@ function EditModal(props) {
   const [description, setDescription] = useState(props.description);
   const [hourlyPrice, setHourlyPrice] = useState(props.hourly);
   const [dailyPrice, setDailyPrice] = useState(props.daily);
-  const [imageFile, setImageFile] = useState(null);
-  
+  const [imageFile, setImageFile] = useState();
+  const [imageURL, setImageURL] = useState(props.image);
+
   console.log(props.assetid);
 
   const handleFormSubmit = (event) => {
-
     event.preventDefault();
-    const data = {
-      id:props.assetid,
+    const formDataObj = {
+      id: props.assetid,
       name,
       description,
       hourlyPrice,
       dailyPrice,
     };
-    console.log(data);
+    console.log(formDataObj);
+
+    const data = new FormData();
+    // data.append("file", imageFile);
+
+    data.append("formData", JSON.stringify(formDataObj));
+    data.append("file", imageFile);
+console.log(imageFile);
+    // axios.post("https://httpbin.org/anything", data).then((res) => {
+    //   console.log(res);
+    // }).catch((err) => console.log(err));
+    // console.log(data);
+    // axios
+    //   .post("/upload", data, {
+    //     // receive two parameter endpoint url ,form data
+    //   })
+    //   .then((res) => {
+    //     // then print response status
+    //     console.log(res.statusText);
+    //   });
 
     axios
       .post("/api/modifyAsset/", data)
@@ -46,36 +65,29 @@ function EditModal(props) {
       .catch((err) => console.log(err));
   };
 
-
-
-  
   const fileSelectedHandler = (event) => {
     console.log(event.target.files[0]);
+
+    setImageURL(URL.createObjectURL(event.target.files[0]));
     setImageFile(event.target.files[0]);
-    const data = new FormData();
-    data.append('file', imageFile);
-
-    axios.post("/upload", data, { // receive two parameter endpoint url ,form data 
-  })
-  .then(res => { // then print response status
-    console.log(res.statusText)
-  })
-
-    // axios.post("")
   };
 
   const handleNameChange = (event) => {
-    setName(event.target.value)
+    setName(event.target.value);
   };
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value)
+    setDescription(event.target.value);
   };
   const handleHourlyPriceChange = (event) => {
-    setHourlyPrice(event.target.value)
+    setHourlyPrice(event.target.value);
   };
   const handleDailyPriceChange = (event) => {
-    setDailyPrice(event.target.value)
+    setDailyPrice(event.target.value);
   };
+
+  useEffect(() => {
+    console.log(imageURL);
+  }, [imageURL]);
 
   return (
     <Modal
@@ -96,19 +108,15 @@ function EditModal(props) {
           <Container>
             <Row>
               <Col md={4}>
-                <img className="edit-img" src={props.image} alt={name} />
-<Form.Group controlId="formImage">
-<Form.Control
+                <img className="edit-img" src={imageURL} alt={name} />
+                <Form.Group controlId="formImage">
+                  <Form.Control
+                    as="input"
+                    type="file"
+                    onChange={fileSelectedHandler}
+                  ></Form.Control>
+                </Form.Group>
 
-as="input"
-type="file"
-onChange={fileSelectedHandler}
->
-  
-</Form.Control>
-
-</Form.Group>
-                
                 <Form.Group controlId="formPrice">
                   <Form.Label>Price</Form.Label>
                   <Form.Row>
@@ -174,9 +182,7 @@ onChange={fileSelectedHandler}
                         onChange={handleDescriptionChange}
                         style={{ minHeight: "200px" }}
                         defaultValue={description}
-                      >
-                        
-                      </Form.Control>
+                      ></Form.Control>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -193,7 +199,9 @@ onChange={fileSelectedHandler}
           <Button variant="dark" type="submit">
             Update
           </Button>
-          <Button variant="danger" onClick={props.onHide}>Close</Button>
+          <Button variant="danger" onClick={props.onHide}>
+            Close
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>

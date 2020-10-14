@@ -1,5 +1,18 @@
 const passport = require("../Auth/passport");
 const controller = require("../controllers/mainController");
+const multer = require("multer");
+const db = require("../models");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 module.exports = (app) => {
   // Login routing
@@ -24,7 +37,27 @@ module.exports = (app) => {
   app.post("/api/addAsset", controller.addAsset);
 
   // modify an asset
-  app.post("/api/modifyAsset", controller.modifyAsset);
+  app.post("/api/modifyAsset", upload.single("file"), function (req, res) {
+    formJSON=JSON.parse(req.body.formData);
+    const updateObj = {
+      name: formJSON.name,
+      description: formJSON.description,
+      hourlyPrice: formJSON.hourlyPrice,
+      dailyPrice: formJSON.dailyPrice,
+      image: req.file.filename
+    };
+      db.Asset.findByIdAndUpdate(formJSON.id, updateObj)
+        .then((response) => {
+          
+          res.json(response);
+        
+        
+        }
+        
+        
+        )
+        .catch((err) => res.status(422).json(err));
+  });
 
   // Delete an asset
   app.post("/api/deleteAsset", controller.deleteAsset);
