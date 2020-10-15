@@ -63,7 +63,7 @@ function FindCard(props) {
 
 show={modalShow}
 onHide={() => setModalShow(false)}
-id={props.asset_id}
+asset_id={props.asset_id}
 
 />
 

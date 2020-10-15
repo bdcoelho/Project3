@@ -55,8 +55,11 @@ module.exports = {
       description: formJSON.description,
       hourlyPrice: formJSON.hourlyPrice,
       dailyPrice: formJSON.dailyPrice,
-      image: req.file.filename,
     };
+    if (req.file.filename) {
+      updateObj.image = req.file.filename;
+    }
+
     db.Asset.findByIdAndUpdate(formJSON.id, updateObj)
       .then((response) => {
         res.json(response);
@@ -65,24 +68,18 @@ module.exports = {
   },
 
   addAsset: function (req, res) {
+    formJSON = JSON.parse(req.body.formData);
+    const updateObj = {
+      user_id: formJSON.user_id,
+      category: formJSON.category,
+      name: formJSON.name,
+      description: formJSON.description,
+      hourlyPrice: formJSON.hourlyPrice,
+      dailyPrice: formJSON.dailyPrice,
+      image: req.file.filename,
+    };
 
-
-
-
-
-
-          formJSON = JSON.parse(req.body.formData);
-      const updateObj = {
-        user_id: formJSON.user_id,
-        category: formJSON.category,
-        name: formJSON.name,
-        description: formJSON.description,
-        hourlyPrice: formJSON.hourlyPrice,
-        dailyPrice: formJSON.dailyPrice,
-        image: req.file.filename,
-      };
-
-      db.Asset.create(updateObj)
+    db.Asset.create(updateObj)
       .then((asset) => {
         db.User.findByIdAndUpdate(
           asset.user_id,
@@ -104,6 +101,62 @@ module.exports = {
     db.Asset.find({ user_id: req.params.userId })
       .then((response) => res.json(response))
       .catch((err) => res.status(422).json(err));
+  },
+
+  book: function (req, res) {
+    console.log(req.body);
+
+    db.Asset.findByIdAndUpdate(
+      req.body.asset_id,
+      {
+        $push: {
+          bookings: [
+            {
+              user_id: req.body.user_id,
+              startDate: req.body.startDate,
+              endDate: req.body.endDate,
+            },
+          ],
+        },
+      },
+      { new: true }
+    )
+      .then((asset) => {
+        console.log(asset);
+
+        db.User.findByIdAndUpdate(
+          req.body.user_id,
+          {
+            $push: {
+              assetBookings: [
+                {
+                  asset_id: asset._id,
+                  startDate: req.body.startDate,
+                  endDate: req.body.endDate,
+                },
+              ],
+            },
+          },
+          { new: true }
+        )
+          .then((user) => {
+            res.json(user);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(422).json(err);
+          });
+
+      })
+
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
+
+    // db.Asset.find({ user_id: req.params.userId })
+    //   .then((response) => res.json(response))
+    //   .catch((err) => res.status(422).json(err));
   },
 
   getUserData: function (req, res) {
@@ -250,7 +303,7 @@ module.exports = {
             filterAsset.postCode = user.postCode;
             responseArray.push(filterAsset);
           });
-       });
+        });
         res.json(responseArray);
       })
       .catch((err) => res.status(422).json(err));

@@ -50,6 +50,7 @@ module.exports = (app) => {
   //Find items and categories
   app.get("/api/findItems/:category", controller.findItems);
 
-  //Upload files
-  app.post("/upload", controller.upload);
+
+  app.post("/api/book", controller.book);
+
 };

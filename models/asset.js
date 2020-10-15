@@ -33,7 +33,15 @@ const AssetSchema = new Schema({
   image:{
     type: String,
     trim: true
-  }
+  },
+
+  bookings:[{
+    user_id: String,
+    startDate : Date,
+    endDate : Date
+     }]
+
+
 });
 
 const Asset = mongoose.model("Asset", AssetSchema);
