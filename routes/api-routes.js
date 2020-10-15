@@ -50,7 +50,14 @@ module.exports = (app) => {
   //Find items and categories
   app.get("/api/findItems/:category", controller.findItems);
 
-
+  // Create a booking
   app.post("/api/book", controller.book);
 
+  //Retrieve user bookings
+
+  app.get("/api/userBookings/:userId", controller.userBooking);
+
+  //Retrieve user items booked
+
+  app.get("/api/userBooked/:userId", controller.userBooked);
 };

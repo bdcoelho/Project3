@@ -253,6 +253,39 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
+
+
+
+
+
+
+
+
+
+
+  userBooking: function (req, res) {
+
+    console.log(req.params.userId)
+    res.json({value:"booking route successful"})
+    // db.Item.find(req.params, { item: 1, _id: 0 })
+    //   .then((response) => res.json(response))
+    //   .catch((err) => res.status(422).json(err));
+  },
+
+
+  userBooked: function (req, res) {
+    console.log(req.params.userId)
+    res.json({value:"booked route successful"})
+    // db.Item.find(req.params, { item: 1, _id: 0 })
+    //   .then((response) => res.json(response))
+    //   .catch((err) => res.status(422).json(err));
+  },
+
+
+
+
+
+
   findItemsNear: function (req, res) {
     let responseArray = [];
     db.User.aggregate([

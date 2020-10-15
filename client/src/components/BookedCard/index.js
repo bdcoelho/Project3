@@ -1,42 +1,39 @@
-import React, { useContext, useState } from "react";
 import "./style.css";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import UserContext from "../../utils/UserContext";
+import React, { useContext, useState, useEffect } from "react";
 
 
 function BookedCard(props) {
 
+  const temp="zzzzz"
 
   return (
 <div>
-    <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
+<Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
       <Card.Body>
         <li
           style={{ borderRadius: "10px", marginBottom: "5px" }}
           className="list-group-item"
-          key={props.asset_id}
+          key={temp}
         >
-          <Row className="SearchResult row" id={props.asset_id}>
+          <Row className="SearchResult row" id={temp}>
             <Col lg={2} className="assetImage">
-              <img className="find-img" src={props.image} alt={props.name} />
+              <img className="find-img" src={temp} alt={temp} />
             </Col>
             <Col lg={1} className="emptyCol" />
             <Col lg={9} className="assetInfo">
               <Row>
-                <h3 className="assetTitle">{props.name}</h3>
+                <h3 className="assetTitle">{temp}</h3>
               </Row>
               <Row>
                 <h6 className="assetSuburb text-muted">
                   <i className="fas fa-map-marker-alt"></i>
-                  {" " +
-                    props.dist.toFixed(1) +
-                    " km | " +
-                    props.suburb +
-                    ", " +
-                    props.postCode}
+                  {temp}
                 </h6>
               </Row>
               <Row>
-                <p className="assetDescription">{props.description}</p>
+                <p className="assetDescription">{temp}</p>
               </Row>
             </Col>
           </Row>
