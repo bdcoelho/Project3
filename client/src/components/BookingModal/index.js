@@ -22,12 +22,10 @@ import {
 } from "react-bootstrap";
 
 function BookingModal(props) {
-  console.log(moment());
-  console.log(props);
   const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
   const [startDate, setStartDate] = useState(moment());
   const [endDate, setEndDate] = useState(moment());
-  const [focusedInput, setFocussedInput] = useState(startDate);
+  const [focusedInput, setFocussedInput] = useState(null);
 
   return (
     <Modal
@@ -45,9 +43,9 @@ function BookingModal(props) {
           startDateId={props.id} // PropTypes.string.isRequired,
           endDate={endDate} // momentPropTypes.momentObj or null,
           endDateId={props.id} // PropTypes.string.isRequired,
-          onDatesChange={(startDate, endDate) => {
-            setStartDate(startDate);
-            setEndDate(endDate);
+          onDatesChange={(dates) => {
+            setStartDate(dates.startDate);
+            setEndDate(dates.endDate);
           }} // PropTypes.func.isRequired,
           focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
           onFocusChange={(focusedInput) => setFocussedInput(focusedInput)} // PropTypes.func.isRequired,
