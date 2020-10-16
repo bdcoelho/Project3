@@ -5,7 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 
 const temp = "zzzzz";
 
-function BookingCard(props) {
+function BookedAssetsCard(props) {
   return (
     <div>
       <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
@@ -43,4 +43,4 @@ function BookingCard(props) {
   );
 }
 
-export default BookingCard;
+export default BookedAssetsCard;

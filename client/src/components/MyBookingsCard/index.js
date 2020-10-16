@@ -4,9 +4,8 @@ import UserContext from "../../utils/UserContext";
 import React, { useContext, useState, useEffect } from "react";
 
 
-function BookedCard(props) {
+function MyBookingsCard(props) {
 
-  const temp="zzzzz"
 
   return (
 <div>
@@ -69,4 +68,4 @@ function BookedCard(props) {
   );
 }
  
-export default BookedCard;
+export default MyBookingsCard;

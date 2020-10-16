@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
 import { Col, Row } from "react-bootstrap";
-import BookingCard from "../components/BookingCard";
-import BookedCard from "../components/BookedCard";
+import BookedAssetsCard from "../components/BookedAssetsCard";
+import MyBookingsCard from "../components/MyBookingsCard";
 import axios from "axios";
 
 function Home() {
@@ -53,7 +53,7 @@ function Home() {
           <Col>
             <h3>Your Booked Items</h3>
             {bookingArray.length>0 ? bookingArray.map((booking) => (
-              <BookedCard key={booking.id}
+              <MyBookingsCard key={booking.id}
 
               id={booking.id}
               assetName={booking.name}
@@ -78,7 +78,7 @@ function Home() {
           <Col>
             <h3>Your Bookings</h3>
             {bookedArray.length>0 ? bookedArray.map((booked) => (
-            <BookingCard 
+            <BookedAssetsCard 
             
             />
             )) :
