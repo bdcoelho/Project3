@@ -68,7 +68,7 @@ const UserSchema = new Schema({
   ],
   assetBookings: [
     {
-      asset_id: String,
+      asset_id: Schema.Types.ObjectId,
       startDate: Date,
       endDate: Date,
     },

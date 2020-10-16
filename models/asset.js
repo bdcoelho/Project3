@@ -27,7 +27,7 @@ const AssetSchema = new Schema({
     trim: true
   },
   user_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     trim: true
   },
   image:{
@@ -36,7 +36,7 @@ const AssetSchema = new Schema({
   },
 
   bookings:[{
-    user_id: String,
+    user_id: Schema.Types.ObjectId,
     startDate : Date,
     endDate : Date
      }]

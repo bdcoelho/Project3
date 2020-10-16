@@ -3,6 +3,7 @@ const axios = require("axios");
 const googleAPI = require("./googleAPIController");
 let addressObject = {};
 let signUpObject = {};
+const mongoose = require("mongoose");
 
 module.exports = {
   findNear: function (req, res) {
@@ -146,7 +147,6 @@ module.exports = {
             console.log(err);
             res.status(422).json(err);
           });
-
       })
 
       .catch((err) => {
@@ -253,38 +253,78 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
 
-
-
-
-
-
-
-
-
-
-
   userBooking: function (req, res) {
+    console.log(req.params.userId);
+    // db.User.findById(req.params.userId, { assetBookings: 1 })
 
-    console.log(req.params.userId)
-    res.json({value:"booking route successful"})
-    // db.Item.find(req.params, { item: 1, _id: 0 })
-    //   .then((response) => res.json(response))
-    //   .catch((err) => res.status(422).json(err));
+    db.User.aggregate([
+      // Stage 1
+      {
+        $match: { _id: mongoose.Types.ObjectId(req.params.userId) },
+      },
+
+      // Stage 2
+      {
+        $lookup: {
+          from: "assets",
+          localField: "assetBookings.asset_id",
+          foreignField: "_id",
+          as: "userAssetBookings",
+        },
+      },
+
+      // Stage 3
+      {
+        $lookup: {
+          from: "users",
+          localField: "userAssetBookings.user_id",
+          foreignField: "_id",
+          as: "bookingOwner",
+        },
+      },
+    ])
+
+      .then((response) => {
+        console.log(
+          "-----------------------------------finished Query--------------------------------------------"
+        );
+        // console.log(response[0].userAssetBookings);
+        let userBookings = response[0].userAssetBookings;
+
+        let bookingObject = {};
+
+        let bookingArray = [];
+
+        userBookings.forEach((booking, index) => {
+          let userBookingOwner = response[0].bookingOwner[index];
+          bookingObject.name = booking.name;
+          bookingObject.dailyPrice = booking.dailyPrice;
+          bookingObject.image = booking.image;
+          (bookingObject.ownerFirstName = userBookingOwner.firstName),
+            (bookingObject.ownerLastName = userBookingOwner.lastName),
+            (bookingObject.ownerStreetNum = userBookingOwner.streetNum),
+            (bookingObject.ownerStreetName = userBookingOwner.streetName),
+            (bookingObject.ownerSuburb = userBookingOwner.suburb),
+            (bookingObject.ownerState = userBookingOwner.state),
+            (bookingObject.ownerPostCode = userBookingOwner.postCode);
+            bookingArray.push(bookingObject);
+        });
+        console.log(bookingArray);
+
+        res.json(bookingArray);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
   },
-
 
   userBooked: function (req, res) {
-    console.log(req.params.userId)
-    res.json({value:"booked route successful"})
+    res.json({ value: "booked route successful" });
     // db.Item.find(req.params, { item: 1, _id: 0 })
     //   .then((response) => res.json(response))
     //   .catch((err) => res.status(422).json(err));
   },
-
-
-
-
-
 
   findItemsNear: function (req, res) {
     let responseArray = [];
