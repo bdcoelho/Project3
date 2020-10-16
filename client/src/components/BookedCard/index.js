@@ -15,25 +15,42 @@ function BookedCard(props) {
         <li
           style={{ borderRadius: "10px", marginBottom: "5px" }}
           className="list-group-item"
-          key={temp}
         >
-          <Row className="SearchResult row" id={temp}>
+          <Row className="SearchResult row" id={props.id}>
             <Col lg={2} className="assetImage">
-              <img className="find-img" src={temp} alt={temp} />
+              <img className="find-img" src={props.image} alt={props.assetName} />
             </Col>
             <Col lg={1} className="emptyCol" />
             <Col lg={9} className="assetInfo">
               <Row>
-                <h3 className="assetTitle">{temp}</h3>
+                <h3 className="assetTitle">{props.assetName}</h3>
               </Row>
               <Row>
                 <h6 className="assetSuburb text-muted">
                   <i className="fas fa-map-marker-alt"></i>
-                  {temp}
+
+
+                  {" "+ props.ownerStreetNum + " " + props.ownerStreetName+", "+props.ownerSuburb+", "+props.ownerState+" "+props.ownerPostCode
+
+                  }
                 </h6>
               </Row>
+
+
               <Row>
-                <p className="assetDescription">{temp}</p>
+                <Col>
+
+                <h4>Details</h4>
+                </Col>
+              </Row>
+
+
+
+              <Row>
+                <Col>
+
+                <p>Daily Cost: $ {parseFloat(props.dailyPrice).toFixed(2)}</p>
+                </Col>
               </Row>
             </Col>
           </Row>

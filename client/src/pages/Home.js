@@ -52,9 +52,10 @@ function Home() {
         <Row>
           <Col>
             <h3>Your Booked Items</h3>
-            {bookingArray.map((booking) => (
+            {bookingArray.length>0 ? bookingArray.map((booking) => (
               <BookedCard key={booking.id}
-              
+
+              id={booking.id}
               assetName={booking.name}
               dailyPrice={booking.dailyPrice}
               image={booking.image}
@@ -66,14 +67,25 @@ function Home() {
               ownerState={booking.ownerState}
               ownerPostCode={booking.ownerPostCode}
               />
-            ))}
+            )):
+          <h5>You have no upcoming bookings</h5>
+            
+            }
           </Col>
         </Row>
 
         <Row>
           <Col>
             <h3>Your Bookings</h3>
-            <BookingCard />
+            {bookedArray.length>0 ? bookedArray.map((booked) => (
+            <BookingCard 
+            
+            />
+            )) :
+            <h5>You have no assets booked by other users</h5>
+            
+          }
+
           </Col>
         </Row>
       </Col>
