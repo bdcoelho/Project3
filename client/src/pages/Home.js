@@ -53,9 +53,9 @@ function Home() {
           <Col>
             <h3>Your Booked Items</h3>
             {bookingArray.length>0 ? bookingArray.map((booking) => (
-              <MyBookingsCard key={booking.id}
+              <MyBookingsCard key={booking._id}
 
-              id={booking.id}
+              id={booking._id}
               assetName={booking.name}
               dailyPrice={booking.dailyPrice}
               image={booking.image}

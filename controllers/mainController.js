@@ -52,9 +52,8 @@ module.exports = {
 
   modifyAsset: function (req, res) {
     const updateObj = {};
-    console.log(req.file);
+
     if (req.file) {
-      console.log("file is here");
       updateObj.image = req.file.filename;
     }
     formJSON = JSON.parse(req.body.formData);
@@ -125,8 +124,6 @@ module.exports = {
       { new: true }
     )
       .then((asset) => {
-        console.log(asset);
-
         db.User.findByIdAndUpdate(
           req.body.user_id,
           {
@@ -241,9 +238,6 @@ module.exports = {
   },
 
   userBooking: function (req, res) {
-    console.log(req.params.userId);
-    // db.User.findById(req.params.userId, { assetBookings: 1 })
-
     db.User.aggregate([
       // Stage 1
       {
@@ -260,6 +254,10 @@ module.exports = {
         },
       },
 
+      {
+        $unwind: "$userAssetBookings",
+      },
+
       // Stage 3
       {
         $lookup: {
@@ -272,33 +270,23 @@ module.exports = {
     ])
 
       .then((response) => {
-        console.log(
-          "-----------------------------------finished Query--------------------------------------------"
-        );
-        // console.log(response[0].userAssetBookings);
-        let userBookings = response[0].userAssetBookings;
-
         let bookingArray = [];
 
-        userBookings.forEach((booking, index) => {
-          let userBookingOwner = response[0].bookingOwner[index];
-          console.log(booking._id);
-          let bookingObject = {};
-          bookingObject.id = booking._id;
-          bookingObject.name = booking.name;
-          bookingObject.dailyPrice = booking.dailyPrice;
-          bookingObject.image = booking.image;
-          bookingObject.ownerFirstName = userBookingOwner.firstName;
-          bookingObject.ownerLastName = userBookingOwner.lastName;
-          bookingObject.ownerStreetNum = userBookingOwner.streetNum;
-          bookingObject.ownerStreetName = userBookingOwner.streetName;
-          bookingObject.ownerSuburb = userBookingOwner.suburb;
-          bookingObject.ownerState = userBookingOwner.state;
-          bookingObject.ownerPostCode = userBookingOwner.postCode;
+        response.forEach((booking, index) => {
+          let bookingObject = booking.assetBookings[index];
+          bookingObject.name = booking.userAssetBookings.name;
+          bookingObject.dailyPrice = booking.userAssetBookings.dailyPrice;
+          bookingObject.ownerFirstName = booking.bookingOwner[0].firstName;
+          bookingObject.ownerLastName = booking.bookingOwner[0].lastName;
+          bookingObject.ownerStreetNum = booking.bookingOwner[0].streetNum;
+          bookingObject.ownerStreetName = booking.bookingOwner[0].streetName;
+          bookingObject.ownerSuburb = booking.bookingOwner[0].suburb;
+          bookingObject.ownerState = booking.bookingOwner[0].state;
+          bookingObject.ownerPostCode = booking.bookingOwner[0].postCode;
+          bookingObject.image = booking.userAssetBookings.image;
           bookingArray.push(bookingObject);
         });
 
-        // console.log(bookingArray)
         res.json(bookingArray);
       })
       .catch((err) => {
@@ -308,7 +296,82 @@ module.exports = {
   },
 
   userBooked: function (req, res) {
-    res.json({ value: "booked route successful" });
+    db.User.aggregate([
+      // Stage 1
+      {
+        $match: { _id: mongoose.Types.ObjectId(req.params.userId) },
+      },
+      // Stage 2
+      {
+        $lookup: {
+          from: "assets",
+          localField: "assets",
+          foreignField: "_id",
+          as: "assetDetails",
+        },
+      },
+      // Stage 3
+      {
+        $unwind: {
+          path: "$assetDetails",
+        },
+      },
+      // Stage 4
+      {
+        $unwind: {
+          path: "$assetDetails.bookings",
+        },
+      },
+      // Stage 5
+      {
+        $lookup: {
+          from: "users",
+          localField: "assetDetails.bookings.user_id",
+          foreignField: "_id",
+          as: "borrowerDetails",
+        },
+      },
+    ])
+      .then((response) => {
+        console.log(
+          "-----------------------------------finished get userBooked Query--------------------------------------------"
+        );
+
+        console.log(response[0]);
+
+        let borrowerArray = [];
+
+        response.forEach((booking, index) => {
+          let borrowerObject = booking.assetDetails.bookings;
+          borrowerObject.name = booking.assetDetails.name;
+          borrowerObject.dailyPrice = booking.assetDetails.dailyPrice;
+          borrowerObject.image = booking.assetDetails.image;
+          borrowerObject.assetId = booking.assetDetails._id;
+          borrowerObject.borrowerFirstName = booking.borrowerDetails[0].firstName;
+          borrowerObject.borrowerLastName = booking.borrowerDetails[0].lastName;
+          borrowerObject.borrowerStreetNum = booking.borrowerDetails[0].streetNum;
+          borrowerObject.borrowerStreetName =
+            booking.borrowerDetails[0].streetName;
+          borrowerObject.borrowerSuburb = booking.borrowerDetails[0].suburb;
+          borrowerObject.borrowerState = booking.borrowerDetails[0].state;
+          borrowerObject.borrowerPostCode = booking.borrowerDetails[0].postCode;
+
+          borrowerArray.push(borrowerObject);
+        });
+
+        console.log(
+          "-----------------------------------------------------------------------------------------------------"
+        );
+
+        console.log(borrowerArray);
+
+        res.json(borrowerArray);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(422).json(err);
+      });
+
     // db.Item.find(req.params, { item: 1, _id: 0 })
     //   .then((response) => res.json(response))
     //   .catch((err) => res.status(422).json(err));
