@@ -7,8 +7,8 @@ import BookedCard from "../components/BookedCard";
 import axios from "axios";
 
 function Home() {
-  const [booked, setBooked] = useState([]);
-  const [booking, setBooking] = useState([]);
+  const [bookedArray, setBookedArray] = useState([]);
+  const [bookingArray, setBookingArray] = useState([]);
 
   const { id, email, firstName, lastName } = useContext(UserContext);
   const retrieveBookings = () => {
@@ -18,7 +18,7 @@ function Home() {
         .get("/api/userBookings/" + id)
         .then((res) => {
           console.log(res);
-          // setBooking(res.data);
+          setBookingArray(res.data);
         })
         .catch((err) => console.log(err));
     }
@@ -52,7 +52,21 @@ function Home() {
         <Row>
           <Col>
             <h3>Your Booked Items</h3>
-            <BookedCard />
+            {bookingArray.map((booking) => (
+              <BookedCard key={booking.id}
+              
+              assetName={booking.name}
+              dailyPrice={booking.dailyPrice}
+              image={booking.image}
+              ownerFirstName={booking.ownerFirstName}
+              ownerLastName={booking.ownerLastName}
+              ownerStreetNum={booking.ownerStreetNum}
+              ownerStreetName={booking.ownerStreetName}
+              ownerSuburb={booking.ownerSuburb}
+              ownerState={booking.ownerState}
+              ownerPostCode={booking.ownerPostCode}
+              />
+            ))}
           </Col>
         </Row>
 

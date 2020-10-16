@@ -291,26 +291,29 @@ module.exports = {
         // console.log(response[0].userAssetBookings);
         let userBookings = response[0].userAssetBookings;
 
-        let bookingObject = {};
+
 
         let bookingArray = [];
 
         userBookings.forEach((booking, index) => {
           let userBookingOwner = response[0].bookingOwner[index];
+          console.log(booking._id);
+          let bookingObject = {};
+          bookingObject.id = booking._id;
           bookingObject.name = booking.name;
           bookingObject.dailyPrice = booking.dailyPrice;
           bookingObject.image = booking.image;
-          (bookingObject.ownerFirstName = userBookingOwner.firstName),
-            (bookingObject.ownerLastName = userBookingOwner.lastName),
-            (bookingObject.ownerStreetNum = userBookingOwner.streetNum),
-            (bookingObject.ownerStreetName = userBookingOwner.streetName),
-            (bookingObject.ownerSuburb = userBookingOwner.suburb),
-            (bookingObject.ownerState = userBookingOwner.state),
-            (bookingObject.ownerPostCode = userBookingOwner.postCode);
-            bookingArray.push(bookingObject);
+          bookingObject.ownerFirstName = userBookingOwner.firstName;
+          bookingObject.ownerLastName = userBookingOwner.lastName;
+          bookingObject.ownerStreetNum = userBookingOwner.streetNum;
+          bookingObject.ownerStreetName = userBookingOwner.streetName;
+          bookingObject.ownerSuburb = userBookingOwner.suburb;
+          bookingObject.ownerState = userBookingOwner.state;
+          bookingObject.ownerPostCode = userBookingOwner.postCode;
+bookingArray.push(bookingObject);
         });
-        console.log(bookingArray);
 
+        // console.log(bookingArray)
         res.json(bookingArray);
       })
       .catch((err) => {
