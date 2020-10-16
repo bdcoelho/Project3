@@ -27,6 +27,7 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
+    console.log(req.body.assetId);
     db.Asset.findByIdAndDelete(req.body.assetId)
       .then((asset) => {
         db.User.findByIdAndUpdate(
