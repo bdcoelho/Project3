@@ -50,16 +50,17 @@ module.exports = {
   },
 
   modifyAsset: function (req, res) {
-    formJSON = JSON.parse(req.body.formData);
-    const updateObj = {
-      name: formJSON.name,
-      description: formJSON.description,
-      hourlyPrice: formJSON.hourlyPrice,
-      dailyPrice: formJSON.dailyPrice,
-    };
-    if (req.file.filename) {
+    const updateObj = {};
+    console.log(req.file);
+    if (req.file) {
+      console.log("file is here");
       updateObj.image = req.file.filename;
     }
+    formJSON = JSON.parse(req.body.formData);
+    updateObj.name = formJSON.name;
+    updateObj.description = formJSON.description;
+    updateObj.hourlyPrice = formJSON.hourlyPrice;
+    updateObj.dailyPrice = formJSON.dailyPrice;
 
     db.Asset.findByIdAndUpdate(formJSON.id, updateObj)
       .then((response) => {
@@ -153,10 +154,6 @@ module.exports = {
         console.log(err);
         res.status(422).json(err);
       });
-
-    // db.Asset.find({ user_id: req.params.userId })
-    //   .then((response) => res.json(response))
-    //   .catch((err) => res.status(422).json(err));
   },
 
   getUserData: function (req, res) {
@@ -172,17 +169,6 @@ module.exports = {
         lat: req.user.geometry.coordinates[1],
       });
     }
-  },
-
-  upload: function (req, res) {
-    upload(req, res, function (err) {
-      if (err instanceof multer.MulterError) {
-        return res.status(500).json(err);
-      } else if (err) {
-        return res.status(500).json(err);
-      }
-      return res.status(200).send(req.file);
-    });
   },
 
   addressSearch: function (req, res) {
@@ -291,8 +277,6 @@ module.exports = {
         // console.log(response[0].userAssetBookings);
         let userBookings = response[0].userAssetBookings;
 
-
-
         let bookingArray = [];
 
         userBookings.forEach((booking, index) => {
@@ -310,7 +294,7 @@ module.exports = {
           bookingObject.ownerSuburb = userBookingOwner.suburb;
           bookingObject.ownerState = userBookingOwner.state;
           bookingObject.ownerPostCode = userBookingOwner.postCode;
-bookingArray.push(bookingObject);
+          bookingArray.push(bookingObject);
         });
 
         // console.log(bookingArray)

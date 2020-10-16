@@ -1,7 +1,6 @@
 const passport = require("../Auth/passport");
 const controller = require("../controllers/mainController");
 const multer = require("multer");
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public");
