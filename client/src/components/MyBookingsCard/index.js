@@ -13,15 +13,15 @@ function MyBookingsCard(props) {
             className="list-group-item"
           >
             <Row className="SearchResult row" id={props.id}>
-              <Col lg={2} className="assetImage">
+              <Col lg={3} className="assetImage">
                 <img
-                  className="find-img"
+                  className="find-img img-fluid"
                   src={props.image}
                   alt={props.assetName}
                 />
               </Col>
-              <Col lg={1} className="emptyCol" />
-              <Col lg={9} className="assetInfo">
+
+              <Col lg={9} className="asset-info">
                 <Row>
                   <Col>
                     <h3 className="assetTitle">{props.assetName}</h3>

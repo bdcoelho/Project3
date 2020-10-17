@@ -23,7 +23,7 @@ function FindCard(props) {
               <img className="find-img" src={props.image} alt={props.name} />
             </Col>
             <Col lg={1} className="emptyCol" />
-            <Col lg={9} className="assetInfo">
+            <Col lg={9} className="asset-info">
               <Row>
                 <h3 className="assetTitle">{props.name}</h3>
               </Row>

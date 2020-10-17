@@ -129,3 +129,7 @@ margin: 30px 0px 0px 0px;
   width: 80%;
   margin: 15px auto 10px auto;
 }
+
+.asset-info{
+  padding-left: 30px !important;
+}
