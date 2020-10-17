@@ -107,3 +107,25 @@ margin: 30px 0px 0px 0px;
 .file-input{
   overflow: hidden;
 }
+
+.home-heading{
+  text-align: center;
+  margin: 30px 0px 10px 0px;
+}
+
+
+.section-heading{
+  margin: 20px 0px 30px 5px;
+}
+
+
+.section-spacing{
+  margin: 0px 0px 30px 0px;
+}
+
+.header-bar {
+  background: #0eabb1;
+  height: 4px;
+  width: 80%;
+  margin: 15px auto 10px auto;
+}

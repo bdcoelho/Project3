@@ -52,11 +52,14 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
         <SideNavBar />
       </Col>
       <Col md={9}>
-        <h1 style={{ textAlign: "center" }}> Welcome to your Dashboard </h1>
-
+        <Container>
+        <h1 className="home-heading"> Welcome to your Dashboard </h1>
         <Row>
+<div className="header-bar"></div>
+</Row>
+        <Row className="section-spacing">
           <Col>
-            <h3>Items you are borrowing</h3>
+            <h3 className="section-heading">Items you are borrowing</h3>
             {bookingArray.length>0 ? bookingArray.map((booking) => (
               <MyBookingsCard key={booking._id}
 
@@ -83,10 +86,12 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
             }
           </Col>
         </Row>
-
-        <Row>
+<Row>
+<div className="header-bar"></div>
+</Row>
+        <Row className = "section-spacing">
           <Col>
-            <h3>Items you are lending</h3>
+            <h3 className="section-heading">Items you are lending</h3>
             {console.log(bookedArray)}
             {bookedArray.length>0 ? bookedArray.map((booked) => (
             <BookedAssetsCard 
@@ -116,6 +121,7 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
 
           </Col>
         </Row>
+        </Container>
       </Col>
     </Row>
     </Container>
