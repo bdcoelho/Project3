@@ -46,8 +46,8 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
 
 
   return (
-    <Container fluid style={{paddingLeft:"0"}}>
-    <Row>
+    <Container fluid style={{paddingLeft:"0"}} className="full-height-container">
+      <Row className="full-height">
       <Col md={2} className="pr-0">
         <SideNavBar />
       </Col>

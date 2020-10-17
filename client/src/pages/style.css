@@ -50,13 +50,6 @@
   position: relative;
 }
 
-body {
-  color: #222222;
-  background-color: rgb(43, 76, 93);
-  font-size: 1em;
-  font-family: "Open Sans", "Helvetica Neue", sans-serif;
-}
-
 .team-heading {
   background-color: rgb(7, 40, 56);
   color: white;
