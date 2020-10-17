@@ -73,13 +73,20 @@ function MyBookingsCard(props) {
                         <tr>
                           <td>Period</td>
                           <td>
-                            {props.startDate} - {props.endDate}
+                            {props.startDate} - {props.endDate}   ({props.numberDays} {(props.numberDays>1)?"days":"day"})
                           </td>
                         </tr>
                         <tr>
                           <td>Daily Cost</td>
                           <td>$ {parseFloat(props.dailyPrice).toFixed(2)}</td>
                         </tr>
+
+                        <tr>
+                          <td>Total Cost</td>
+                          <td>$ {parseFloat(props.totalPrice).toFixed(2)}</td>
+                        </tr>
+
+
                       </tbody>
                     </Table>
 

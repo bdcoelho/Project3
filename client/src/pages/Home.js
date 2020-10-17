@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import BookedAssetsCard from "../components/BookedAssetsCard";
 import MyBookingsCard from "../components/MyBookingsCard";
 import axios from "axios";
-import moment from "moment";
+import timeHandle from "../utils/timeHandle"
 function Home() {
   const [bookedArray, setBookedArray] = useState([]);
   const [bookingArray, setBookingArray] = useState([]);
@@ -40,11 +40,9 @@ function Home() {
   };
 
   useEffect(retrieveBooked, [id]);
+  console.log("---------------------------------------------------------------------------------------")
 
-  const formatTime = (timeString)=>{
-    let momentTime = moment("2020-10-22T01:00:00.000Z", moment.ISO_8601);
-    return momentTime.format("DD-MM-YYYY")
-  }
+console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.000Z"))
 
 
   return (
@@ -63,8 +61,10 @@ function Home() {
 
               id={booking._id}
               email={booking.ownerEmail}
-              startDate={formatTime(booking.startDate)}
-              endDate={formatTime(booking.startDate)}
+              numberDays={timeHandle.numDays(booking.startDate,booking.endDate)}
+              totalPrice={timeHandle.numDays(booking.startDate,booking.endDate)*booking.dailyPrice}
+              startDate={timeHandle.formatTime(booking.startDate)}
+              endDate={timeHandle.formatTime(booking.endDate)}
               assetName={booking.name}
               dailyPrice={booking.dailyPrice}
               image={booking.image}
