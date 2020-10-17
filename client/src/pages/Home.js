@@ -62,6 +62,7 @@ function Home() {
               <MyBookingsCard key={booking._id}
 
               id={booking._id}
+              email={booking.ownerEmail}
               startDate={formatTime(booking.startDate)}
               endDate={formatTime(booking.startDate)}
               assetName={booking.name}

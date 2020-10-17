@@ -278,6 +278,7 @@ module.exports = {
           bookingObject.dailyPrice = booking.userAssetBookings.dailyPrice;
           bookingObject.ownerFirstName = booking.bookingOwner[0].firstName;
           bookingObject.ownerLastName = booking.bookingOwner[0].lastName;
+          bookingObject.ownerEmail = booking.bookingOwner[0].email;
           bookingObject.ownerStreetNum = booking.bookingOwner[0].streetNum;
           bookingObject.ownerStreetName = booking.bookingOwner[0].streetName;
           bookingObject.ownerSuburb = booking.bookingOwner[0].suburb;

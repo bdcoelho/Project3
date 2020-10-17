@@ -64,7 +64,12 @@ function MyBookingsCard(props) {
                             {props.firstName + " " + props.lastName}
                           </td>
                         </tr>
-
+                        <tr>
+                          <td>Contact</td>
+                          <td>
+                            {props.email}
+                          </td>
+                        </tr>
                         <tr>
                           <td>Period</td>
                           <td>
