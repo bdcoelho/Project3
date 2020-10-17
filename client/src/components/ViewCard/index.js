@@ -1,17 +1,14 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../../utils/UserContext";
 import "./style.css";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col, Table } from "react-bootstrap";
 import axios from "axios";
 import EditModal from "../EditModal";
-
 
 function FindCard(props) {
   const { id, email, firstName, lastName } = useContext(UserContext);
   const [modalShow, setModalShow] = useState(false);
 
-
-  
   const handleRemove = (event) => {
     event.preventDefault();
     let assetId = event.nativeEvent.target.id;
@@ -22,50 +19,96 @@ function FindCard(props) {
       })
       .catch((err) => console.log(err));
   };
-
-
-
-
+  console.log(props);
   return (
     <div>
-    <Card style={{ width: "18rem" }} className="box asset-card">
-      <Card.Img variant="top" src={props.image} />
-      <Card.Body>
-        <Card.Title>{props.name}</Card.Title>
-        <Card.Text>{props.description}</Card.Text>
-        <div className="card-buttons">
-          <Button id={props.id} type="button" variant="dark" onClick={() => setModalShow(true)}>Edit</Button>
-          <Button
-            id={props.id}
-            type="button"
-            variant="dark"
-            onClick={handleRemove}
+      <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
+        <Card.Body>
+          <li
+            style={{ borderRadius: "10px", marginBottom: "5px" }}
+            className="list-group-item"
           >
-            Remove
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
+            <Row className="SearchResult row" id={props.id}>
+              <Col lg={3} className="assetImage">
+                <img
+                  className="find-img img-fluid"
+                  src={props.image}
+                  alt={props.Name}
+                />
+              </Col>
 
+              <Col lg={9} className="asset-info">
+                <Row>
+                  <Col>
+                    <h3 className="assetTitle">{props.name}</h3>
+                  </Col>
+                </Row>
 
+                <Row>
+                  <Col>
+                    <h4>Description</h4>
+                  </Col>
+                </Row>
 
-    <EditModal
+                <Row>
+                  <Col>
+                    <p>{props.description}</p>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={4}>
+                    <Row>
+                      <Col>
+                  <div className="shaded-input">
+                    $
+                  </div>
+                  </Col>
+                  <Col>
+                  {props.daily}
+                  </Col>
+                  </Row>
 
-show={modalShow}
-onHide={() => setModalShow(false)}
-complete={props.update}
-name={props.name}
-image={props.image}
-category={props.category}
-description={props.description}
-hourly={props.hourly}
-daily={props.daily}
-assetid={props.id}
-/>
-
-
-
-</div>
+                  </Col>
+                  <Col md={8} className="view-buttons">
+                    <div className="card-buttons">
+                      <Button
+                        id={props.id}
+                        type="button"
+                        variant="dark"
+                        onClick={() => setModalShow(true)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        id={props.id}
+                        type="button"
+                        variant="dark"
+                        onClick={handleRemove}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <br></br>
+          </li>
+        </Card.Body>
+      </Card>
+      <EditModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        complete={props.update}
+        name={props.name}
+        image={props.image}
+        category={props.category}
+        description={props.description}
+        hourly={props.hourly}
+        daily={props.daily}
+        assetid={props.id}
+      />
+    </div>
   );
 }
 

@@ -23,17 +23,21 @@ function View() {
   useEffect(retrieveAssets, [id]);
 
   return (
-    <Container fluid style={{ paddingLeft: "0" }} className="full-height-container">
+    <Container
+      fluid
+      style={{ paddingLeft: "0" }}
+      className="full-height-container"
+    >
       <Row className="full-height">
         <Col md={2} className="pr-0">
           <SideNavBar />
         </Col>
         <Col md={9}>
           <Row>
-            <CardDeck>
+            <Col>
               {userAssets.length > 0
                 ? userAssets.map((asset) => (
-                    <Col md={4} key={asset._id}>
+                    <Col md={12} key={asset._id}>
                       <ViewCard
                         name={asset.name}
                         image={asset.image}
@@ -47,7 +51,7 @@ function View() {
                     </Col>
                   ))
                 : null}
-            </CardDeck>
+            </Col>
           </Row>
         </Col>
       </Row>

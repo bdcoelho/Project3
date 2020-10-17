@@ -80,11 +80,6 @@
   margin: 20px 0px 0px 20px;
 }
 
-.find-img {
-  height: 250px;
-  object-fit: scale-down;
-}
-
 .modal {
   display: block;
 }
