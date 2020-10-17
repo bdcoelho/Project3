@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 import BookedAssetsCard from "../components/BookedAssetsCard";
 import MyBookingsCard from "../components/MyBookingsCard";
 import axios from "axios";
-
+import moment from "moment";
 function Home() {
   const [bookedArray, setBookedArray] = useState([]);
   const [bookingArray, setBookingArray] = useState([]);
@@ -33,13 +33,19 @@ function Home() {
         .get("/api/userBooked/" + id)
         .then((res) => {
           console.log(res);
-          // setBooked(res.data);
+          setBookedArray(res.data);
         })
         .catch((err) => console.log(err));
     }
   };
 
   useEffect(retrieveBooked, [id]);
+
+  const formatTime = (timeString)=>{
+    let momentTime = moment("2020-10-22T01:00:00.000Z", moment.ISO_8601);
+    return momentTime.format("DD-MM-YYYY")
+  }
+
 
   return (
     <Row>
@@ -51,21 +57,23 @@ function Home() {
 
         <Row>
           <Col>
-            <h3>Your Booked Items</h3>
+            <h3>Items you are borrowing</h3>
             {bookingArray.length>0 ? bookingArray.map((booking) => (
               <MyBookingsCard key={booking._id}
 
               id={booking._id}
+              startDate={formatTime(booking.startDate)}
+              endDate={formatTime(booking.startDate)}
               assetName={booking.name}
               dailyPrice={booking.dailyPrice}
               image={booking.image}
-              ownerFirstName={booking.ownerFirstName}
-              ownerLastName={booking.ownerLastName}
-              ownerStreetNum={booking.ownerStreetNum}
-              ownerStreetName={booking.ownerStreetName}
-              ownerSuburb={booking.ownerSuburb}
-              ownerState={booking.ownerState}
-              ownerPostCode={booking.ownerPostCode}
+              firstName={booking.ownerFirstName}
+              lastName={booking.ownerLastName}
+              streetNum={booking.ownerStreetNum}
+              streetName={booking.ownerStreetName}
+              suburb={booking.ownerSuburb}
+              state={booking.ownerState}
+              postCode={booking.ownerPostCode}
               />
             )):
           <h5>You have no upcoming bookings</h5>
@@ -76,10 +84,23 @@ function Home() {
 
         <Row>
           <Col>
-            <h3>Your Bookings</h3>
+            <h3>Items you are lending</h3>
+            {console.log(bookedArray)}
             {bookedArray.length>0 ? bookedArray.map((booked) => (
             <BookedAssetsCard 
-            
+            key={booked._id}
+
+            id={booked._id}
+            assetName={booked.name}
+            dailyPrice={booked.dailyPrice}
+            image={booked.image}
+            borrowerFirstName={booked.borrowerFirstName}
+            borrowerLastName={booked.borrowerLastName}
+            borrowerStreetNum={booked.borrowerStreetNum}
+            borrowerStreetName={booked.borrowerStreetName}
+            borrowerSuburb={booked.borrowerSuburb}
+            borrowerState={booked.borrowerState}
+            borrowerPostCode={booked.borrowerPostCode}
             />
             )) :
             <h5>You have no assets booked by other users</h5>

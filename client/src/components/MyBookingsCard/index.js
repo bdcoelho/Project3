@@ -1,71 +1,93 @@
 import "./style.css";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Button, Row, Col, Table } from "react-bootstrap";
 import UserContext from "../../utils/UserContext";
 import React, { useContext, useState, useEffect } from "react";
 
-
 function MyBookingsCard(props) {
-
-
   return (
-<div>
-<Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
-      <Card.Body>
-        <li
-          style={{ borderRadius: "10px", marginBottom: "5px" }}
-          className="list-group-item"
-        >
-          <Row className="SearchResult row" id={props.id}>
-            <Col lg={2} className="assetImage">
-              <img className="find-img" src={props.image} alt={props.assetName} />
-            </Col>
-            <Col lg={1} className="emptyCol" />
-            <Col lg={9} className="assetInfo">
-              <Row>
-                <h3 className="assetTitle">{props.assetName}</h3>
-              </Row>
-              <Row>
-                <h6 className="assetSuburb text-muted">
-                  <i className="fas fa-map-marker-alt"></i>
-
-
-                  {" "+ props.ownerStreetNum + " " + props.ownerStreetName+", "+props.ownerSuburb+", "+props.ownerState+" "+props.ownerPostCode
-
-                  }
-                </h6>
-              </Row>
-
-
-              <Row>
+    <div>
+      <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
+        <Card.Body>
+          <li
+            style={{ borderRadius: "10px", marginBottom: "5px" }}
+            className="list-group-item"
+          >
+            <Row className="SearchResult row" id={props.id}>
+              <Col lg={2} className="assetImage">
+                <img
+                  className="find-img"
+                  src={props.image}
+                  alt={props.assetName}
+                />
+              </Col>
+              <Col lg={1} className="emptyCol" />
+              <Col lg={9} className="assetInfo">
+                <Row>
+                  <Col>
+                    <h3 className="assetTitle">{props.assetName}</h3>
+                  </Col>
+                </Row>
+                <Row>
                 <Col>
 
-                <h4>Details</h4>
-                </Col>
-              </Row>
+                  <h6 className="assetSuburb text-muted">
+                    <i className="fas fa-map-marker-alt"></i>
 
+                    {" " +
+                      props.streetNum +
+                      " " +
+                      props.streetName +
+                      ", " +
+                      props.suburb +
+                      ", " +
+                      props.state +
+                      " " +
+                      props.postCode}
+                  </h6>
+                  </Col>
 
+                </Row>
 
-              <Row>
-                <Col>
+                <Row>
+                  <Col>
+                    <h4>Details</h4>
+                  </Col>
+                </Row>
 
-                <p>Daily Cost: $ {parseFloat(props.dailyPrice).toFixed(2)}</p>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <br></br>
+                <Row>
+                  <Col md={6}>
+                    <Table bordered hover responsive size="sm">
+                      <tbody>
+                      <tr>
+                          <td>Neighbour</td>
+                          <td>
+                            {props.firstName + " " + props.lastName}
+                          </td>
+                        </tr>
 
-        </li>
-      </Card.Body>
-    </Card>
+                        <tr>
+                          <td>Period</td>
+                          <td>
+                            {props.startDate} - {props.endDate}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Daily Cost</td>
+                          <td>$ {parseFloat(props.dailyPrice).toFixed(2)}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
 
-
-
-</div>
-
-
-
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <br></br>
+          </li>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
- 
+
 export default MyBookingsCard;
