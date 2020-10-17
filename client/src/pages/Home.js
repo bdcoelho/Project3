@@ -95,13 +95,18 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
             assetName={booked.name}
             dailyPrice={booked.dailyPrice}
             image={booked.image}
-            borrowerFirstName={booked.borrowerFirstName}
-            borrowerLastName={booked.borrowerLastName}
-            borrowerStreetNum={booked.borrowerStreetNum}
-            borrowerStreetName={booked.borrowerStreetName}
-            borrowerSuburb={booked.borrowerSuburb}
-            borrowerState={booked.borrowerState}
-            borrowerPostCode={booked.borrowerPostCode}
+            firstName={booked.borrowerFirstName}
+            lastName={booked.borrowerLastName}
+            email={booked.borrowerEmail}
+            numberDays={timeHandle.numDays(booked.startDate,booked.endDate)}
+            totalPrice={timeHandle.numDays(booked.startDate,booked.endDate)*booked.dailyPrice}
+            startDate={timeHandle.formatTime(booked.startDate)}
+            endDate={timeHandle.formatTime(booked.endDate)}
+            streetNum={booked.borrowerStreetNum}
+            streetName={booked.borrowerStreetName}
+            suburb={booked.borrowerSuburb}
+            state={booked.borrowerState}
+            postCode={booked.borrowerPostCode}
             />
             )) :
             <h5>You have no assets booked by other users</h5>

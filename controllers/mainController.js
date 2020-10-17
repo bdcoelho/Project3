@@ -342,7 +342,7 @@ module.exports = {
 
         let borrowerArray = [];
 
-        response.forEach((booking, index) => {
+        response.forEach((booking) => {
           let borrowerObject = booking.assetDetails.bookings;
           borrowerObject.name = booking.assetDetails.name;
           borrowerObject.dailyPrice = booking.assetDetails.dailyPrice;
@@ -350,6 +350,7 @@ module.exports = {
           borrowerObject.assetId = booking.assetDetails._id;
           borrowerObject.borrowerFirstName = booking.borrowerDetails[0].firstName;
           borrowerObject.borrowerLastName = booking.borrowerDetails[0].lastName;
+          borrowerObject.borrowerEmail = booking.borrowerDetails[0].email;
           borrowerObject.borrowerStreetNum = booking.borrowerDetails[0].streetNum;
           borrowerObject.borrowerStreetName =
             booking.borrowerDetails[0].streetName;

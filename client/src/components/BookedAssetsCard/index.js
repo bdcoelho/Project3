@@ -1,5 +1,5 @@
 import "./style.css";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Table, Button, Row, Col } from "react-bootstrap";
 import UserContext from "../../utils/UserContext";
 import React, { useContext, useState, useEffect } from "react";
 
@@ -26,23 +26,27 @@ function BookedAssetsCard(props) {
               <Col lg={1} className="emptyCol" />
               <Col lg={9} className="assetInfo">
                 <Row>
+                  <Col>
                   <h3 className="assetTitle">{props.assetName}</h3>
+                  </Col>
                 </Row>
                 <Row>
+                  <Col>
                   <h6 className="assetSuburb text-muted">
                     <i className="fas fa-map-marker-alt"></i>
 
                     {" " +
-                      props.borrowerStreetNum +
+                      props.streetNum +
                       " " +
-                      props.borrowerStreetName +
+                      props.streetName +
                       ", " +
-                      props.borrowerSuburb +
+                      props.suburb +
                       ", " +
-                      props.borrowerState +
+                      props.state +
                       " " +
-                      props.borrowerPostCode}
+                      props.postCode}
                   </h6>
+                  </Col>
                 </Row>
 
                 <Row>
@@ -51,13 +55,49 @@ function BookedAssetsCard(props) {
                   </Col>
                 </Row>
 
+
+
+
+
                 <Row>
-                  <Col>
-                    <p>
-                      Daily Cost: $ {parseFloat(props.dailyPrice).toFixed(2)}
-                    </p>
+                  <Col md={6}>
+                    <Table bordered hover responsive size="sm">
+                      <tbody>
+                      <tr>
+                          <td>Neighbour</td>
+                          <td>
+                            {props.firstName + " " + props.lastName}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Contact</td>
+                          <td>
+                            {props.email}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Period</td>
+                          <td>
+                            {props.startDate} - {props.endDate}   ({props.numberDays} {(props.numberDays>1)?"days":"day"})
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Daily Price</td>
+                          <td>$ {parseFloat(props.dailyPrice).toFixed(2)}</td>
+                        </tr>
+
+                        <tr>
+                          <td>Total Earning</td>
+                          <td>$ {parseFloat(props.totalPrice).toFixed(2)}</td>
+                        </tr>
+
+
+                      </tbody>
+                    </Table>
+
                   </Col>
                 </Row>
+
               </Col>
             </Row>
             <br></br>
