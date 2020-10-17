@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import BookedAssetsCard from "../components/BookedAssetsCard";
 import MyBookingsCard from "../components/MyBookingsCard";
 import axios from "axios";
@@ -46,6 +46,7 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
 
 
   return (
+    <Container fluid style={{paddingLeft:"0"}}>
     <Row>
       <Col md={2} className="pr-0">
         <SideNavBar />
@@ -117,6 +118,7 @@ console.log(timeHandle.numDays("2020-10-22T01:00:00.000Z","2020-10-22T01:00:00.0
         </Row>
       </Col>
     </Row>
+    </Container>
   );
 }
 

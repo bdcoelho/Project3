@@ -23,7 +23,7 @@ function View() {
   useEffect(retrieveAssets, [id]);
 
   return (
-    <div>
+    <Container fluid style={{ paddingLeft: "0" }}>
       <Row>
         <Col md={2} className="pr-0">
           <SideNavBar />
@@ -51,7 +51,7 @@ function View() {
           </Row>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }
 

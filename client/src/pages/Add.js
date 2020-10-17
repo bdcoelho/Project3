@@ -100,143 +100,149 @@ function Add() {
   return complete ? (
     <View />
   ) : (
-    <Row>
-      <Col md={2} className="pr-0">
-        <SideNavBar />
-      </Col>
-      <Col md={9}>
-        <Container className="mt-3">
-          <Form
-            className="search-form"
-            autoComplete="off"
-            onSubmit={handleFormSubmit}
-          >
-            <Form.Row>
-              <Col md={3} className="mt-4">
-                <img className="edit-img" src={imageURL} alt={name} />
-                <Form.Group controlId="formImage" className="add-img-btn">
-                  <Form.File
-                    onChange={fileSelectedHandler}
-                    className="file-input"
-                  ></Form.File>
-                </Form.Group>
-              </Col> 
+    <Container fluid style={{ paddingLeft: "0" }}>
+      <Row>
+        <Col md={2} className="pr-0">
+          <SideNavBar />
+        </Col>
+        <Col md={9}>
+          <Container className="mt-3">
+            <Form
+              className="search-form"
+              autoComplete="off"
+              onSubmit={handleFormSubmit}
+            >
+              <Form.Row>
+                <Col md={3} className="mt-4">
+                  <img className="edit-img" src={imageURL} alt={name} />
+                  <Form.Group controlId="formImage" className="add-img-btn">
+                    <Form.File
+                      onChange={fileSelectedHandler}
+                      className="file-input"
+                    ></Form.File>
+                  </Form.Group>
+                </Col>
 
-              <Col>
-                <Form.Row>
-                  <Col md={9}>
-                    <Form.Group controlId="formCategory">
-                      <Form.Label>Categories</Form.Label>
-                      <Form.Control
-                        as="select"
-                        size="md"
-                        onChange={handleCategoryChange}
-                        defaultValue={"DEFAULT"}
-                      >
-                        <option disabled value="DEFAULT">
-                          Select Category
-                        </option>
-                        {categoryArray.map((element, index) => (
-                          <option key={"cat" + index} value={element}>
-                            {element}
-                          </option>
-                        ))}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-
-                  <Col>
-                    <Form.Group controlId="formItem">
-                      <Form.Label>Items</Form.Label>
-                      <Form.Control
-                        as="select"
-                        size="md"
-                        onChange={handleItemChange}
-                        defaultValue={"DEFAULT"}
-                      >
-                        <option disabled value="DEFAULT">
-                          Select Item
-                        </option>
-                        {itemArray.map((element, index) => (
-                          <option key={"item" + index} value={element.item}>
-                            {element.item}
-                          </option>
-                        ))}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <Form.Row>
-                  <Col className="d-flex align-items-end pb-3">
-                    <Form.Group
-                      controlId="formDescription"
-                      style={{ width: "100%" }}
-                    >
-                      <Form.Label>Description</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        size="lg"
-                        onChange={handleDescriptionChange}
-                        className="add-text-area"
-                        defaultValue={description}
-                      ></Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <Form.Group controlId="formPrice">
-                  <Form.Label>Price</Form.Label>
+                <Col>
                   <Form.Row>
-                    <Col md={3}>
-                      <Form.Label>Hourly</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Prepend>
-                          <InputGroup.Text id="inputGroupPrepend">
-                            $
-                          </InputGroup.Text>
-                        </InputGroup.Prepend>
+                    <Col md={9}>
+                      <Form.Group controlId="formCategory">
+                        <Form.Label>Categories</Form.Label>
                         <Form.Control
-                          as="input"
-                          type="number"
+                          as="select"
                           size="md"
-                          onChange={handleHourlyPriceChange}
-                          value={hourlyPrice}
-                        ></Form.Control>
-                      </InputGroup>
+                          onChange={handleCategoryChange}
+                          defaultValue={"DEFAULT"}
+                        >
+                          <option disabled value="DEFAULT">
+                            Select Category
+                          </option>
+                          {categoryArray.map((element, index) => (
+                            <option key={"cat" + index} value={element}>
+                              {element}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Form.Group>
                     </Col>
-                    <Col md={3}>
-                      <Form.Label>Daily</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Prepend>
-                          <InputGroup.Text id="inputGroupPrepend">
-                            $
-                          </InputGroup.Text>
-                        </InputGroup.Prepend>
+
+                    <Col>
+                      <Form.Group controlId="formItem">
+                        <Form.Label>Items</Form.Label>
                         <Form.Control
-                          as="input"
-                          type="number"
+                          as="select"
                           size="md"
-                          onChange={handleDailyPriceChange}
-                          value={dailyPrice}
-                        ></Form.Control>
-                      </InputGroup>
+                          onChange={handleItemChange}
+                          defaultValue={"DEFAULT"}
+                        >
+                          <option disabled value="DEFAULT">
+                            Select Item
+                          </option>
+                          {itemArray.map((element, index) => (
+                            <option key={"item" + index} value={element.item}>
+                              {element.item}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Form.Group>
                     </Col>
                   </Form.Row>
-                </Form.Group>
-                <Form.Row>
-                  <Col className="d-flex align-items-end pb-3">
-                    <Button variant="dark" type="submit" className="add-button">
-                      Add Item
-                    </Button>
-                  </Col>
-                </Form.Row>
-              </Col>
-            </Form.Row>
-          </Form>
-          <br></br>
-          <br></br>
-        </Container>
-      </Col>
-    </Row>
+                  <Form.Row>
+                    <Col className="d-flex align-items-end pb-3">
+                      <Form.Group
+                        controlId="formDescription"
+                        style={{ width: "100%" }}
+                      >
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          size="lg"
+                          onChange={handleDescriptionChange}
+                          className="add-text-area"
+                          defaultValue={description}
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Form.Row>
+                  <Form.Group controlId="formPrice">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Row>
+                      <Col md={3}>
+                        <Form.Label>Hourly</Form.Label>
+                        <InputGroup>
+                          <InputGroup.Prepend>
+                            <InputGroup.Text id="inputGroupPrepend">
+                              $
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            as="input"
+                            type="number"
+                            size="md"
+                            onChange={handleHourlyPriceChange}
+                            value={hourlyPrice}
+                          ></Form.Control>
+                        </InputGroup>
+                      </Col>
+                      <Col md={3}>
+                        <Form.Label>Daily</Form.Label>
+                        <InputGroup>
+                          <InputGroup.Prepend>
+                            <InputGroup.Text id="inputGroupPrepend">
+                              $
+                            </InputGroup.Text>
+                          </InputGroup.Prepend>
+                          <Form.Control
+                            as="input"
+                            type="number"
+                            size="md"
+                            onChange={handleDailyPriceChange}
+                            value={dailyPrice}
+                          ></Form.Control>
+                        </InputGroup>
+                      </Col>
+                    </Form.Row>
+                  </Form.Group>
+                  <Form.Row>
+                    <Col className="d-flex align-items-end pb-3">
+                      <Button
+                        variant="dark"
+                        type="submit"
+                        className="add-button"
+                      >
+                        Add Item
+                      </Button>
+                    </Col>
+                  </Form.Row>
+                </Col>
+              </Form.Row>
+            </Form>
+            <br></br>
+            <br></br>
+          </Container>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

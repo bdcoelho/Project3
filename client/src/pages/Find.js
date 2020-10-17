@@ -96,6 +96,7 @@ const getCategories = () => {
 
 
   return (
+    <Container fluid style={{paddingLeft:"0"}}>
     <Row>
       <Col md={2} className="pr-0">
         <SideNavBar />
@@ -186,6 +187,7 @@ const getCategories = () => {
         </Row>
       </Col>
     </Row>
+    </Container>
   );
 }
 
