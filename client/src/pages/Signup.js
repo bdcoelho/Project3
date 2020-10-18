@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { uuid } from "uuidv4";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
-  const [addressList, setAddressList] = useState([1, 2, 3]);
+  const [addressList, setAddressList] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,7 +71,7 @@ function Signup() {
 
   const addressTest = addressList.map((address) => {
     return (
-      <li className="address-list-item" onClick={handleLiClick}>
+      <li key={uuid()} className="address-list-item" onClick={handleLiClick}>
         {address.description}
       </li>
     );
@@ -139,26 +140,32 @@ function Signup() {
             </Col>
             <Col>
               <Button
-                variant="primary"
+                variant="dark"
                 value={address}
                 onClick={handleAddressSearch}
-                required                
+                style={{marginTop:"0"}}
+                required
               >
                 Search
               </Button>
             </Col>
           </Row>
-          <ul className="address-list">Select your Address {addressTest}</ul>
-        </Form.Group>
+          {addressList.length > 0 ? (
+            <div>
+              <h4>Please select your address</h4>
+                <ul className="address-list" required>{addressTest}</ul>
 
+            </div>
+          ) : null}
+        </Form.Group>
 
         <Form.Group controlId="formBasicCountryChange">
           <Form.Label>Country</Form.Label>
           <Form.Control type="text" value="Australia" disabled />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
+        <Button variant="dark" type="submit">
+          Sign Up!
         </Button>
       </Form>
       <br></br>
