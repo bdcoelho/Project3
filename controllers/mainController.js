@@ -27,7 +27,6 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
-    console.log(req.body.assetId);
     db.Asset.findByIdAndDelete(req.body.assetId)
       .then((asset) => {
         db.User.findByIdAndUpdate(
@@ -104,8 +103,6 @@ module.exports = {
   },
 
   book: function (req, res) {
-    console.log(req.body);
-
     db.Asset.findByIdAndUpdate(
       req.body.asset_id,
       {
@@ -332,11 +329,6 @@ module.exports = {
       },
     ])
       .then((response) => {
-        console.log(
-          "-----------------------------------finished get userBooked Query--------------------------------------------"
-        );
-
-        console.log(response[0]);
 
         let borrowerArray = [];
 
@@ -358,12 +350,6 @@ module.exports = {
 
           borrowerArray.push(borrowerObject);
         });
-
-        console.log(
-          "-----------------------------------------------------------------------------------------------------"
-        );
-
-        console.log(borrowerArray);
 
         res.json(borrowerArray);
       })

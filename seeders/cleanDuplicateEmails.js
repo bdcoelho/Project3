@@ -13,7 +13,6 @@ let userEmail = users[i].email
 if(emailArray.includes(userEmail)){
 let newUserEmail= Math.round(Math.random()*999)+userEmail
 users[i].email=newUserEmail
-console.log=newUserEmail
 }
 emailArray.push(userEmail);
   }

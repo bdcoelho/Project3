@@ -47,10 +47,6 @@ function App() {
 
   return (
     <UserContext.Provider value={userData}>
-      {console.log("The user is "+ userData.email )}
-      {console.log("The user lat is "+ userData.lat )}
-      
-      {console.log(loggedIn)}
 
       <Router>
         

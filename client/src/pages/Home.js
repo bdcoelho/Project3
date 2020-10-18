@@ -13,12 +13,10 @@ function Home() {
 
   const { id } = useContext(UserContext);
   const retrieveBookings = () => {
-    console.log(id);
     if (id) {
       axios
         .get("/api/userBookings/" + id)
         .then((res) => {
-          console.log(res);
           setBookingArray(res.data);
         })
         .catch((err) => console.log(err));
@@ -33,7 +31,6 @@ function Home() {
       axios
         .get("/api/userBooked/" + id)
         .then((res) => {
-          console.log(res);
           setBookedArray(res.data);
         })
         .catch((err) => console.log(err));
@@ -41,13 +38,6 @@ function Home() {
   };
 
   useEffect(retrieveBooked, [id]);
-  console.log(
-    "---------------------------------------------------------------------------------------"
-  );
-
-  console.log(
-    timeHandle.numDays("2020-10-22T01:00:00.000Z", "2020-10-22T01:00:00.000Z")
-  );
 
   return (
     <Container
@@ -107,7 +97,6 @@ function Home() {
             <Row className="section-spacing">
               <Col>
                 <h3 className="section-heading">Items you are lending</h3>
-                {console.log(bookedArray)}
                 {bookedArray.length > 0 ? (
                   bookedArray.map((booked) => (
                     <BookedAssetsCard

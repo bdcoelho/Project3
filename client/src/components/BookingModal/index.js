@@ -9,7 +9,6 @@ import "react-dates/lib/css/_datepicker.css";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function BookingModal(props) {
-  console.log(props);
   const { id } = useContext(UserContext);
   const [startDate, setStartDate] = useState(moment());
   const [endDate, setEndDate] = useState(moment());
@@ -28,11 +27,9 @@ function BookingModal(props) {
       startDate,
       endDate,
     };
-    console.log(data);
     axios
       .post("/api/book", data)
       .then((res) => {
-        console.log(res);
         props.onHide();
       })
       .catch((err) => console.log(err));

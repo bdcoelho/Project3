@@ -41,12 +41,10 @@ function Find() {
       lng,
       lat,
     };
-    console.log(data);
 
     axios
       .post("/api/findItemsNear/", data)
       .then((res) => {
-        console.log(res);
         setSearchResult(res.data);
       })
       .catch((err) => console.log(err));

@@ -24,7 +24,6 @@ function Signup() {
     axios
       .post("/api/signup", data)
       .then(() => {
-        console.log("User Created");
         window.location = "/Home";
       })
       .catch((err) => {

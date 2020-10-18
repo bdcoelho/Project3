@@ -45,6 +45,7 @@ function Signup(props) {
           placeholder="Enter email"
           value={email}
           onChange={handleUserChange}
+          required
         />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
@@ -58,6 +59,7 @@ function Signup(props) {
           placeholder="Password"
           value={password}
           onChange={handlePassChange}
+          required
         />
       </Form.Group>
 

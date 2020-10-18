@@ -9,7 +9,6 @@ function View() {
   const [userAssets, setUserAssets] = useState([]);
   const { id } = useContext(UserContext);
   const retrieveAssets = () => {
-    console.log(id);
     if (id) {
       axios
         .get("/api/myAssets/" + id)

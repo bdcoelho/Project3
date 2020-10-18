@@ -18,7 +18,6 @@ function FindCard(props) {
       })
       .catch((err) => console.log(err));
   };
-  console.log(props);
   return (
     <div>
       <Container>
