@@ -48,10 +48,7 @@ code {
 }
 
 .side-nav {
-  min-height: calc( max((100vh - 56px), 100%));
-  position: -webkit-sticky;
-  position: sticky;
-  top:56px;
+  min-height: calc(max((100vh - 56px), 100%));
 }
 
 .nav-link {
@@ -184,4 +181,13 @@ code {
   padding-left: 30px !important;
 }
 
+.rs-sidenav-body {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 56px;
+}
 
+input[type="file"] {
+  max-width: 98px;
+  overflow: hidden;
+}
