@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import UserContext from "../../utils/UserContext";
-import "./style.css";
 import { Navbar, Nav } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavHeader() {
   const { firstName, lastName } = useContext(UserContext);

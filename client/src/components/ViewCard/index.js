@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../../utils/UserContext";
-import "./style.css";
-import { Card, Button, Row, Col, Container, Table } from "react-bootstrap";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import axios from "axios";
 import EditModal from "../EditModal";
 
 function FindCard(props) {
-  const { id, email, firstName, lastName } = useContext(UserContext);
+  const { id } = useContext(UserContext);
   const [modalShow, setModalShow] = useState(false);
 
   const handleRemove = (event) => {
