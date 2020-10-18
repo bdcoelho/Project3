@@ -9,7 +9,6 @@ function NavHeader() {
   return (
     <Navbar
       collapseOnSelect
-      expand="lg"
       bg="dark"
       variant="dark"
       expand="md"

@@ -14,7 +14,6 @@ import {
 function EditModal(props) {
   const [name, setName] = useState(props.name);
   const [description, setDescription] = useState(props.description);
-  const [hourlyPrice, setHourlyPrice] = useState(props.hourly);
   const [dailyPrice, setDailyPrice] = useState(props.daily);
   const [imageFile, setImageFile] = useState();
   const [imageURL, setImageURL] = useState(props.image);
@@ -25,7 +24,6 @@ function EditModal(props) {
       id: props.assetid,
       name,
       description,
-      hourlyPrice,
       dailyPrice,
     };
 

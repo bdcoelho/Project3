@@ -59,7 +59,6 @@ module.exports = {
     formJSON = JSON.parse(req.body.formData);
     updateObj.name = formJSON.name;
     updateObj.description = formJSON.description;
-    updateObj.hourlyPrice = formJSON.hourlyPrice;
     updateObj.dailyPrice = formJSON.dailyPrice;
 
     db.Asset.findByIdAndUpdate(formJSON.id, updateObj)
