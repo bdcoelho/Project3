@@ -78,8 +78,8 @@ console.log(data);
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button type="submit">Book</Button>
-          <Button onClick={props.onHide}>Close</Button>
+          <Button variant="dark" type="submit">Book</Button>
+          <Button variant="danger" onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Form>
     </Modal>
