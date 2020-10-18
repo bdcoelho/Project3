@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
 
-
-import "./style.css";
-
-
 function Signup(props) {
   
   const [email, setEmail] = useState("");

@@ -6,6 +6,7 @@ import BookedAssetsCard from "../components/BookedAssetsCard";
 import MyBookingsCard from "../components/MyBookingsCard";
 import axios from "axios";
 import timeHandle from "../utils/timeHandle";
+
 function Home() {
   const [bookedArray, setBookedArray] = useState([]);
   const [bookingArray, setBookingArray] = useState([]);

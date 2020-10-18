@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../utils/UserContext";
 import SideNavBar from "../components/SideNavBar";
-import { Col, Row, Container, Button, CardDeck } from "react-bootstrap";
+import { Col, Row, Container } from "react-bootstrap";
 import ViewCard from "../components/ViewCard";
 import axios from "axios";
 
 function View() {
   const [userAssets, setUserAssets] = useState([]);
-  const { id, email, firstName, lastName } = useContext(UserContext);
+  const { id } = useContext(UserContext);
   const retrieveAssets = () => {
     console.log(id);
     if (id) {

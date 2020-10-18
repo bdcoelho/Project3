@@ -10,7 +10,6 @@ function Add() {
 
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
-  const [hourlyPrice, setHourlyPrice] = useState("");
   const [dailyPrice, setDailyPrice] = useState("");
   const [description, setDescription] = useState("");
   const [categoryArray, setCategoryArray] = useState([]);
@@ -49,11 +48,6 @@ function Add() {
     setDailyPrice(event.target.value);
   };
 
-  const handleHourlyPriceChange = (event) => {
-    event.persist();
-    setHourlyPrice(event.target.value);
-  };
-
   const retrieveItems = () => {
     if (category === "") {
       return;
@@ -75,7 +69,6 @@ function Add() {
       user_id: id,
       category,
       name,
-      hourlyPrice,
       dailyPrice,
       description,
     };

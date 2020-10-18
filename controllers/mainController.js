@@ -76,7 +76,6 @@ module.exports = {
       category: formJSON.category,
       name: formJSON.name,
       description: formJSON.description,
-      hourlyPrice: formJSON.hourlyPrice,
       dailyPrice: formJSON.dailyPrice,
       image: req.file.filename,
     };

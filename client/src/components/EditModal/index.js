@@ -53,12 +53,11 @@ function EditModal(props) {
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
+
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
-  const handleHourlyPriceChange = (event) => {
-    setHourlyPrice(event.target.value);
-  };
+  
   const handleDailyPriceChange = (event) => {
     setDailyPrice(event.target.value);
   };
@@ -147,10 +146,6 @@ function EditModal(props) {
             </Row>
           </Container>
 
-          {/* <h4>{props.name}</h4>
-          <p>
-    {props.description}}
-          </p> */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" type="submit">
