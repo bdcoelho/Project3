@@ -170,7 +170,7 @@ function Find() {
             </Row>
 
             <Row>
-              <Col className="find-card">
+              <Col>
                 {searchResult.length > 0 ? (
                   searchResult.map((item) => (
                     <FindCard

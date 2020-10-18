@@ -130,6 +130,7 @@ function EditModal(props) {
                         size="md"
                         onChange={handleNameChange}
                         value={name}
+                        disabled
                       ></Form.Control>
                     </Form.Group>
                   </Col>

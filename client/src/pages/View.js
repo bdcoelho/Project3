@@ -43,6 +43,7 @@ function View() {
               {userAssets.length > 0
                 ? userAssets.map((asset) => (
                       <ViewCard
+                      key={asset._id}
                         name={asset.name}
                         image={asset.image}
                         category={asset.category}
