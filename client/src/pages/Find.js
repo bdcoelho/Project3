@@ -160,7 +160,7 @@ const getCategories = () => {
               </Col>
 
               <Col className="d-flex align-items-end pb-3">
-                <Button variant="primary" type="submit" className="findButton">
+                <Button variant="dark" type="submit" className="findButton">
                   Submit
                 </Button>
               </Col>

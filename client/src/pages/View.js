@@ -35,6 +35,11 @@ function View() {
         <Col md={9}>
           <Row>
             <Col>
+            <h1 style={{textAlign:"center", margin:"20px 0px 20px 0px"}}>Your Items</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               {userAssets.length > 0
                 ? userAssets.map((asset) => (
                     <Col md={12} key={asset._id}>

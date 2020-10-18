@@ -35,3 +35,14 @@ height: calc(100% - 56px)
 .view-buttons{
   text-align: right;
 }
+
+.view-amount{
+  border: black !important;
+  border-radius: 20%;
+  border-width: 10px;
+}
+
+.currency{
+  background-color: lightgray;
+  text-align: center;
+}

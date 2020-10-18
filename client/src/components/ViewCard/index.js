@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../../utils/UserContext";
 import "./style.css";
-import { Card, Button, Row, Col, Table } from "react-bootstrap";
+import { Card, Button, Row, Col, Container, Table } from "react-bootstrap";
 import axios from "axios";
 import EditModal from "../EditModal";
 
@@ -22,6 +22,7 @@ function FindCard(props) {
   console.log(props);
   return (
     <div>
+      <Container>
       <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
         <Card.Body>
           <li
@@ -55,19 +56,18 @@ function FindCard(props) {
                     <p>{props.description}</p>
                   </Col>
                 </Row>
-                <Row>
-                  <Col md={4}>
-                    <Row>
-                      <Col>
-                  <div className="shaded-input">
-                    $
-                  </div>
+                <Row className="align-items-end">
+                  <Col md={2} style={{ paddingRight: "0"}}>
+                    Daily Price:
                   </Col>
-                  <Col>
-                  {props.daily}
-                  </Col>
-                  </Row>
 
+                  <Col md={2} style={{ paddingLeft: "0"}}>
+                    <Row className="border rounded">
+                      <Col md={1} className="currency">
+                        <div className="shaded-input">$</div>
+                      </Col>
+                      <Col style={{textAlign:"center"}}>{parseFloat(props.daily).toFixed(2)}</Col>
+                    </Row>
                   </Col>
                   <Col md={8} className="view-buttons">
                     <div className="card-buttons">
@@ -82,8 +82,9 @@ function FindCard(props) {
                       <Button
                         id={props.id}
                         type="button"
-                        variant="dark"
+                        variant="danger"
                         onClick={handleRemove}
+
                       >
                         Remove
                       </Button>
@@ -96,6 +97,7 @@ function FindCard(props) {
           </li>
         </Card.Body>
       </Card>
+      </Container>
       <EditModal
         show={modalShow}
         onHide={() => setModalShow(false)}

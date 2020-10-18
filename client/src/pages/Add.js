@@ -114,7 +114,7 @@ function Add() {
             >
               <Form.Row>
                 <Col md={3} className="mt-4">
-                  <img className="edit-img" src={imageURL} alt={name} />
+                  <img className="edit-img img-fluid" src={imageURL} alt={name} />
                   <Form.Group controlId="formImage" className="add-img-btn">
                     <Form.File
                       onChange={fileSelectedHandler}
@@ -185,27 +185,9 @@ function Add() {
                     </Col>
                   </Form.Row>
                   <Form.Group controlId="formPrice">
-                    <Form.Label>Price</Form.Label>
                     <Form.Row>
                       <Col md={3}>
-                        <Form.Label>Hourly</Form.Label>
-                        <InputGroup>
-                          <InputGroup.Prepend>
-                            <InputGroup.Text id="inputGroupPrepend">
-                              $
-                            </InputGroup.Text>
-                          </InputGroup.Prepend>
-                          <Form.Control
-                            as="input"
-                            type="number"
-                            size="md"
-                            onChange={handleHourlyPriceChange}
-                            value={hourlyPrice}
-                          ></Form.Control>
-                        </InputGroup>
-                      </Col>
-                      <Col md={3}>
-                        <Form.Label>Daily</Form.Label>
+                        <Form.Label>Daily Price</Form.Label>
                         <InputGroup>
                           <InputGroup.Prepend>
                             <InputGroup.Text id="inputGroupPrepend">

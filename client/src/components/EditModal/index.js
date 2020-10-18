@@ -100,23 +100,6 @@ function EditModal(props) {
                   <Form.Label>Price</Form.Label>
                   <Form.Row>
                     <Col>
-                      <Form.Label>Hourly</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Prepend>
-                          <InputGroup.Text id="inputGroupPrepend">
-                            $
-                          </InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <Form.Control
-                          as="input"
-                          type="number"
-                          size="md"
-                          onChange={handleHourlyPriceChange}
-                          value={hourlyPrice}
-                        ></Form.Control>
-                      </InputGroup>
-                    </Col>
-                    <Col>
                       <Form.Label>Daily</Form.Label>
                       <InputGroup>
                         <InputGroup.Prepend>
@@ -159,7 +142,7 @@ function EditModal(props) {
                         as="textarea"
                         size="md"
                         onChange={handleDescriptionChange}
-                        style={{ minHeight: "200px" }}
+                        style={{ minHeight: "250px" }}
                         defaultValue={description}
                       ></Form.Control>
                     </Form.Group>
