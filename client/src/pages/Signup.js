@@ -86,6 +86,7 @@ function Signup() {
             placeholder="Enter email"
             value={email}
             onChange={handleUserChange}
+            required
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -99,6 +100,7 @@ function Signup() {
             placeholder="Password"
             value={password}
             onChange={handlePassChange}
+            required
           />
         </Form.Group>
 
@@ -109,6 +111,7 @@ function Signup() {
             placeholder="John"
             value={firstName}
             onChange={handleFirstNameChange}
+            required
           />
         </Form.Group>
 
@@ -119,6 +122,7 @@ function Signup() {
             placeholder="Smith"
             value={lastName}
             onChange={handleLastNameChange}
+            required
           />
         </Form.Group>
 
@@ -131,6 +135,7 @@ function Signup() {
                 placeholder="Search for your address"
                 value={address}
                 onChange={handleAddressChange}
+                required
               />
             </Col>
             <Col>
@@ -138,6 +143,7 @@ function Signup() {
                 variant="primary"
                 value={address}
                 onClick={handleAddressSearch}
+                required                
               >
                 Search
               </Button>
