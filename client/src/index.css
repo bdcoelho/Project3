@@ -13,10 +13,6 @@ code {
     monospace;
 }
 
-.fade.fade {
-  opacity: unset;
-}
-
 .full-height-container {
   height: calc(100% - 56px);
 }
