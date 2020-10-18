@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./style.css";
-import UserContext from "../../utils/UserContext";
+import React, { useState } from "react";
 import axios from "axios";
 
 import {
@@ -14,7 +12,6 @@ import {
 } from "react-bootstrap";
 
 function EditModal(props) {
-  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
   const [name, setName] = useState(props.name);
   const [description, setDescription] = useState(props.description);
   const [hourlyPrice, setHourlyPrice] = useState(props.hourly);
@@ -49,7 +46,6 @@ function EditModal(props) {
   };
 
   const fileSelectedHandler = (event) => {
-
     setImageURL(URL.createObjectURL(event.target.files[0]));
     setImageFile(event.target.files[0]);
   };
@@ -66,7 +62,6 @@ function EditModal(props) {
   const handleDailyPriceChange = (event) => {
     setDailyPrice(event.target.value);
   };
-
 
   return (
     <Modal
@@ -87,7 +82,7 @@ function EditModal(props) {
           <Container>
             <Row>
               <Col md={4}>
-                <img className="edit-img" src={imageURL} alt={name} />
+                <img className="edit-img img-fluid" src={imageURL} alt={name} />
                 <Form.Group controlId="formImage">
                   <Form.Control
                     as="input"

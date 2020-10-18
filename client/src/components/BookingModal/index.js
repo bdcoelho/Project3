@@ -1,29 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./style.css";
+import React, { useContext, useState } from "react";
 import UserContext from "../../utils/UserContext";
 import axios from "axios";
 import "react-dates/initialize";
 import moment from "moment";
-import {
-  DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController,
-} from "react-dates";
+import { DateRangePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 
-import {
-  Modal,
-  Button,
-  Container,
-  Row,
-  Col,
-  Form,
-  InputGroup,
-} from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 
 function BookingModal(props) {
-  console.log(props)
-  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
+  console.log(props);
+  const { id } = useContext(UserContext);
   const [startDate, setStartDate] = useState(moment());
   const [endDate, setEndDate] = useState(moment());
   const [focusedInput, setFocussedInput] = useState(null);
@@ -39,9 +26,9 @@ function BookingModal(props) {
       user_id: id,
       asset_id: props.asset_id,
       startDate,
-      endDate
+      endDate,
     };
-console.log(data);
+    console.log(data);
     axios
       .post("/api/book", data)
       .then((res) => {
@@ -78,8 +65,12 @@ console.log(data);
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="dark" type="submit">Book</Button>
-          <Button variant="danger" onClick={props.onHide}>Close</Button>
+          <Button variant="dark" type="submit">
+            Book
+          </Button>
+          <Button variant="danger" onClick={props.onHide}>
+            Close
+          </Button>
         </Modal.Footer>
       </Form>
     </Modal>

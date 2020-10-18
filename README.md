@@ -21,7 +21,7 @@
 
 ## Description
 
-An application that allows neighbours to share their tools and gardening equipment with each other. Users can list items that they own, but use infrequently with other users near them. I thought of the concept as a first time home owner who found that the list tools required for home and garden upkeep was endless. Good quality tools don't come cheap and if purchased for home use, many don't get used more than a couple of times a year. Enabling users to share these at a reasonable cost would offset some of the purchase cost and space constraints involved in owning them. In addition, the app could help increase personal interaction and building ties with your neighbours and community.
+An application that allows neighbours to share their tools and gardening equipment with each other. Users can list items that they own, but use infrequently with other users near them. I thought of the concept as a first time home owner who found that the list of tools required for home and garden upkeep was endless. Good quality tools don't come cheap and if purchased for home use, many don't get used more than a couple of times a year. Enabling users to share these at a reasonable cost would offset some of the purchase cost and space constraints involved in owning them. In addition, the app could help increase personal interaction and building ties with your neighbours and community.
 
 ## Demonstration
 

@@ -47,3 +47,9 @@ height: calc(100% - 56px)
   background-color: lightgray;
   text-align: center;
 }
+
+.edit-img{
+  height: 200px;
+  object-fit: scale-down;
+  margin: 0px 0px 30px 0px;
+}

@@ -1,12 +1,8 @@
-import "./style.css";
-import { Card, Table, Button, Row, Col } from "react-bootstrap";
-import UserContext from "../../utils/UserContext";
-import React, { useContext, useState, useEffect } from "react";
-
-
+import { Card, Table, Row, Col } from "react-bootstrap";
+import React from "react";
 
 function BookedAssetsCard(props) {
-  console.log(props);
+
   return (
     <div>
       <Card style={{ borderRadius: "10px", backgroundColor: "#e9ecef" }}>
@@ -54,10 +50,6 @@ function BookedAssetsCard(props) {
                   </Col>
                 </Row>
 
-
-
-
-
                 <Row>
                   <Col md={6}>
                     <Table bordered hover responsive size="sm">
@@ -93,10 +85,8 @@ function BookedAssetsCard(props) {
 
                       </tbody>
                     </Table>
-
                   </Col>
                 </Row>
-
               </Col>
             </Row>
             <br></br>
