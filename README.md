@@ -5,7 +5,7 @@
 ![Open Issues](https://img.shields.io/github/issues-raw/bdcoelho/Project3)
 ![Repo Size](https://img.shields.io/github/repo-size/bdcoelho/Project3)
 
-# Welcome to Google Books Search
+# Welcome to Howdy Neighbour!
 
 ## Table of Contents
 
@@ -43,7 +43,7 @@ To install locally, clone the repository and then run `npm i` to install require
 
 ## Usage
 
-You can add items from the Add New menu under the menu item `My Tools`. View or edit your items under `View/Edit` under the same menu item. You can find items to borrow from `Find Tools` by selecting a category and item, and entering the maximum distance that your are willing to travel.
+You can add items using the Add New menu under the menu item `My Tools`. View or edit your items under `View/Edit` under the same menu item. You can find items to borrow from `Find Tools` by selecting a category and item, and entering the maximum distance that your are willing to travel.
 
 ## License
 
