@@ -6,7 +6,7 @@ import { Form, Button, Container, Row, Col, InputGroup } from "react-bootstrap";
 import View from "./View";
 
 function Add() {
-  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
+  const { id } = useContext(UserContext);
 
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");

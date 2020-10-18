@@ -10,7 +10,7 @@ function Home() {
   const [bookedArray, setBookedArray] = useState([]);
   const [bookingArray, setBookingArray] = useState([]);
 
-  const { id, email, firstName, lastName } = useContext(UserContext);
+  const { id } = useContext(UserContext);
   const retrieveBookings = () => {
     console.log(id);
     if (id) {

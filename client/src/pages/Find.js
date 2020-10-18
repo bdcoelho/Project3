@@ -6,8 +6,6 @@ import {
   Row,
   Container,
   Button,
-  CardDeck,
-  Dropdown,
   Form,
 } from "react-bootstrap";
 import FindCard from "../components/FindCard";
@@ -15,7 +13,7 @@ import axios from "axios";
 
 function Find() {
   const [searchResult, setSearchResult] = useState([]);
-  const { id, email, firstName, lastName, lng, lat } = useContext(UserContext);
+  const { lng, lat } = useContext(UserContext);
 
   const [category, setCategory] = useState("");
   const [item, setItem] = useState([]);
