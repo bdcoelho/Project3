@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import "./style.css";
+import React, { useState } from "react";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import BookingModal from "../BookingModal";
 
@@ -45,7 +44,14 @@ function FindCard(props) {
                   </Row>
 
                   <Row className="buttonDiv align-items-end">
-                    <Col md={2} style={{ textAlign: "left", paddingLeft: "0", paddingRight: "0" }}>
+                    <Col
+                      md={2}
+                      style={{
+                        textAlign: "left",
+                        paddingLeft: "0",
+                        paddingRight: "0",
+                      }}
+                    >
                       Daily Price:
                     </Col>
                     <Col md={2} style={{ paddingLeft: "0" }}>

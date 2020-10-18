@@ -1,7 +1,5 @@
-import "./style.css";
-import { Card, Button, Row, Col, Table } from "react-bootstrap";
-import UserContext from "../../utils/UserContext";
-import React, { useContext, useState, useEffect } from "react";
+import { Card, Row, Col, Table } from "react-bootstrap";
+import React from "react";
 
 function MyBookingsCard(props) {
   return (
@@ -28,24 +26,22 @@ function MyBookingsCard(props) {
                   </Col>
                 </Row>
                 <Row>
-                <Col>
+                  <Col>
+                    <h6 className="assetSuburb text-muted">
+                      <i className="fas fa-map-marker-alt"></i>
 
-                  <h6 className="assetSuburb text-muted">
-                    <i className="fas fa-map-marker-alt"></i>
-
-                    {" " +
-                      props.streetNum +
-                      " " +
-                      props.streetName +
-                      ", " +
-                      props.suburb +
-                      ", " +
-                      props.state +
-                      " " +
-                      props.postCode}
-                  </h6>
+                      {" " +
+                        props.streetNum +
+                        " " +
+                        props.streetName +
+                        ", " +
+                        props.suburb +
+                        ", " +
+                        props.state +
+                        " " +
+                        props.postCode}
+                    </h6>
                   </Col>
-
                 </Row>
 
                 <Row>
@@ -58,22 +54,20 @@ function MyBookingsCard(props) {
                   <Col md={6}>
                     <Table bordered hover responsive size="sm">
                       <tbody>
-                      <tr>
+                        <tr>
                           <td>Neighbour</td>
-                          <td>
-                            {props.firstName + " " + props.lastName}
-                          </td>
+                          <td>{props.firstName + " " + props.lastName}</td>
                         </tr>
                         <tr>
                           <td>Contact</td>
-                          <td>
-                            {props.email}
-                          </td>
+                          <td>{props.email}</td>
                         </tr>
                         <tr>
                           <td>Period</td>
                           <td>
-                            {props.startDate} - {props.endDate}   ({props.numberDays} {(props.numberDays>1)?"days":"day"})
+                            {props.startDate} - {props.endDate} (
+                            {props.numberDays}{" "}
+                            {props.numberDays > 1 ? "days" : "day"})
                           </td>
                         </tr>
                         <tr>
@@ -85,11 +79,8 @@ function MyBookingsCard(props) {
                           <td>Total Cost</td>
                           <td>$ {parseFloat(props.totalPrice).toFixed(2)}</td>
                         </tr>
-
-
                       </tbody>
                     </Table>
-
                   </Col>
                 </Row>
               </Col>
