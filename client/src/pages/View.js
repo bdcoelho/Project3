@@ -42,7 +42,6 @@ function View() {
             <Col>
               {userAssets.length > 0
                 ? userAssets.map((asset) => (
-                    <Col md={12} key={asset._id}>
                       <ViewCard
                         name={asset.name}
                         image={asset.image}
@@ -53,7 +52,6 @@ function View() {
                         id={asset._id}
                         update={retrieveAssets}
                       />
-                    </Col>
                   ))
                 : null}
             </Col>

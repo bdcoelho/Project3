@@ -103,7 +103,6 @@ function Find() {
           <SideNavBar />
         </Col>
         <Col md={9}>
-          <Container>
             <Row className="mt-3">
               <Form
                 className="search-form"
@@ -194,7 +193,7 @@ function Find() {
                 )}
               </Col>
             </Row>
-          </Container>
+
         </Col>
       </Row>
     </Container>
