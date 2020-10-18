@@ -102,6 +102,7 @@ function EditModal(props) {
                         <Form.Control
                           as="input"
                           type="number"
+                          min="0"
                           size="md"
                           onChange={handleDailyPriceChange}
                           value={dailyPrice}

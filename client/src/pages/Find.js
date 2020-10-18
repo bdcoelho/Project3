@@ -154,6 +154,7 @@ function Find() {
                         size="md"
                         onChange={handleDistanceChange}
                         type="number"
+                        min="0"
                       ></Form.Control>
                     </Form.Group>
                   </Col>
