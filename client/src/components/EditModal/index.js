@@ -97,10 +97,9 @@ function EditModal(props) {
                 </Form.Group>
 
                 <Form.Group controlId="formPrice">
-                  <Form.Label>Price</Form.Label>
                   <Form.Row>
                     <Col>
-                      <Form.Label>Daily</Form.Label>
+                      <Form.Label>Daily Price</Form.Label>
                       <InputGroup>
                         <InputGroup.Prepend>
                           <InputGroup.Text id="inputGroupPrepend">
