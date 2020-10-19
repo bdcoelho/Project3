@@ -18,13 +18,15 @@ function BookingModal(props) {
 
   const blockedDays = (day) => {
     let blocked = false;
+    if(bookings){
     for (let i = 0; i < bookings.length; i++) {
       let start = moment(bookings[i].startDate, moment.ISO_8601);
       let end = moment(bookings[i].endDate, moment.ISO_8601);
       if (day.isBetween(start.subtract(1, "days"), end.add(1, "days"))) {
         blocked = true;
-      }
-    }
+      };
+    };
+  };
     return blocked;
   };
 
