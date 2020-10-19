@@ -12,7 +12,7 @@ function FindCard(props) {
     event.preventDefault();
     let assetId = event.nativeEvent.target.id;
     axios
-      .post("/api/deleteAsset", { assetId: assetId, userId: id })
+      .delete("/api/deleteAsset/"+assetId)
       .then((res) => {
         props.update();
       })

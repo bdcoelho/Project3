@@ -34,7 +34,7 @@ function EditModal(props) {
     data.append("file", imageFile);
 
     axios
-      .post("/api/modifyAsset/", data)
+      .put("/api/modifyAsset/", data)
       .then((res) => {
         props.onHide();
         props.complete();

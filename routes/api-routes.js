@@ -35,10 +35,10 @@ module.exports = (app) => {
   app.post("/api/addAsset", upload.single("file"), controller.addAsset);
 
   // modify an asset
-  app.post("/api/modifyAsset", upload.single("file"), controller.modifyAsset);
+  app.put("/api/modifyAsset", upload.single("file"), controller.modifyAsset);
 
   // Delete an asset
-  app.post("/api/deleteAsset", controller.deleteAsset);
+  app.delete("/api/deleteAsset/:id", controller.deleteAsset);
 
   // Find Users Near
   app.post("/api/findItemsNear/", controller.findItemsNear);

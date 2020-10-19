@@ -27,11 +27,11 @@ module.exports = {
   },
 
   deleteAsset: function (req, res) {
-    db.Asset.findByIdAndDelete(req.body.assetId)
+    db.Asset.findByIdAndDelete(req.params.id)
       .then((asset) => {
         db.User.findByIdAndUpdate(
           asset.user_id,
-          { $pull: { assets: req.body.assetId } },
+          { $pull: { assets: req.params.id } },
           { new: true }
         )
           .then((user) => {
