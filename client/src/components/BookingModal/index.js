@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import UserContext from "../../utils/UserContext";
 import axios from "axios";
 import "react-dates/initialize";
@@ -71,7 +71,7 @@ function BookingModal(props) {
             }} // PropTypes.func.isRequired,
             focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
             onFocusChange={(focusedInput) => setFocussedInput(focusedInput)} // PropTypes.func.isRequired,
-            // isDayBlocked={blockedDays}
+            isDayBlocked={blockedDays}
           />
         </Modal.Body>
         <Modal.Footer>
