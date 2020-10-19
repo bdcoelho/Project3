@@ -389,17 +389,19 @@ module.exports = {
       { $match: { "userAssets.name": req.body.item } },
     ])
       .then((users) => {
-        console.log(users)
-        responseObject = {};
-        users.map((user) => {
 
+
+        users.map((user) => {
+          responseObject = {};
+          console.log(user);
+          console.log("------------------------------------------------------------------------------------------");
           responseObject.dist = user.dist.calculated;
           responseObject.streetNum = user.streetNum;
           responseObject.streetName = user.streetName;
           responseObject.suburb = user.suburb;
           responseObject.state = user.state;
           responseObject.postCode = user.postCode;
-          // responseObject.bookings = user.userAssets.bookings;
+          responseObject.bookings = user.userAssets.bookings;
           responseObject._id = user.userAssets._id;
           responseObject.name = user.userAssets.name;
           responseObject.dailyPrice = user.userAssets.dailyPrice;
@@ -408,6 +410,7 @@ module.exports = {
           responseArray.push(responseObject);
         });
 console.log(responseArray);
+
         res.json(responseArray);
       })
       .catch((err) => res.status(422).json(err));

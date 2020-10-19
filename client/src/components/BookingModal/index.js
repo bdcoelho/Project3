@@ -9,15 +9,33 @@ import "react-dates/lib/css/_datepicker.css";
 import { Modal, Button, Form } from "react-bootstrap";
 
 function BookingModal(props) {
+  console.log();
   const { id } = useContext(UserContext);
   const [startDate, setStartDate] = useState(moment());
   const [endDate, setEndDate] = useState(moment());
   const [focusedInput, setFocussedInput] = useState(null);
+  const [bookings, setBookings] = useState(props.bookings);
 
   const blockedDays = (day) => {
-    let blockedDays = ["20 Oct 2020"];
-    return blockedDays.includes(day.format("DD MMM YYYY"));
+    let blocked = false;
+    for (let i = 0; i < bookings.length; i++) {
+      let start = moment(bookings[i].startDate, moment.ISO_8601);
+      let end = moment(bookings[i].endDate, moment.ISO_8601);
+      if (day.isBetween(start.subtract(1, "days"), end.add(1, "days"))) {
+        blocked = true;
+      }
+    }
+    return blocked;
   };
+
+  //   const bookingDates = ()=>{
+  // let start=moment(bookings[0].startDate, moment.ISO_8601);
+  // let end=moment(bookings[0].endDate, moment.ISO_8601);
+
+  // console.log(start,end)
+  //   }
+
+  //   bookingDates();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,7 +51,6 @@ function BookingModal(props) {
         props.onHide();
         setStartDate(moment());
         setEndDate(moment());
-        
       })
       .catch((err) => console.log(err));
   };
