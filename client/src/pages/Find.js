@@ -185,7 +185,7 @@ function Find() {
                   ))
                 ) : (
                   <h4 style={{ textAlign: "center" }}>
-                    No matching items. Enter or change your search criteria.
+                    No matching items. Please search or change your search criteria.
                   </h4>
                 )}
               </Col>

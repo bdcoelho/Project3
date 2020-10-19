@@ -59,7 +59,7 @@ function BookingModal(props) {
             }} // PropTypes.func.isRequired,
             focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
             onFocusChange={(focusedInput) => setFocussedInput(focusedInput)} // PropTypes.func.isRequired,
-            isDayBlocked={blockedDays}
+            // isDayBlocked={blockedDays}
           />
         </Modal.Body>
         <Modal.Footer>
