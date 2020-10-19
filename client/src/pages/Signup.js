@@ -10,6 +10,7 @@ function Signup() {
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [addressList, setAddressList] = useState([]);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,15 +64,17 @@ function Signup() {
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
+    setButtonDisabled(true)
   };
 
-  const handleLiClick = (event) => {
+  const handleSelect = (event) => {
     setAddress(event.target.innerText);
+    setButtonDisabled(false)
   };
 
   const addressTest = addressList.map((address) => {
     return (
-      <li key={uuid()} className="address-list-item" onClick={handleLiClick}>
+      <li key={uuid()} className="address-list-item" onClick={handleSelect}>
         {address.description}
       </li>
     );
@@ -164,9 +167,10 @@ function Signup() {
           <Form.Control type="text" value="Australia" disabled />
         </Form.Group>
 
-        <Button variant="dark" type="submit">
+        <Button variant="dark" type="submit" disabled={buttonDisabled}>
           Sign Up!
         </Button>
+        {buttonDisabled?<p className="text-muted mt-3">Please search for and select your address</p>:null}
       </Form>
       <br></br>
       <br></br>
