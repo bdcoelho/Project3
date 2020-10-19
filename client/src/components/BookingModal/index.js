@@ -28,14 +28,6 @@ function BookingModal(props) {
     return blocked;
   };
 
-  //   const bookingDates = ()=>{
-  // let start=moment(bookings[0].startDate, moment.ISO_8601);
-  // let end=moment(bookings[0].endDate, moment.ISO_8601);
-
-  // console.log(start,end)
-  //   }
-
-  //   bookingDates();
 
   const handleSubmit = (event) => {
     event.preventDefault();

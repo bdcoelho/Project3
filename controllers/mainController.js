@@ -346,10 +346,6 @@ module.exports = {
         console.log(err);
         res.status(422).json(err);
       });
-
-    // db.Item.find(req.params, { item: 1, _id: 0 })
-    //   .then((response) => res.json(response))
-    //   .catch((err) => res.status(422).json(err));
   },
 
   findItemsNear: function (req, res) {
@@ -365,7 +361,7 @@ module.exports = {
           distanceField: "dist.calculated",
           minDistance: 1,
           maxDistance: req.body.distance * 1000,
-          //  query: { category: "Parks" },
+
           spherical: true,
         },
       },
@@ -389,12 +385,8 @@ module.exports = {
       { $match: { "userAssets.name": req.body.item } },
     ])
       .then((users) => {
-
-
         users.map((user) => {
           responseObject = {};
-          console.log(user);
-          console.log("------------------------------------------------------------------------------------------");
           responseObject.dist = user.dist.calculated;
           responseObject.streetNum = user.streetNum;
           responseObject.streetName = user.streetName;
@@ -409,8 +401,6 @@ module.exports = {
           responseObject.image = user.userAssets.image;
           responseArray.push(responseObject);
         });
-console.log(responseArray);
-
         res.json(responseArray);
       })
       .catch((err) => res.status(422).json(err));
