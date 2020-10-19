@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
-import UserContext from "../../utils/UserContext";
+import React, { useState } from "react";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import axios from "axios";
 import EditModal from "../EditModal";
 
 function FindCard(props) {
-  const { id } = useContext(UserContext);
   const [modalShow, setModalShow] = useState(false);
 
   const handleRemove = (event) => {
@@ -13,7 +11,7 @@ function FindCard(props) {
     let assetId = event.nativeEvent.target.id;
     axios
       .delete("/api/deleteAsset/"+assetId)
-      .then((res) => {
+      .then(() => {
         props.update();
       })
       .catch((err) => console.log(err));

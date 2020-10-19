@@ -6,26 +6,6 @@ let signUpObject = {};
 const mongoose = require("mongoose");
 
 module.exports = {
-  findNear: function (req, res) {
-    db.User.aggregate([
-      {
-        $geoNear: {
-          near: {
-            type: "Point",
-            coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
-          },
-          distanceField: "dist.calculated",
-          maxDistance: 1000,
-          //  query: { category: "Parks" },
-          spherical: true,
-        },
-      },
-    ])
-
-      .then((response) => res.send({ length: response.length }))
-      .catch((err) => res.status(422).json(err));
-  },
-
   deleteAsset: function (req, res) {
     db.Asset.findByIdAndDelete(req.params.id)
       .then((asset) => {
@@ -35,7 +15,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json(user);
+            res.json({Result:"Item deleted successfully"});
           })
           .catch((err) => {
             console.log(err);
@@ -86,7 +66,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json(user);
+            res.json({Result:"Asset added successfully"});
           })
           .catch((err) => {
             console.log(err);
@@ -135,7 +115,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json(user);
+            res.json({Result:"Booking Successful"});
           })
           .catch((err) => {
             console.log(err);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from 'uuid';
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -74,7 +74,7 @@ function Signup() {
 
   const addressTest = addressList.map((address) => {
     return (
-      <li key={uuid()} className="address-list-item" onClick={handleSelect}>
+      <li key={uuidv4()} className="address-list-item" onClick={handleSelect}>
         {address.description}
       </li>
     );
