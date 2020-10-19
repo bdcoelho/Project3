@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../utils/UserContext";
 import axios from "axios";
 import "react-dates/initialize";
@@ -31,6 +31,9 @@ function BookingModal(props) {
       .post("/api/book", data)
       .then((res) => {
         props.onHide();
+        setStartDate(moment());
+        setEndDate(moment());
+        
       })
       .catch((err) => console.log(err));
   };
@@ -41,7 +44,7 @@ function BookingModal(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{opacity:"unset"}}
+      style={{ opacity: "unset" }}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Book Item</Modal.Title>

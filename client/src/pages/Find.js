@@ -181,6 +181,7 @@ function Find() {
                       postCode={item.postCode}
                       suburb={item.suburb}
                       asset_id={item._id}
+
                     />
                   ))
                 ) : (

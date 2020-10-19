@@ -15,7 +15,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json({Result:"Item deleted successfully"});
+            res.json({ Result: "Item deleted successfully" });
           })
           .catch((err) => {
             console.log(err);
@@ -66,7 +66,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json({Result:"Asset added successfully"});
+            res.json({ Result: "Asset added successfully" });
           })
           .catch((err) => {
             console.log(err);
@@ -79,6 +79,14 @@ module.exports = {
   userAsset: function (req, res) {
     db.Asset.find({ user_id: req.params.userId })
       .then((response) => res.json(response))
+      .catch((err) => res.status(422).json(err));
+  },
+
+  assetBookings: function (req, res) {
+    db.Asset.findById(req.params.asset_id)
+      .then((response) => {
+        res.json(response);
+      })
       .catch((err) => res.status(422).json(err));
   },
 
@@ -115,7 +123,7 @@ module.exports = {
           { new: true }
         )
           .then((user) => {
-            res.json({Result:"Booking Successful"});
+            res.json({ Result: "Booking Successful" });
           })
           .catch((err) => {
             console.log(err);
@@ -309,7 +317,6 @@ module.exports = {
       },
     ])
       .then((response) => {
-
         let borrowerArray = [];
 
         response.forEach((booking) => {
@@ -318,10 +325,12 @@ module.exports = {
           borrowerObject.dailyPrice = booking.assetDetails.dailyPrice;
           borrowerObject.image = booking.assetDetails.image;
           borrowerObject.assetId = booking.assetDetails._id;
-          borrowerObject.borrowerFirstName = booking.borrowerDetails[0].firstName;
+          borrowerObject.borrowerFirstName =
+            booking.borrowerDetails[0].firstName;
           borrowerObject.borrowerLastName = booking.borrowerDetails[0].lastName;
           borrowerObject.borrowerEmail = booking.borrowerDetails[0].email;
-          borrowerObject.borrowerStreetNum = booking.borrowerDetails[0].streetNum;
+          borrowerObject.borrowerStreetNum =
+            booking.borrowerDetails[0].streetNum;
           borrowerObject.borrowerStreetName =
             booking.borrowerDetails[0].streetName;
           borrowerObject.borrowerSuburb = booking.borrowerDetails[0].suburb;
@@ -370,30 +379,35 @@ module.exports = {
           as: "userAssets",
         },
       },
-      // Stage 3
+
+      {
+        $unwind: {
+          path: "$userAssets",
+        },
+      },
 
       { $match: { "userAssets.name": req.body.item } },
     ])
       .then((users) => {
-        const queryFilter = (asset) => {
-          if (asset.name === req.body.item) {
-            return asset;
-          }
-        };
-
+        console.log(users)
+        responseObject = {};
         users.map((user) => {
-          let userAssets = user.userAssets;
-          let filterAssets = userAssets.filter(queryFilter);
-          filterAssets.forEach((filterAsset) => {
-            filterAsset.dist = user.dist.calculated;
-            filterAsset.streetNum = user.streetNum;
-            filterAsset.streetName = user.streetName;
-            filterAsset.suburb = user.suburb;
-            filterAsset.state = user.state;
-            filterAsset.postCode = user.postCode;
-            responseArray.push(filterAsset);
-          });
+
+          responseObject.dist = user.dist.calculated;
+          responseObject.streetNum = user.streetNum;
+          responseObject.streetName = user.streetName;
+          responseObject.suburb = user.suburb;
+          responseObject.state = user.state;
+          responseObject.postCode = user.postCode;
+          // responseObject.bookings = user.userAssets.bookings;
+          responseObject._id = user.userAssets._id;
+          responseObject.name = user.userAssets.name;
+          responseObject.dailyPrice = user.userAssets.dailyPrice;
+          responseObject.description = user.userAssets.description;
+          responseObject.image = user.userAssets.image;
+          responseArray.push(responseObject);
         });
+console.log(responseArray);
         res.json(responseArray);
       })
       .catch((err) => res.status(422).json(err));

@@ -4,7 +4,7 @@ import BookingModal from "../BookingModal";
 
 function FindCard(props) {
   const [modalShow, setModalShow] = useState(false);
-
+console.log(props);
   return (
     <div>
       <Container>
