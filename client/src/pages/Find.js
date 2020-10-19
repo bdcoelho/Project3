@@ -173,7 +173,6 @@ function Find() {
                     <FindCard
                       key={item._id}
                       name={item.name}
-                      hourlyPrice={item.hourlyPrice}
                       dailyPrice={item.dailyPrice}
                       description={item.description}
                       dist={item.dist / 1000}
@@ -181,6 +180,8 @@ function Find() {
                       postCode={item.postCode}
                       suburb={item.suburb}
                       asset_id={item._id}
+                      bookings={item.bookings}
+
                     />
                   ))
                 ) : (

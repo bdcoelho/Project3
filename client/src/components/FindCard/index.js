@@ -4,7 +4,6 @@ import BookingModal from "../BookingModal";
 
 function FindCard(props) {
   const [modalShow, setModalShow] = useState(false);
-
   return (
     <div>
       <Container>
@@ -83,9 +82,11 @@ function FindCard(props) {
         </Card>
       </Container>
       <BookingModal
+      key={props.asset_id}
         show={modalShow}
         onHide={() => setModalShow(false)}
         asset_id={props.asset_id}
+        bookings={props.bookings}
       />
     </div>
   );

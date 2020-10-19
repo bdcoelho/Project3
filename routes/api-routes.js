@@ -59,4 +59,6 @@ module.exports = (app) => {
   //Retrieve user items booked
 
   app.get("/api/userBooked/:userId", controller.userBooked);
+
+  app.get("/api/assetBookings/:asset_id", controller.assetBookings);
 };
