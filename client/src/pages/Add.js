@@ -56,6 +56,7 @@ function Add() {
       .get("/api/findItems/" + category)
       .then((items) => {
         setItemArray(items.data);
+        console.log(items.data);
       })
       .catch((err) => console.log(err));
   };
