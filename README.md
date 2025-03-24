@@ -68,3 +68,5 @@ If you have further questions or would like to see more features, please contact
 https://github.com/bdcoelho
 
 ben_coelho@hotmail.com
+
+Thanks for visiting!
